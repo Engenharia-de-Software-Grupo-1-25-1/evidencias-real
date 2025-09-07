@@ -1,0 +1,766 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Metodo</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sedinternet.entities</a>
+</div>
+
+<h1>Coverage Summary for Class: Metodo (com.sedinternet.entities)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">Metodo</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sedinternet.entities;
+&nbsp;
+&nbsp;import jakarta.persistence.*;
+&nbsp;import lombok.*;
+&nbsp;
+&nbsp;import java.time.LocalDate;
+&nbsp;
+&nbsp;@Data
+&nbsp;@EqualsAndHashCode(callSuper = false)
+&nbsp;@Entity
+&nbsp;@Builder
+&nbsp;@NoArgsConstructor
+&nbsp;@AllArgsConstructor
+&nbsp;@Table(name = &quot;metodos&quot;)
+&nbsp;public class Metodo extends GenericEntity {
+&nbsp;
+&nbsp;    @Id
+&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
+&nbsp;    @Column(name = &quot;metodo_id&quot;)
+&nbsp;    private Long id;
+&nbsp;
+&nbsp;    @Column(name = &quot;METODO_NOME&quot;, length = 40)
+&nbsp;    private String metodoNome;
+&nbsp;
+&nbsp;    @Column(name = &quot;ANO_LETIVO&quot;)
+&nbsp;    private Integer anoLetivo;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;OBS&quot;)
+&nbsp;    private byte[] obs;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT11&quot;)
+&nbsp;    private Integer nt11;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT11_DESC&quot;, length = 9)
+&nbsp;    private String nt11Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT12&quot;)
+&nbsp;    private Integer nt12;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT12_DESC&quot;, length = 9)
+&nbsp;    private String nt12Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT13&quot;)
+&nbsp;    private Integer nt13;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT13_DESC&quot;, length = 9)
+&nbsp;    private String nt13Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT14&quot;)
+&nbsp;    private Integer nt14;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT14_DESC&quot;, length = 9)
+&nbsp;    private String nt14Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT15&quot;)
+&nbsp;    private Integer nt15;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT15_DESC&quot;, length = 9)
+&nbsp;    private String nt15Desc;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;NT11_EXP&quot;)
+&nbsp;    private byte[] nt11Exp;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT21&quot;)
+&nbsp;    private Integer nt21;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT21_DESC&quot;, length = 9)
+&nbsp;    private String nt21Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT22&quot;)
+&nbsp;    private Integer nt22;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT22_DESC&quot;, length = 9)
+&nbsp;    private String nt22Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT23&quot;)
+&nbsp;    private Integer nt23;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT23_DESC&quot;, length = 9)
+&nbsp;    private String nt23Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT24&quot;)
+&nbsp;    private Integer nt24;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT24_DESC&quot;, length = 9)
+&nbsp;    private String nt24Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT25&quot;)
+&nbsp;    private Integer nt25;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT25_DESC&quot;, length = 9)
+&nbsp;    private String nt25Desc;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;NT21_EXP&quot;)
+&nbsp;    private byte[] nt21Exp;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT31&quot;)
+&nbsp;    private Integer nt31;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT31_DESC&quot;, length = 9)
+&nbsp;    private String nt31Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT32&quot;)
+&nbsp;    private Integer nt32;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT32_DESC&quot;, length = 9)
+&nbsp;    private String nt32Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT33&quot;)
+&nbsp;    private Integer nt33;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT33_DESC&quot;, length = 9)
+&nbsp;    private String nt33Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT34&quot;)
+&nbsp;    private Integer nt34;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT34_DESC&quot;, length = 9)
+&nbsp;    private String nt34Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT35&quot;)
+&nbsp;    private Integer nt35;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT35_DESC&quot;, length = 9)
+&nbsp;    private String nt35Desc;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;NT31_EXP&quot;)
+&nbsp;    private byte[] nt31Exp;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT41&quot;)
+&nbsp;    private Integer nt41;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT41_DESC&quot;, length = 9)
+&nbsp;    private String nt41Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT42&quot;)
+&nbsp;    private Integer nt42;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT42_DESC&quot;, length = 9)
+&nbsp;    private String nt42Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT43&quot;)
+&nbsp;    private Integer nt43;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT43_DESC&quot;, length = 9)
+&nbsp;    private String nt43Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT44&quot;)
+&nbsp;    private Integer nt44;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT44_DESC&quot;, length = 9)
+&nbsp;    private String nt44Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT45&quot;)
+&nbsp;    private Integer nt45;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT45_DESC&quot;, length = 9)
+&nbsp;    private String nt45Desc;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;NT41_EXP&quot;)
+&nbsp;    private byte[] nt41Exp;
+&nbsp;
+&nbsp;    @Column(name = &quot;MF1&quot;, length = 9)
+&nbsp;    private String mf1;
+&nbsp;
+&nbsp;    @Column(name = &quot;MF2&quot;, length = 9)
+&nbsp;    private String mf2;
+&nbsp;
+&nbsp;    @Column(name = &quot;MF3&quot;, length = 9)
+&nbsp;    private String mf3;
+&nbsp;
+&nbsp;    @Column(name = &quot;MF4&quot;, length = 9)
+&nbsp;    private String mf4;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;MA_EXP&quot;)
+&nbsp;    private byte[] maExp;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;MF_EXP&quot;)
+&nbsp;    private byte[] mfExp;
+&nbsp;
+&nbsp;    @Column(name = &quot;VALOR_MEDIA&quot;)
+&nbsp;    private Double valorMedia;
+&nbsp;
+&nbsp;    @Column(name = &quot;PESO_FINAL&quot;)
+&nbsp;    private Double pesoFinal;
+&nbsp;
+&nbsp;    @Column(name = &quot;INST_ID&quot;)
+&nbsp;    private Integer instId;
+&nbsp;
+&nbsp;    @Column(name = &quot;USR_CAD&quot;)
+&nbsp;    private Integer usrCad;
+&nbsp;
+&nbsp;    @Column(name = &quot;USUARIO_ID&quot;)
+&nbsp;    private Integer usuarioId;
+&nbsp;
+&nbsp;    @Column(name = &quot;DT_ALTERADO&quot;)
+&nbsp;    private LocalDate dtAlterado;
+&nbsp;
+&nbsp;    @Column(name = &quot;USA_REC1&quot;)
+&nbsp;    private Integer usaRec1;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC11&quot;)
+&nbsp;    private Integer rec11;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC11_DESC&quot;, length = 9)
+&nbsp;    private String rec11Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC12&quot;)
+&nbsp;    private Integer rec12;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC12_DESC&quot;, length = 9)
+&nbsp;    private String rec12Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC13&quot;)
+&nbsp;    private Integer rec13;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC13_DESC&quot;, length = 9)
+&nbsp;    private String rec13Desc;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;REC1_EXP&quot;)
+&nbsp;    private byte[] rec1Exp;
+&nbsp;
+&nbsp;    @Column(name = &quot;USA_REC2&quot;)
+&nbsp;    private Integer usaRec2;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC21&quot;)
+&nbsp;    private Integer rec21;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC21_DESC&quot;, length = 9)
+&nbsp;    private String rec21Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC22&quot;)
+&nbsp;    private Integer rec22;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC22_DESC&quot;, length = 9)
+&nbsp;    private String rec22Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC23&quot;)
+&nbsp;    private Integer rec23;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC23_DESC&quot;, length = 9)
+&nbsp;    private String rec23Desc;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;REC2_EXP&quot;)
+&nbsp;    private byte[] rec2Exp;
+&nbsp;
+&nbsp;    @Column(name = &quot;USA_REC3&quot;)
+&nbsp;    private Integer usaRec3;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC31&quot;)
+&nbsp;    private Integer rec31;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC31_DESC&quot;, length = 9)
+&nbsp;    private String rec31Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC32&quot;)
+&nbsp;    private Integer rec32;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC32_DESC&quot;, length = 9)
+&nbsp;    private String rec32Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC33&quot;)
+&nbsp;    private Integer rec33;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC33_DESC&quot;, length = 9)
+&nbsp;    private String rec33Desc;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;REC3_EXP&quot;)
+&nbsp;    private byte[] rec3Exp;
+&nbsp;
+&nbsp;    @Column(name = &quot;USA_REC4&quot;)
+&nbsp;    private Integer usaRec4;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC41&quot;)
+&nbsp;    private Integer rec41;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC41_DESC&quot;, length = 9)
+&nbsp;    private String rec41Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC42&quot;)
+&nbsp;    private Integer rec42;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC42_DESC&quot;, length = 9)
+&nbsp;    private String rec42Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC43&quot;)
+&nbsp;    private Integer rec43;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC43_DESC&quot;, length = 9)
+&nbsp;    private String rec43Desc;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;REC4_EXP&quot;)
+&nbsp;    private byte[] rec4Exp;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC1&quot;, length = 9)
+&nbsp;    private String rec1;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC2&quot;, length = 9)
+&nbsp;    private String rec2;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC3&quot;, length = 9)
+&nbsp;    private String rec3;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC4&quot;, length = 9)
+&nbsp;    private String rec4;
+&nbsp;
+&nbsp;    @Column(name = &quot;USA_SM1&quot;)
+&nbsp;    private Integer usaSm1;
+&nbsp;
+&nbsp;    @Column(name = &quot;SM1&quot;, length = 9)
+&nbsp;    private String sm1;
+&nbsp;
+&nbsp;    @Column(name = &quot;USA_SM2&quot;)
+&nbsp;    private Integer usaSm2;
+&nbsp;
+&nbsp;    @Column(name = &quot;SM2&quot;, length = 9)
+&nbsp;    private String sm2;
+&nbsp;
+&nbsp;    @Column(name = &quot;USA_SM3&quot;)
+&nbsp;    private Integer usaSm3;
+&nbsp;
+&nbsp;    @Column(name = &quot;SM3&quot;, length = 9)
+&nbsp;    private String sm3;
+&nbsp;
+&nbsp;    @Column(name = &quot;USA_SM4&quot;)
+&nbsp;    private Integer usaSm4;
+&nbsp;
+&nbsp;    @Column(name = &quot;SM4&quot;, length = 9)
+&nbsp;    private String sm4;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;MF1_EXP&quot;)
+&nbsp;    private byte[] mf1Exp;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;MF2_EXP&quot;)
+&nbsp;    private byte[] mf2Exp;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;MF3_EXP&quot;)
+&nbsp;    private byte[] mf3Exp;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;MF4_EXP&quot;)
+&nbsp;    private byte[] mf4Exp;
+&nbsp;
+&nbsp;    @Column(name = &quot;TXT_NT1&quot;, length = 40)
+&nbsp;    private String txtNt1;
+&nbsp;
+&nbsp;    // Todos os campos TXT de NT até PF são similares em tipo e comprimento
+&nbsp;    @Column(name = &quot;TXT_NT2&quot;, length = 40)
+&nbsp;    private String txtNt2;
+&nbsp;
+&nbsp;    @Column(name = &quot;TXT_NT3&quot;, length = 40)
+&nbsp;    private String txtNt3;
+&nbsp;
+&nbsp;    @Column(name = &quot;TXT_NT4&quot;, length = 40)
+&nbsp;    private String txtNt4;
+&nbsp;
+&nbsp;    @Column(name = &quot;TXT_NT5&quot;, length = 40)
+&nbsp;    private String txtNt5;
+&nbsp;
+&nbsp;    @Column(name = &quot;TXT_SM&quot;, length = 40)
+&nbsp;    private String txtSm;
+&nbsp;
+&nbsp;    @Column(name = &quot;TXT_REC1&quot;, length = 40)
+&nbsp;    private String txtRec1;
+&nbsp;
+&nbsp;    @Column(name = &quot;TXT_REC2&quot;, length = 40)
+&nbsp;    private String txtRec2;
+&nbsp;
+&nbsp;    @Column(name = &quot;TXT_REC3&quot;, length = 40)
+&nbsp;    private String txtRec3;
+&nbsp;
+&nbsp;    @Column(name = &quot;TXT_REC&quot;, length = 40)
+&nbsp;    private String txtRec;
+&nbsp;
+&nbsp;    @Column(name = &quot;TXT_MF&quot;, length = 40)
+&nbsp;    private String txtMf;
+&nbsp;
+&nbsp;    @Column(name = &quot;TXT_PTS&quot;, length = 40)
+&nbsp;    private String txtPts;
+&nbsp;
+&nbsp;    @Column(name = &quot;TXT_MA&quot;, length = 40)
+&nbsp;    private String txtMa;
+&nbsp;
+&nbsp;    @Column(name = &quot;TXT_PF&quot;, length = 40)
+&nbsp;    private String txtPf;
+&nbsp;
+&nbsp;    @Column(name = &quot;TXT_MB&quot;, length = 40)
+&nbsp;    private String txtMb;
+&nbsp;
+&nbsp;    @Column(name = &quot;PESO11&quot;)
+&nbsp;    private Integer peso11;
+&nbsp;
+&nbsp;    @Column(name = &quot;PESO12&quot;)
+&nbsp;    private Integer peso12;
+&nbsp;
+&nbsp;    @Column(name = &quot;PESO13&quot;)
+&nbsp;    private Integer peso13;
+&nbsp;
+&nbsp;    @Column(name = &quot;PESO14&quot;)
+&nbsp;    private Integer peso14;
+&nbsp;
+&nbsp;    @Column(name = &quot;PESO15&quot;)
+&nbsp;    private Integer peso15;
+&nbsp;
+&nbsp;    @Column(name = &quot;PESO21&quot;)
+&nbsp;    private Integer peso21;
+&nbsp;
+&nbsp;    @Column(name = &quot;PESO22&quot;)
+&nbsp;    private Integer peso22;
+&nbsp;
+&nbsp;    @Column(name = &quot;PESO23&quot;)
+&nbsp;    private Integer peso23;
+&nbsp;
+&nbsp;    @Column(name = &quot;PESO24&quot;)
+&nbsp;    private Integer peso24;
+&nbsp;
+&nbsp;    @Column(name = &quot;PESO25&quot;)
+&nbsp;    private Integer peso25;
+&nbsp;
+&nbsp;    @Column(name = &quot;PESO31&quot;)
+&nbsp;    private Integer peso31;
+&nbsp;
+&nbsp;    @Column(name = &quot;PESO32&quot;)
+&nbsp;    private Integer peso32;
+&nbsp;
+&nbsp;    @Column(name = &quot;PESO33&quot;)
+&nbsp;    private Integer peso33;
+&nbsp;
+&nbsp;    @Column(name = &quot;PESO34&quot;)
+&nbsp;    private Integer peso34;
+&nbsp;
+&nbsp;    @Column(name = &quot;PESO35&quot;)
+&nbsp;    private Integer peso35;
+&nbsp;
+&nbsp;    @Column(name = &quot;PESO41&quot;)
+&nbsp;    private Integer peso41;
+&nbsp;
+&nbsp;    @Column(name = &quot;PESO42&quot;)
+&nbsp;    private Integer peso42;
+&nbsp;
+&nbsp;    @Column(name = &quot;PESO43&quot;)
+&nbsp;    private Integer peso43;
+&nbsp;
+&nbsp;    @Column(name = &quot;PESO44&quot;)
+&nbsp;    private Integer peso44;
+&nbsp;
+&nbsp;    @Column(name = &quot;PESO45&quot;)
+&nbsp;    private Integer peso45;
+&nbsp;
+&nbsp;    @Column(name = &quot;ARRED_MED&quot;)
+&nbsp;    private Integer arredMed;
+&nbsp;
+&nbsp;    @Column(name = &quot;PT_EXTRA1&quot;)
+&nbsp;    private Integer ptExtra1;
+&nbsp;
+&nbsp;    @Column(name = &quot;PT_EXTRA1_DESC&quot;, length = 9)
+&nbsp;    private String ptExtra1Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;PT_EXTRA2&quot;)
+&nbsp;    private Integer ptExtra2;
+&nbsp;
+&nbsp;    @Column(name = &quot;PT_EXTRA2_DESC&quot;, length = 9)
+&nbsp;    private String ptExtra2Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;PT_EXTRA3&quot;)
+&nbsp;    private Integer ptExtra3;
+&nbsp;
+&nbsp;    @Column(name = &quot;PT_EXTRA3_DESC&quot;, length = 9)
+&nbsp;    private String ptExtra3Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;PT_EXTRA4&quot;)
+&nbsp;    private Integer ptExtra4;
+&nbsp;
+&nbsp;    @Column(name = &quot;PT_EXTRA4_DESC&quot;, length = 9)
+&nbsp;    private String ptExtra4Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;SIM11&quot;)
+&nbsp;    private Integer sim11;
+&nbsp;
+&nbsp;    @Column(name = &quot;SIM21&quot;)
+&nbsp;    private Integer sim21;
+&nbsp;
+&nbsp;    @Column(name = &quot;SIM31&quot;)
+&nbsp;    private Integer sim31;
+&nbsp;
+&nbsp;    @Column(name = &quot;SIM41&quot;)
+&nbsp;    private Integer sim41;
+&nbsp;
+&nbsp;    @Column(name = &quot;ARRED_SUBMED&quot;)
+&nbsp;    private Integer arredSubmed;
+&nbsp;
+&nbsp;    @Column(name = &quot;SIT&quot;)
+&nbsp;    private Short sit;
+&nbsp;
+&nbsp;    @Column(name = &quot;UTIL_FREQ&quot;)
+&nbsp;    private Short utilFreq;
+&nbsp;
+&nbsp;    @Column(name = &quot;TXT_EXE1&quot;, length = 20)
+&nbsp;    private String txtExe1;
+&nbsp;
+&nbsp;    @Column(name = &quot;TXT_EXE2&quot;, length = 20)
+&nbsp;    private String txtExe2;
+&nbsp;
+&nbsp;    @Column(name = &quot;TXT_EXE3&quot;, length = 20)
+&nbsp;    private String txtExe3;
+&nbsp;
+&nbsp;    @Column(name = &quot;TXT_EXE4&quot;, length = 20)
+&nbsp;    private String txtExe4;
+&nbsp;
+&nbsp;    @Column(name = &quot;TXT_EXE5&quot;, length = 20)
+&nbsp;    private String txtExe5;
+&nbsp;
+&nbsp;    @Column(name = &quot;N_ETAPAS&quot;)
+&nbsp;    private Short nEtapas;
+&nbsp;
+&nbsp;    @Column(name = &quot;TIP_METODO&quot;)
+&nbsp;    private Short tipMetodo;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC_PF&quot;)
+&nbsp;    private Short recPf;
+&nbsp;
+&nbsp;    @Column(name = &quot;DECIMAIS&quot;)
+&nbsp;    private Short decimais;
+&nbsp;
+&nbsp;    @Column(name = &quot;OPCAO_PESO1&quot;)
+&nbsp;    private Short opcaoPeso1;
+&nbsp;
+&nbsp;    @Column(name = &quot;OPCAO_PESO2&quot;)
+&nbsp;    private Short opcaoPeso2;
+&nbsp;
+&nbsp;    @Column(name = &quot;OPCAO_PESO3&quot;)
+&nbsp;    private Short opcaoPeso3;
+&nbsp;
+&nbsp;    @Column(name = &quot;OPCAO_PESO4&quot;)
+&nbsp;    private Short opcaoPeso4;
+&nbsp;
+&nbsp;    @Column(name = &quot;UTIL_DES_AL&quot;)
+&nbsp;    private Short utilDesAl;
+&nbsp;
+&nbsp;    @Column(name = &quot;CALC_DISC_PRIN&quot;)
+&nbsp;    private Short calcDiscPrin;
+&nbsp;
+&nbsp;    @Column(name = &quot;PF_DISC_PRIN&quot;)
+&nbsp;    private Short pfDiscPrin;
+&nbsp;
+&nbsp;    @Column(name = &quot;VALOR_MEDIA_ANUAL&quot;)
+&nbsp;    private Double valorMediaAnual;
+&nbsp;
+&nbsp;    @Column(name = &quot;CALC_MA&quot;)
+&nbsp;    private Short calcMa;
+&nbsp;
+&nbsp;    @Column(name = &quot;ARRED_MA&quot;)
+&nbsp;    private Integer arredMa;
+&nbsp;
+&nbsp;    @Column(name = &quot;ARRED_MF&quot;)
+&nbsp;    private Integer arredMf;
+&nbsp;
+&nbsp;    @Column(name = &quot;PT_EXTRA_MA&quot;)
+&nbsp;    private Integer ptExtraMa;
+&nbsp;
+&nbsp;    @Column(name = &quot;PT_EXTRA_MA_DESC&quot;, length = 9)
+&nbsp;    private String ptExtraMaDesc;
+&nbsp;
+&nbsp;    @Column(name = &quot;PT_EXTRA_MF&quot;)
+&nbsp;    private Integer ptExtraMf;
+&nbsp;
+&nbsp;    @Column(name = &quot;PT_EXTRA_MF_DESC&quot;, length = 9)
+&nbsp;    private String ptExtraMfDesc;
+&nbsp;
+&nbsp;    @Column(name = &quot;PERC_FALTAS&quot;)
+&nbsp;    private Double percFaltas;
+&nbsp;
+&nbsp;    @Column(name = &quot;CALC_MF&quot;)
+&nbsp;    private Short calcMf;
+&nbsp;
+&nbsp;    @Column(name = &quot;MA_DESC&quot;, length = 9)
+&nbsp;    private String maDesc;
+&nbsp;
+&nbsp;    @Column(name = &quot;PF_DESC&quot;, length = 9)
+&nbsp;    private String pfDesc;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC_PF_DESC&quot;, length = 9)
+&nbsp;    private String recPfDesc;
+&nbsp;
+&nbsp;    @Column(name = &quot;MF_DESC&quot;, length = 9)
+&nbsp;    private String mfDesc;
+&nbsp;
+&nbsp;    @Column(name = &quot;NOME_ETAPA&quot;, length = 20)
+&nbsp;    private String nomeEtapa;
+&nbsp;
+&nbsp;    @Column(name = &quot;NF1&quot;)
+&nbsp;    private Short nf1;
+&nbsp;
+&nbsp;    @Column(name = &quot;NF2&quot;)
+&nbsp;    private Short nf2;
+&nbsp;
+&nbsp;    @Column(name = &quot;NF3&quot;)
+&nbsp;    private Short nf3;
+&nbsp;
+&nbsp;    @Column(name = &quot;NF4&quot;)
+&nbsp;    private Short nf4;
+&nbsp;
+&nbsp;    @Column(name = &quot;NF&quot;)
+&nbsp;    private Short nf;
+&nbsp;
+&nbsp;    @Column(name = &quot;ME_1E2&quot;)
+&nbsp;    private Short me1e2;
+&nbsp;
+&nbsp;    @Column(name = &quot;ME_2E3&quot;)
+&nbsp;    private Short me2e3;
+&nbsp;
+&nbsp;    @Column(name = &quot;ME_3E4&quot;)
+&nbsp;    private Short me3e4;
+&nbsp;
+&nbsp;    @Column(name = &quot;ME_1E2_DESC&quot;, length = 9)
+&nbsp;    private String me1e2Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;ME_2E3_DESC&quot;, length = 9)
+&nbsp;    private String me2e3Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;ME_3E4_DESC&quot;, length = 9)
+&nbsp;    private String me3e4Desc;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;ME_1E2_EXP&quot;)
+&nbsp;    private byte[] me1e2Exp;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;ME_2E3_EXP&quot;)
+&nbsp;    private byte[] me2e3Exp;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;ME_3E4_EXP&quot;)
+&nbsp;    private byte[] me3e4Exp;
+&nbsp;
+&nbsp;    @Column(name = &quot;TPE_1E2&quot;)
+&nbsp;    private Short tpe1e2;
+&nbsp;
+&nbsp;    @Column(name = &quot;TPE_2E3&quot;)
+&nbsp;    private Short tpe2e3;
+&nbsp;
+&nbsp;    @Column(name = &quot;TPE_3E4&quot;)
+&nbsp;    private Short tpe3e4;
+&nbsp;
+&nbsp;    @Column(name = &quot;TPE_1E2_DESC&quot;, length = 9)
+&nbsp;    private String tpe1e2Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;TPE_2E3_DESC&quot;, length = 9)
+&nbsp;    private String tpe2e3Desc;
+&nbsp;
+&nbsp;    @Column(name = &quot;TPE_3E4_DESC&quot;, length = 9)
+&nbsp;    private String tpe3e4Desc;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;TPE_1E2_EXP&quot;)
+&nbsp;    private byte[] tpe1e2Exp;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;TPE_2E3_EXP&quot;)
+&nbsp;    private byte[] tpe2e3Exp;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;TPE_3E4_EXP&quot;)
+&nbsp;    private byte[] tpe3e4Exp;
+&nbsp;
+&nbsp;    @Column(name = &quot;DIG_PLANO_AULA&quot;)
+&nbsp;    private Short digPlanoAula;
+&nbsp;
+&nbsp;    @Column(name = &quot;INCLUE_REC_TP&quot;)
+&nbsp;    private Short inclueRecTp;
+&nbsp;
+&nbsp;    @Column(name = &quot;PF_REC_MF&quot;)
+&nbsp;    private Short pfRecMf;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;tp_exp&quot;)
+&nbsp;    private byte[] tpExp;
+&nbsp;
+&nbsp;    @Column(name = &quot;TP_DISC_PRIN&quot;)
+&nbsp;    private Short tpDiscPrin;
+&nbsp;
+&nbsp;    @Column(name = &quot;MA_DISC_PRIN&quot;)
+&nbsp;    private Short maDiscPrin;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-09-01 14:08</div>
+</div>
+</body>
+</html>

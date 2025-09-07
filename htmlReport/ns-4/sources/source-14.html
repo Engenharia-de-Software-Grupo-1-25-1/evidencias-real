@@ -1,0 +1,163 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TurmaAulas</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sedinternet.entities</a>
+</div>
+
+<h1>Coverage Summary for Class: TurmaAulas (com.sedinternet.entities)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">TurmaAulas</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sedinternet.entities;
+&nbsp;
+&nbsp;import jakarta.persistence.*;
+&nbsp;import lombok.*;
+&nbsp;
+&nbsp;@Data
+&nbsp;@EqualsAndHashCode(callSuper = false)
+&nbsp;@Entity
+&nbsp;@Builder
+&nbsp;@NoArgsConstructor
+&nbsp;@AllArgsConstructor
+&nbsp;@Table(name = &quot;turma_aulas&quot;)
+&nbsp;public class TurmaAulas extends GenericEntity {
+&nbsp;
+&nbsp;    @Id
+&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
+&nbsp;    @Column(name = &quot;turma_aula_id&quot;)
+&nbsp;    private Long id;
+&nbsp;
+&nbsp;    @Column(name = &quot;ANO_LETIVO&quot;)
+&nbsp;    private Integer anoLetivo;
+&nbsp;
+&nbsp;    @Column(name = &quot;TURMA_ID&quot;, nullable = false)
+&nbsp;    private Integer turmaId;
+&nbsp;
+&nbsp;    @Column(name = &quot;HORA_AULA_ID&quot;)
+&nbsp;    private Integer horaAulaId;
+&nbsp;
+&nbsp;    @Column(name = &quot;C_DOM&quot;)
+&nbsp;    private Short cDom;
+&nbsp;
+&nbsp;    @Column(name = &quot;DOM_GRADE_PROF_ID&quot;)
+&nbsp;    private Integer domGradeProfId;
+&nbsp;
+&nbsp;    @Column(name = &quot;C_SEG&quot;)
+&nbsp;    private Short cSeg;
+&nbsp;
+&nbsp;    @Column(name = &quot;SEG_GRADE_PROF_ID&quot;)
+&nbsp;    private Integer segGradeProfId;
+&nbsp;
+&nbsp;    @Column(name = &quot;C_TER&quot;)
+&nbsp;    private Short cTer;
+&nbsp;
+&nbsp;    @Column(name = &quot;TER_GRADE_PROF_ID&quot;)
+&nbsp;    private Integer terGradeProfId;
+&nbsp;
+&nbsp;    @Column(name = &quot;C_QUA&quot;)
+&nbsp;    private Short cQua;
+&nbsp;
+&nbsp;    @Column(name = &quot;QUA_GRADE_PROF_ID&quot;)
+&nbsp;    private Integer quaGradeProfId;
+&nbsp;
+&nbsp;    @Column(name = &quot;C_QUI&quot;)
+&nbsp;    private Short cQui;
+&nbsp;
+&nbsp;    @Column(name = &quot;QUI_GRADE_PROF_ID&quot;)
+&nbsp;    private Integer quiGradeProfId;
+&nbsp;
+&nbsp;    @Column(name = &quot;C_SEX&quot;)
+&nbsp;    private Short cSex;
+&nbsp;
+&nbsp;    @Column(name = &quot;SEX_GRADE_PROF_ID&quot;)
+&nbsp;    private Integer sexGradeProfId;
+&nbsp;
+&nbsp;    @Column(name = &quot;C_SAB&quot;)
+&nbsp;    private Short cSab;
+&nbsp;
+&nbsp;    @Column(name = &quot;SAB_GRADE_PROF_ID&quot;)
+&nbsp;    private Integer sabGradeProfId;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;OBSERVACAO&quot;)
+&nbsp;    private byte[] observacao;
+&nbsp;
+&nbsp;    @Column(name = &quot;USUARIO_ID&quot;)
+&nbsp;    private Integer usuarioId;
+&nbsp;
+&nbsp;    @Column(name = &quot;SEG_SALA_ID&quot;)
+&nbsp;    private Short segSalaId;
+&nbsp;
+&nbsp;    @Column(name = &quot;TER_SALA_ID&quot;)
+&nbsp;    private Short terSalaId;
+&nbsp;
+&nbsp;    @Column(name = &quot;QUA_SALA_ID&quot;)
+&nbsp;    private Short quaSalaId;
+&nbsp;
+&nbsp;    @Column(name = &quot;QUI_SALA_ID&quot;)
+&nbsp;    private Short quiSalaId;
+&nbsp;
+&nbsp;    @Column(name = &quot;SEX_SALA_ID&quot;)
+&nbsp;    private Short sexSalaId;
+&nbsp;
+&nbsp;    @Column(name = &quot;SAB_SALA_ID&quot;)
+&nbsp;    private Short sabSalaId;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-09-01 14:08</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,273 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Instituicao</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sedinternet.entities</a>
+</div>
+
+<h1>Coverage Summary for Class: Instituicao (com.sedinternet.entities)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">Instituicao</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sedinternet.entities;
+&nbsp;
+&nbsp;import jakarta.persistence.*;
+&nbsp;import lombok.*;
+&nbsp;import java.sql.Date;
+&nbsp;
+&nbsp;@Data
+&nbsp;@EqualsAndHashCode(callSuper = false)
+&nbsp;@Entity
+&nbsp;@Builder
+&nbsp;@NoArgsConstructor
+&nbsp;@AllArgsConstructor
+&nbsp;@Table(name = &quot;instituicao&quot;)
+&nbsp;public class Instituicao extends GenericEntity{
+&nbsp;    @Id
+&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
+&nbsp;    @Column(name = &quot;inst_id&quot;)
+&nbsp;    private Long instId;
+&nbsp;
+&nbsp;    @Column(name = &quot;NOME&quot;, length = 60)
+&nbsp;    private String instNome;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;LOGOMARCA&quot;)
+&nbsp;    private byte[] logomarca;
+&nbsp;
+&nbsp;    @Column(name = &quot;SLOGAN&quot;, length = 60)
+&nbsp;    private String slogan;
+&nbsp;
+&nbsp;    @Column(name = &quot;FUNDACAO&quot;)
+&nbsp;    private Date fundacao;
+&nbsp;
+&nbsp;    @Column(name = &quot;CNPJ_CGC&quot;, length = 20)
+&nbsp;    private String cnpjCgc;
+&nbsp;
+&nbsp;    @Column(name = &quot;RESOLUCAO&quot;, length = 120)
+&nbsp;    private String resolucao;
+&nbsp;
+&nbsp;    @Column(name = &quot;NACIONAL&quot;, length = 20)
+&nbsp;    private String nacional;
+&nbsp;
+&nbsp;    @Column(name = &quot;LOGRADOURO&quot;, length = 60)
+&nbsp;    private String logradouro;
+&nbsp;
+&nbsp;    @Column(name = &quot;BAIRRO&quot;, length = 60)
+&nbsp;    private String bairro;
+&nbsp;
+&nbsp;    @Column(name = &quot;CEP&quot;, length = 9)
+&nbsp;    private String cep;
+&nbsp;
+&nbsp;    @Column(name = &quot;FONE1&quot;, length = 16)
+&nbsp;    private String fone1;
+&nbsp;
+&nbsp;    @Column(name = &quot;FONE2&quot;, length = 16)
+&nbsp;    private String fone2;
+&nbsp;
+&nbsp;    @Column(name = &quot;FONE3&quot;, length = 16)
+&nbsp;    private String fone3;
+&nbsp;
+&nbsp;    @Column(name = &quot;CELULAR&quot;, length = 16)
+&nbsp;    private String celular;
+&nbsp;
+&nbsp;    @Column(name = &quot;FAX&quot;, length = 16)
+&nbsp;    private String fax;
+&nbsp;
+&nbsp;    @Column(name = &quot;EMAIL&quot;, length = 60)
+&nbsp;    private String email;
+&nbsp;
+&nbsp;    @Column(name = &quot;SITE&quot;, length = 60)
+&nbsp;    private String site;
+&nbsp;
+&nbsp;    @Column(name = &quot;COMPLEMENTO&quot;, length = 240)
+&nbsp;    private String complemento;
+&nbsp;
+&nbsp;    @Column(name = &quot;OBS_END&quot;, length = 240)
+&nbsp;    private String obsEnd;
+&nbsp;
+&nbsp;    @Column(name = &quot;DIRETOR&quot;, length = 60)
+&nbsp;    private String diretor;
+&nbsp;
+&nbsp;    @Column(name = &quot;SECRETARIO&quot;, length = 60)
+&nbsp;    private String secretario;
+&nbsp;
+&nbsp;    @Column(name = &quot;BIBLIOTECARIO&quot;, length = 60)
+&nbsp;    private String bibliotecario;
+&nbsp;
+&nbsp;    @Column(name = &quot;COORDENADOR1&quot;, length = 60)
+&nbsp;    private String coordenador1;
+&nbsp;
+&nbsp;    @Column(name = &quot;COORDENADOR2&quot;, length = 60)
+&nbsp;    private String coordenador2;
+&nbsp;
+&nbsp;    @Column(name = &quot;COORDENADOR3&quot;, length = 60)
+&nbsp;    private String coordenador3;
+&nbsp;
+&nbsp;    @Column(name = &quot;COORDENADOR4&quot;, length = 60)
+&nbsp;    private String coordenador4;
+&nbsp;
+&nbsp;    @Column(name = &quot;COORDENADOR5&quot;, length = 60)
+&nbsp;    private String coordenador5;
+&nbsp;
+&nbsp;    @Column(name = &quot;COR_PADRAO1&quot;, length = 20)
+&nbsp;    private String corPadrao1;
+&nbsp;
+&nbsp;    @Column(name = &quot;COR_PADRAOTXT1&quot;, length = 20)
+&nbsp;    private String corPadraoTxt1;
+&nbsp;
+&nbsp;    @Column(name = &quot;FANTASIA&quot;, length = 60)
+&nbsp;    private String fantasia;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;LOGO1&quot;)
+&nbsp;    private byte[] logo1;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;LOGO2&quot;)
+&nbsp;    private byte[] logo2;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;LOGO3&quot;)
+&nbsp;    private byte[] logo3;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;LOGO4&quot;)
+&nbsp;    private byte[] logo4;
+&nbsp;
+&nbsp;    @Column(name = &quot;AGRUPA_BOLETOS&quot;)
+&nbsp;    private Integer agrupaBoletos;
+&nbsp;
+&nbsp;    @Column(name = &quot;TIPO_BOLETO&quot;)
+&nbsp;    private Integer tipoBoleto;
+&nbsp;
+&nbsp;    @Column(name = &quot;MODELO_BOLETO&quot;, length = 60)
+&nbsp;    private String modeloBoleto;
+&nbsp;
+&nbsp;    @Column(name = &quot;TEMPO_OCIOSO&quot;)
+&nbsp;    private Integer tempoOcioso;
+&nbsp;
+&nbsp;    @Column(name = &quot;LIBERA_ESTACAO&quot;)
+&nbsp;    private Integer liberaEstacao;
+&nbsp;
+&nbsp;    @Column(name = &quot;USR_CAD&quot;)
+&nbsp;    private Integer usrCad;
+&nbsp;
+&nbsp;    @Column(name = &quot;USUARIO_ID&quot;)
+&nbsp;    private Integer usuarioId;
+&nbsp;
+&nbsp;    @Column(name = &quot;DT_ALTERADO&quot;)
+&nbsp;    @Temporal(TemporalType.DATE)
+&nbsp;    private Date dtAlterado;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;CHAVE&quot;)
+&nbsp;    private byte[] chave;
+&nbsp;
+&nbsp;    @Column(name = &quot;SITE_NOME&quot;, length = 40)
+&nbsp;    private String siteNome;
+&nbsp;
+&nbsp;    @Column(name = &quot;SITE_SERVIDOR&quot;, length = 60)
+&nbsp;    private String siteServidor;
+&nbsp;
+&nbsp;    @Column(name = &quot;SITE_BANCO_DADOS&quot;, length = 40)
+&nbsp;    private String siteBancoDados;
+&nbsp;
+&nbsp;    @Column(name = &quot;SITE_TIPO_BANCO&quot;, length = 20)
+&nbsp;    private String siteTipoBanco;
+&nbsp;
+&nbsp;    @Column(name = &quot;SITE_USUARIO&quot;, length = 20)
+&nbsp;    private String siteUsuario;
+&nbsp;
+&nbsp;    @Column(name = &quot;SITE_SENHA&quot;, length = 20)
+&nbsp;    private String siteSenha;
+&nbsp;
+&nbsp;    @Column(name = &quot;CID_COD&quot;)
+&nbsp;    private Integer cidCod;
+&nbsp;
+&nbsp;    @Column(name = &quot;UF_COD&quot;, length = 20)
+&nbsp;    private String ufCod;
+&nbsp;
+&nbsp;    @Column(name = &quot;DIRETOR_RG&quot;, length = 16)
+&nbsp;    private String diretorRg;
+&nbsp;
+&nbsp;    @Column(name = &quot;DIRETOR_RG_ORGAO&quot;, length = 9)
+&nbsp;    private String diretorRgOrgao;
+&nbsp;
+&nbsp;    @Column(name = &quot;DIRETOR_RG_DATA&quot;)
+&nbsp;    @Temporal(TemporalType.DATE)
+&nbsp;    private Date diretorRgData;
+&nbsp;
+&nbsp;    @Column(name = &quot;DIRETOR_RG_UF&quot;, length = 20)
+&nbsp;    private String diretorRgUf;
+&nbsp;
+&nbsp;    @Column(name = &quot;COD_INEP&quot;)
+&nbsp;    private Integer codInep;
+&nbsp;
+&nbsp;    @Column(name = &quot;CPF_DIRETOR&quot;, length = 19)
+&nbsp;    private String cpfDiretor;
+&nbsp;
+&nbsp;    @Column(name = &quot;USA_AUTENTICACAO&quot;)
+&nbsp;    private Short usaAutenticacao;
+&nbsp;
+&nbsp;    @Column(name = &quot;CANCELADO&quot;)
+&nbsp;    private Integer cancelado;
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-09-01 14:08</div>
+</div>
+</body>
+</html>

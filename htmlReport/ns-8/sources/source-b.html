@@ -1,0 +1,138 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > LoginRepository</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sedinternet.repositories</a>
+</div>
+
+<h1>Coverage Summary for Class: LoginRepository (com.sedinternet.repositories)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">LoginRepository$MockitoMock$qrsO42e1</td>
+  </tr>
+  <tr>
+    <td class="name">LoginRepository$MockitoMock$qrsO42e1$auxiliary$dcCRgcRq</td>
+  </tr>
+  <tr>
+    <td class="name">LoginRepository$MockitoMock$qrsO42e1$auxiliary$knmlaQLm</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sedinternet.repositories;
+&nbsp;
+&nbsp;import com.sedinternet.dtos.LoginDTO;
+&nbsp;import com.sedinternet.entities.Login;
+&nbsp;import org.springframework.data.jpa.repository.Query;
+&nbsp;import org.springframework.data.repository.query.Param;
+&nbsp;import org.springframework.stereotype.Repository;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Optional;
+&nbsp;
+&nbsp;@Repository
+&nbsp;public interface LoginRepository extends GenericRepository&lt;Login&gt; {
+&nbsp;
+&nbsp;    @Query(&quot;SELECT l FROM Login l WHERE l.login = :nome and l.ativo = 1&quot;)
+&nbsp;    Optional&lt;Login&gt; findByUsername(@Param(&quot;nome&quot;) String nome);
+&nbsp;
+&nbsp;    @Query(&quot;SELECT new com.sedinternet.dtos.LoginDTO(&quot; +
+&nbsp;            &quot;l.nome, &quot; +
+&nbsp;            &quot;l.loginId, &quot; +
+&nbsp;            &quot;l.professorId, &quot; +
+&nbsp;            &quot;l.grupoId, &quot; +
+&nbsp;            &quot;l.psicId, &quot; +
+&nbsp;            &quot;l.gUsrId, &quot; +
+&nbsp;            &quot;p.email, &quot; +
+&nbsp;            &quot;(SELECT MIN(iSub.instId) &quot; +
+&nbsp;            &quot; FROM Instituicao iSub &quot; +
+&nbsp;            &quot; WHERE COALESCE(iSub.cancelado, 0) = 0 &quot; +
+&nbsp;            &quot;   AND iSub.cnpjCgc &lt;&gt; &#39;&#39;), &quot; +
+&nbsp;            &quot;i.instNome) &quot; +
+&nbsp;            &quot;FROM Login l &quot; +
+&nbsp;            &quot;LEFT JOIN Professor p ON p.professorId = l.professorId &quot; +
+&nbsp;            &quot;LEFT JOIN Instituicao i ON i.instId = (&quot; +
+&nbsp;            &quot;    SELECT MIN(iSub.instId) &quot; +
+&nbsp;            &quot;    FROM Instituicao iSub &quot; +
+&nbsp;            &quot;    WHERE COALESCE(iSub.cancelado, 0) = 0 &quot; +
+&nbsp;            &quot;      AND iSub.cnpjCgc &lt;&gt; &#39;&#39;) &quot; +
+&nbsp;            &quot;WHERE l.login = :nome &quot; +
+&nbsp;            &quot;  AND l.ativo = 1 &quot;)
+&nbsp;    LoginDTO findByUsernameDTO(@Param(&quot;nome&quot;) String nome);
+&nbsp;
+&nbsp;    @Query(value = &quot;&quot;&quot;
+&nbsp;    SELECT DISTINCT
+&nbsp;        l.nome,
+&nbsp;        l.login_id,
+&nbsp;        l.professor_id,
+&nbsp;        l.grupo_id,
+&nbsp;        l.psic_id,
+&nbsp;        l.g_usr_id,
+&nbsp;        l.inst_id,
+&nbsp;        null
+&nbsp;    FROM grade_professor gpd
+&nbsp;    LEFT JOIN login l ON l.professor_id = gpd.professor_id
+&nbsp;    LEFT JOIN professores p ON p.professor_id = gpd.professor_id
+&nbsp;    WHERE l.g_usr_id IN (:grupoIds)
+&nbsp;      AND l.ativo = 1
+&nbsp;      ORDER BY l.nome
+&nbsp;&quot;&quot;&quot;, nativeQuery = true)
+&nbsp;    List&lt;Object[]&gt; findUsersById(@Param(&quot;grupoIds&quot;) List&lt;Integer&gt; grupoIds);
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-09-01 14:08</div>
+</div>
+</body>
+</html>

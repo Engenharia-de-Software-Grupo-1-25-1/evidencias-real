@@ -1,0 +1,187 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Criptografar</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sedinternet.infrastructure</a>
+</div>
+
+<h1>Coverage Summary for Class: Criptografar (com.sedinternet.infrastructure)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Criptografar</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/40)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sedinternet.infrastructure;
+&nbsp;
+<b class="nc">&nbsp;public class Criptografar {</b>
+&nbsp;
+&nbsp;    public static String cifrar(String texto, long chave) {
+<b class="nc">&nbsp;        texto = texto.trim();</b>
+<b class="nc">&nbsp;        int tamTexto = texto.length();</b>
+<b class="nc">&nbsp;        StringBuilder tmp = new StringBuilder();</b>
+<b class="nc">&nbsp;        int tamMax = 0;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (tamTexto &gt; 0) {</b>
+<b class="nc">&nbsp;            if (tamTexto % 2 != 0) {</b>
+<b class="nc">&nbsp;                tamTexto++;</b>
+<b class="nc">&nbsp;                texto += &quot; &quot;;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            int[] iArray = new int[tamTexto];</b>
+<b class="nc">&nbsp;            for (int i = 0; i &lt; tamTexto; i++) {</b>
+<b class="nc">&nbsp;                int y = texto.charAt(i) ^ (int) (chave + 81 + tamTexto);</b>
+<b class="nc">&nbsp;                iArray[i] = y;</b>
+<b class="nc">&nbsp;                chave += 13;</b>
+&nbsp;
+<b class="nc">&nbsp;                int tamLetra = Integer.toString(y).length();</b>
+<b class="nc">&nbsp;                if (tamLetra &gt; tamMax) {</b>
+<b class="nc">&nbsp;                    tamMax = tamLetra;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            String formato = &quot;%0&quot; + tamMax + &quot;d&quot;;</b>
+&nbsp;
+<b class="nc">&nbsp;            for (int i = 0; i &lt; tamTexto; i += 2) {</b>
+<b class="nc">&nbsp;                String letra1 = String.format(formato, iArray[i]);</b>
+<b class="nc">&nbsp;                String letra2 = String.format(formato, iArray[i + 1]);</b>
+&nbsp;
+<b class="nc">&nbsp;                for (int z = 0; z &lt; tamMax; z++) {</b>
+<b class="nc">&nbsp;                    tmp.append(letra1.charAt(z)).append(letra2.charAt(z));</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            tmp.append(tamMax);</b>
+<b class="nc">&nbsp;            String dv = DVCifrar(tmp.toString(), &#39;C&#39;);</b>
+<b class="nc">&nbsp;            tmp.insert(0, dv.charAt(0)).append(dv.charAt(1));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return tmp.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String DVCifrar(String texto, char modo) {
+&nbsp;        try {
+<b class="nc">&nbsp;            texto = texto.trim();</b>
+<b class="nc">&nbsp;            int tamTexto = texto.length();</b>
+<b class="nc">&nbsp;            long soma = 0;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (modo == &#39;C&#39;) {</b>
+<b class="nc">&nbsp;                for (int i = 0; i &lt; tamTexto; i++) {</b>
+<b class="nc">&nbsp;                    soma += Character.getNumericValue(texto.charAt(i));</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                int dv1 = (int) (soma % 10);</b>
+<b class="nc">&nbsp;                int dv2 = tamTexto % 11;</b>
+<b class="nc">&nbsp;                if (dv2 == 10) {</b>
+<b class="nc">&nbsp;                    dv2 = 0;</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                return &quot;&quot; + dv1 + dv2;</b>
+&nbsp;            }
+&nbsp;        } catch (Exception e) {
+<b class="nc">&nbsp;            return &quot;&quot;;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return &quot;&quot;;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-09-01 14:08</div>
+</div>
+</body>
+</html>

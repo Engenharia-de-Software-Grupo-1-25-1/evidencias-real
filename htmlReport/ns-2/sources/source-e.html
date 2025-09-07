@@ -1,0 +1,181 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ResumoAtividadeController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sedinternet.controllers</a>
+</div>
+
+<h1>Coverage Summary for Class: ResumoAtividadeController (com.sedinternet.controllers)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ResumoAtividadeController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.9%
+  </span>
+  <span class="absValue">
+    (10/11)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sedinternet.controllers;
+&nbsp;
+&nbsp;import com.sedinternet.entities.ResumoAtividade;
+&nbsp;import com.sedinternet.services.ResumoAtividadeService;
+&nbsp;import jakarta.transaction.Transactional;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.format.annotation.DateTimeFormat;
+&nbsp;import org.springframework.http.ResponseEntity;
+&nbsp;import org.springframework.web.bind.annotation.*;
+&nbsp;import org.springframework.web.bind.annotation.PathVariable;
+&nbsp;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@RestController
+&nbsp;@RequestMapping(&quot;/resumo-atividades&quot;)
+&nbsp;public class ResumoAtividadeController extends GenericController&lt;ResumoAtividade, Long&gt; {
+&nbsp;
+&nbsp;    private final ResumoAtividadeService resumoAtividadeService;
+&nbsp;
+&nbsp;    public ResumoAtividadeController(ResumoAtividadeService resumoAtividadeService) {
+<b class="fc">&nbsp;        super(resumoAtividadeService);</b>
+<b class="fc">&nbsp;        this.resumoAtividadeService = resumoAtividadeService;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Transactional
+&nbsp;    @Override
+&nbsp;    @PostMapping
+&nbsp;    public ResponseEntity&lt;ResumoAtividade&gt; create(@RequestBody ResumoAtividade resumo) {
+&nbsp;        try {
+<b class="fc">&nbsp;            ResumoAtividade savedResumo = resumoAtividadeService.save(resumo);</b>
+&nbsp;
+<b class="fc">&nbsp;            return ResponseEntity.ok(savedResumo);</b>
+&nbsp;
+&nbsp;        } catch (Exception e) {
+<b class="fc">&nbsp;            return ResponseEntity.badRequest().body(null);</b>
+&nbsp;        } 
+&nbsp;    }
+&nbsp;
+&nbsp;    @GetMapping(&quot;/turma/{turmaId}/disciplina/{disciplinaId}/data/{dtAtividade}&quot;)
+&nbsp;    public List&lt;ResumoAtividade&gt; getResumoByTurmaDiscData(
+&nbsp;            @PathVariable(&quot;turmaId&quot;) Integer turmaId,
+&nbsp;            @PathVariable(&quot;disciplinaId&quot;) Integer disciplinaId,
+&nbsp;            @PathVariable(&quot;dtAtividade&quot;) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dtAtividade) {
+<b class="fc">&nbsp;        return this.resumoAtividadeService.findResumoByTurmaDiscDateAtvd(turmaId, disciplinaId, dtAtividade);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @GetMapping(&quot;/turma/{turmaId}/disciplina/{disciplinaId}/etapa/{etapa}&quot;)
+&nbsp;    public List&lt;ResumoAtividade&gt; getResumoAtivToPrint(
+&nbsp;            @PathVariable(&quot;turmaId&quot;) Integer turmaId,
+&nbsp;            @PathVariable(&quot;disciplinaId&quot;) Integer disciplinaId,
+&nbsp;            @PathVariable(&quot;etapa&quot;) Integer etapa) {
+<b class="fc">&nbsp;        return this.resumoAtividadeService.findResumoAtivToPrint(turmaId, disciplinaId, etapa);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @DeleteMapping(&quot;/{id}&quot;)
+&nbsp;    @Override
+&nbsp;    public ResponseEntity&lt;Void&gt; delete(@PathVariable Long id) {
+<b class="pc">&nbsp;        if (!genericService.findById(id).isPresent()) {</b>
+<b class="nc">&nbsp;            return ResponseEntity.notFound().build();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        this.resumoAtividadeService.deleteResumoById(id);</b>
+<b class="fc">&nbsp;        return ResponseEntity.noContent().build();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-09-01 14:08</div>
+</div>
+</body>
+</html>

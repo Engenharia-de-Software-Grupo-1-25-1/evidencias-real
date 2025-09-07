@@ -1,0 +1,316 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MetodoRepository</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sedinternet.repositories</a>
+</div>
+
+<h1>Coverage Summary for Class: MetodoRepository (com.sedinternet.repositories)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">MetodoRepository$MockitoMock$myYss7tD</td>
+  </tr>
+  <tr>
+    <td class="name">MetodoRepository$MockitoMock$myYss7tD$auxiliary$02qTW9my</td>
+  </tr>
+  <tr>
+    <td class="name">MetodoRepository$MockitoMock$myYss7tD$auxiliary$j9CXtKfG</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sedinternet.repositories;
+&nbsp;
+&nbsp;import com.sedinternet.entities.Metodo;
+&nbsp;import org.springframework.data.jpa.repository.Query;
+&nbsp;import org.springframework.data.repository.query.Param;
+&nbsp;import org.springframework.stereotype.Repository;
+&nbsp;
+&nbsp;@Repository
+&nbsp;public interface MetodoRepository extends GenericRepository&lt;Metodo&gt; {
+&nbsp;
+&nbsp;    @Query(value = &quot;SELECT &quot; +
+&nbsp;            &quot;COALESCE(gc.METODO_ID, t.METODO_ID) AS metodo_id, &quot; +
+&nbsp;            &quot;m.METODO_NOME, &quot; +
+&nbsp;            &quot;m.ANO_LETIVO, &quot; +
+&nbsp;            &quot;m.OBS, &quot; +
+&nbsp;            &quot;m.NT11, &quot; +
+&nbsp;            &quot;m.NT11_DESC, &quot; +
+&nbsp;            &quot;m.NT12, &quot; +
+&nbsp;            &quot;m.NT12_DESC, &quot; +
+&nbsp;            &quot;m.NT13, &quot; +
+&nbsp;            &quot;m.NT13_DESC, &quot; +
+&nbsp;            &quot;m.NT14, &quot; +
+&nbsp;            &quot;m.NT14_DESC, &quot; +
+&nbsp;            &quot;m.NT15, &quot; +
+&nbsp;            &quot;m.NT15_DESC, &quot; +
+&nbsp;            &quot;m.NT11_EXP, &quot; +
+&nbsp;            &quot;m.NT21, &quot; +
+&nbsp;            &quot;m.NT21_DESC, &quot; +
+&nbsp;            &quot;m.NT22, &quot; +
+&nbsp;            &quot;m.NT22_DESC, &quot; +
+&nbsp;            &quot;m.NT23, &quot; +
+&nbsp;            &quot;m.NT23_DESC, &quot; +
+&nbsp;            &quot;m.NT24, &quot; +
+&nbsp;            &quot;m.NT24_DESC, &quot; +
+&nbsp;            &quot;m.NT25, &quot; +
+&nbsp;            &quot;m.NT25_DESC, &quot; +
+&nbsp;            &quot;m.NT21_EXP, &quot; +
+&nbsp;            &quot;m.NT31, &quot; +
+&nbsp;            &quot;m.NT31_DESC, &quot; +
+&nbsp;            &quot;m.NT32, &quot; +
+&nbsp;            &quot;m.NT32_DESC, &quot; +
+&nbsp;            &quot;m.NT33, &quot; +
+&nbsp;            &quot;m.NT33_DESC, &quot; +
+&nbsp;            &quot;m.NT34, &quot; +
+&nbsp;            &quot;m.NT34_DESC, &quot; +
+&nbsp;            &quot;m.NT35, &quot; +
+&nbsp;            &quot;m.NT35_DESC, &quot; +
+&nbsp;            &quot;m.NT31_EXP, &quot; +
+&nbsp;            &quot;m.NT41, &quot; +
+&nbsp;            &quot;m.NT41_DESC, &quot; +
+&nbsp;            &quot;m.NT42, &quot; +
+&nbsp;            &quot;m.NT42_DESC, &quot; +
+&nbsp;            &quot;m.NT43, &quot; +
+&nbsp;            &quot;m.NT43_DESC, &quot; +
+&nbsp;            &quot;m.NT44, &quot; +
+&nbsp;            &quot;m.NT44_DESC, &quot; +
+&nbsp;            &quot;m.NT45, &quot; +
+&nbsp;            &quot;m.NT45_DESC, &quot; +
+&nbsp;            &quot;m.NT41_EXP, &quot; +
+&nbsp;            &quot;m.MF1, &quot; +
+&nbsp;            &quot;m.MF2, &quot; +
+&nbsp;            &quot;m.MF3, &quot; +
+&nbsp;            &quot;m.MF4, &quot; +
+&nbsp;            &quot;m.MA_EXP, &quot; +
+&nbsp;            &quot;m.MF_EXP, &quot; +
+&nbsp;            &quot;m.VALOR_MEDIA, &quot; +
+&nbsp;            &quot;m.PESO_FINAL, &quot; +
+&nbsp;            &quot;m.INST_ID, &quot; +
+&nbsp;            &quot;m.USR_CAD, &quot; +
+&nbsp;            &quot;m.USUARIO_ID, &quot; +
+&nbsp;            &quot;m.DT_ALTERADO, &quot; +
+&nbsp;            &quot;m.USA_REC1, &quot; +
+&nbsp;            &quot;m.REC11, &quot; +
+&nbsp;            &quot;m.REC11_DESC, &quot; +
+&nbsp;            &quot;m.REC12, &quot; +
+&nbsp;            &quot;m.REC12_DESC, &quot; +
+&nbsp;            &quot;m.REC13, &quot; +
+&nbsp;            &quot;m.REC13_DESC, &quot; +
+&nbsp;            &quot;m.REC1_EXP, &quot; +
+&nbsp;            &quot;m.USA_REC2, &quot; +
+&nbsp;            &quot;m.REC21, &quot; +
+&nbsp;            &quot;m.REC21_DESC, &quot; +
+&nbsp;            &quot;m.REC22, &quot; +
+&nbsp;            &quot;m.REC22_DESC, &quot; +
+&nbsp;            &quot;m.REC23, &quot; +
+&nbsp;            &quot;m.REC23_DESC, &quot; +
+&nbsp;            &quot;m.REC2_EXP, &quot; +
+&nbsp;            &quot;m.USA_REC3, &quot; +
+&nbsp;            &quot;m.REC31, &quot; +
+&nbsp;            &quot;m.REC31_DESC, &quot; +
+&nbsp;            &quot;m.REC32, &quot; +
+&nbsp;            &quot;m.REC32_DESC, &quot; +
+&nbsp;            &quot;m.REC33, &quot; +
+&nbsp;            &quot;m.REC33_DESC, &quot; +
+&nbsp;            &quot;m.REC3_EXP, &quot; +
+&nbsp;            &quot;m.USA_REC4, &quot; +
+&nbsp;            &quot;m.REC41, &quot; +
+&nbsp;            &quot;m.REC41_DESC, &quot; +
+&nbsp;            &quot;m.REC42, &quot; +
+&nbsp;            &quot;m.REC42_DESC, &quot; +
+&nbsp;            &quot;m.REC43, &quot; +
+&nbsp;            &quot;m.REC43_DESC, &quot; +
+&nbsp;            &quot;m.REC4_EXP, &quot; +
+&nbsp;            &quot;m.REC1, &quot; +
+&nbsp;            &quot;m.REC2, &quot; +
+&nbsp;            &quot;m.REC3, &quot; +
+&nbsp;            &quot;m.REC4, &quot; +
+&nbsp;            &quot;m.USA_SM1, &quot; +
+&nbsp;            &quot;m.SM1, &quot; +
+&nbsp;            &quot;m.USA_SM2, &quot; +
+&nbsp;            &quot;m.SM2, &quot; +
+&nbsp;            &quot;m.USA_SM3, &quot; +
+&nbsp;            &quot;m.SM3, &quot; +
+&nbsp;            &quot;m.USA_SM4, &quot; +
+&nbsp;            &quot;m.SM4, &quot; +
+&nbsp;            &quot;m.MF1_EXP, &quot; +
+&nbsp;            &quot;m.MF2_EXP, &quot; +
+&nbsp;            &quot;m.MF3_EXP, &quot; +
+&nbsp;            &quot;m.MF4_EXP, &quot; +
+&nbsp;            &quot;m.TXT_NT1, &quot; +
+&nbsp;            &quot;m.TXT_NT2, &quot; +
+&nbsp;            &quot;m.TXT_NT3, &quot; +
+&nbsp;            &quot;m.TXT_NT4, &quot; +
+&nbsp;            &quot;m.TXT_NT5, &quot; +
+&nbsp;            &quot;m.TXT_SM, &quot; +
+&nbsp;            &quot;m.TXT_REC1, &quot; +
+&nbsp;            &quot;m.TXT_REC2, &quot; +
+&nbsp;            &quot;m.TXT_REC3, &quot; +
+&nbsp;            &quot;m.TXT_REC, &quot; +
+&nbsp;            &quot;m.TXT_MF, &quot; +
+&nbsp;            &quot;m.TXT_PTS, &quot; +
+&nbsp;            &quot;m.TXT_MA, &quot; +
+&nbsp;            &quot;m.TXT_PF, &quot; +
+&nbsp;            &quot;m.TXT_MB, &quot; +
+&nbsp;            &quot;m.PESO11, &quot; +
+&nbsp;            &quot;m.PESO12, &quot; +
+&nbsp;            &quot;m.PESO13, &quot; +
+&nbsp;            &quot;m.PESO14, &quot; +
+&nbsp;            &quot;m.PESO15, &quot; +
+&nbsp;            &quot;m.PESO21, &quot; +
+&nbsp;            &quot;m.PESO22, &quot; +
+&nbsp;            &quot;m.PESO23, &quot; +
+&nbsp;            &quot;m.PESO24, &quot; +
+&nbsp;            &quot;m.PESO25, &quot; +
+&nbsp;            &quot;m.PESO31, &quot; +
+&nbsp;            &quot;m.PESO32, &quot; +
+&nbsp;            &quot;m.PESO33, &quot; +
+&nbsp;            &quot;m.PESO34, &quot; +
+&nbsp;            &quot;m.PESO35, &quot; +
+&nbsp;            &quot;m.PESO41, &quot; +
+&nbsp;            &quot;m.PESO42, &quot; +
+&nbsp;            &quot;m.PESO43, &quot; +
+&nbsp;            &quot;m.PESO44, &quot; +
+&nbsp;            &quot;m.PESO45, &quot; +
+&nbsp;            &quot;m.ARRED_MED, &quot; +
+&nbsp;            &quot;m.PT_EXTRA1, &quot; +
+&nbsp;            &quot;m.PT_EXTRA1_DESC, &quot; +
+&nbsp;            &quot;m.PT_EXTRA2, &quot; +
+&nbsp;            &quot;m.PT_EXTRA2_DESC, &quot; +
+&nbsp;            &quot;m.PT_EXTRA3, &quot; +
+&nbsp;            &quot;m.PT_EXTRA3_DESC, &quot; +
+&nbsp;            &quot;m.PT_EXTRA4, &quot; +
+&nbsp;            &quot;m.PT_EXTRA4_DESC, &quot; +
+&nbsp;            &quot;m.SIM11, &quot; +
+&nbsp;            &quot;m.SIM21, &quot; +
+&nbsp;            &quot;m.SIM31, &quot; +
+&nbsp;            &quot;m.SIM41, &quot; +
+&nbsp;            &quot;m.ARRED_SUBMED, &quot; +
+&nbsp;            &quot;m.SIT, &quot; +
+&nbsp;            &quot;m.UTIL_FREQ, &quot; +
+&nbsp;            &quot;m.TXT_EXE1, &quot; +
+&nbsp;            &quot;m.TXT_EXE2, &quot; +
+&nbsp;            &quot;m.TXT_EXE3, &quot; +
+&nbsp;            &quot;m.TXT_EXE4, &quot; +
+&nbsp;            &quot;m.TXT_EXE5, &quot; +
+&nbsp;            &quot;m.N_ETAPAS, &quot; +
+&nbsp;            &quot;m.TIP_METODO, &quot; +
+&nbsp;            &quot;m.REC_PF, &quot; +
+&nbsp;            &quot;m.DECIMAIS, &quot; +
+&nbsp;            &quot;m.OPCAO_PESO1, &quot; +
+&nbsp;            &quot;m.OPCAO_PESO2, &quot; +
+&nbsp;            &quot;m.OPCAO_PESO3, &quot; +
+&nbsp;            &quot;m.OPCAO_PESO4, &quot; +
+&nbsp;            &quot;m.UTIL_DES_AL, &quot; +
+&nbsp;            &quot;m.CALC_DISC_PRIN, &quot; +
+&nbsp;            &quot;m.PF_DISC_PRIN, &quot; +
+&nbsp;            &quot;m.VALOR_MEDIA_ANUAL, &quot; +
+&nbsp;            &quot;m.CALC_MA, &quot; +
+&nbsp;            &quot;m.ARRED_MA, &quot; +
+&nbsp;            &quot;m.ARRED_MF, &quot; +
+&nbsp;            &quot;m.PT_EXTRA_MA, &quot; +
+&nbsp;            &quot;m.PT_EXTRA_MA_DESC, &quot; +
+&nbsp;            &quot;m.PT_EXTRA_MF, &quot; +
+&nbsp;            &quot;m.PT_EXTRA_MF_DESC, &quot; +
+&nbsp;            &quot;m.PERC_FALTAS, &quot; +
+&nbsp;            &quot;m.CALC_MF, &quot; +
+&nbsp;            &quot;m.MA_DESC, &quot; +
+&nbsp;            &quot;m.PF_DESC, &quot; +
+&nbsp;            &quot;m.REC_PF_DESC, &quot; +
+&nbsp;            &quot;m.MF_DESC, &quot; +
+&nbsp;            &quot;m.NOME_ETAPA, &quot; +
+&nbsp;            &quot;m.NF1, &quot; +
+&nbsp;            &quot;m.NF2, &quot; +
+&nbsp;            &quot;m.NF3, &quot; +
+&nbsp;            &quot;m.NF4, &quot; +
+&nbsp;            &quot;m.NF, &quot; +
+&nbsp;            &quot;m.ME_1E2, &quot; +
+&nbsp;            &quot;m.ME_2E3, &quot; +
+&nbsp;            &quot;m.ME_3E4, &quot; +
+&nbsp;            &quot;m.ME_1E2_DESC, &quot; +
+&nbsp;            &quot;m.ME_2E3_DESC, &quot; +
+&nbsp;            &quot;m.ME_3E4_DESC, &quot; +
+&nbsp;            &quot;m.ME_1E2_EXP, &quot; +
+&nbsp;            &quot;m.ME_2E3_EXP, &quot; +
+&nbsp;            &quot;m.ME_3E4_EXP, &quot; +
+&nbsp;            &quot;m.TPE_1E2, &quot; +
+&nbsp;            &quot;m.TPE_2E3, &quot; +
+&nbsp;            &quot;m.TPE_3E4, &quot; +
+&nbsp;            &quot;m.TPE_1E2_DESC, &quot; +
+&nbsp;            &quot;m.TPE_2E3_DESC, &quot; +
+&nbsp;            &quot;m.TPE_3E4_DESC, &quot; +
+&nbsp;            &quot;m.TPE_1E2_EXP, &quot; +
+&nbsp;            &quot;m.TPE_2E3_EXP, &quot; +
+&nbsp;            &quot;m.TPE_3E4_EXP, &quot; +
+&nbsp;            &quot;m.DIG_PLANO_AULA, &quot; +
+&nbsp;            &quot;m.INCLUE_REC_TP, &quot; +
+&nbsp;            &quot;m.PF_REC_MF, &quot; +
+&nbsp;            &quot;m.tp_exp, &quot; +
+&nbsp;            &quot;m.TP_DISC_PRIN, &quot; +
+&nbsp;            &quot;m.MA_DISC_PRIN &quot; +
+&nbsp;            &quot;FROM turmas t &quot; +
+&nbsp;            &quot;LEFT JOIN grade_professor gp ON gp.turma_id = t.turma_id &quot; +
+&nbsp;            &quot;LEFT JOIN grade_curricular gc ON gc.grade_id = gp.GRADE_ID &quot; +
+&nbsp;            &quot;LEFT JOIN metodos m ON m.metodo_id = COALESCE(gc.METODO_ID, t.METODO_ID) &quot; +
+&nbsp;            &quot;LEFT JOIN disciplinas d ON gp.disciplina_id = d.disc_id &quot; +
+&nbsp;            &quot;WHERE t.turma_id = :turmaId &quot; +
+&nbsp;            &quot;AND gc.DISCIPLINA_ID = :discId&quot;, nativeQuery = true)
+&nbsp;    Metodo findMetodoByDisciplinaOrTurma(@Param(&quot;discId&quot;) Integer discId, @Param(&quot;turmaId&quot;) Integer turmaId);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-09-01 14:08</div>
+</div>
+</body>
+</html>

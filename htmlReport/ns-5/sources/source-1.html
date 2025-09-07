@@ -1,0 +1,187 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AppSecurityConfig</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sedinternet.infrastructure</a>
+</div>
+
+<h1>Coverage Summary for Class: AppSecurityConfig (com.sedinternet.infrastructure)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AppSecurityConfig</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (2/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    9.5%
+  </span>
+  <span class="absValue">
+    (2/21)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">AppSecurityConfig$$SpringCGLIB$$0</td>
+  </tr>
+  <tr>
+    <td class="name">AppSecurityConfig$$SpringCGLIB$$FastClass$$0</td>
+  </tr>
+  <tr>
+    <td class="name">AppSecurityConfig$$SpringCGLIB$$FastClass$$1</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (2/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    9.5%
+  </span>
+  <span class="absValue">
+    (2/21)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sedinternet.infrastructure;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.databind.ObjectMapper;
+&nbsp;import com.sedinternet.services.impl.LoginServiceImpl;
+&nbsp;import jakarta.servlet.http.HttpServletResponse;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.context.annotation.Bean;
+&nbsp;import org.springframework.context.annotation.Configuration;
+&nbsp;import org.springframework.http.HttpMethod;
+&nbsp;import org.springframework.security.authentication.AuthenticationManager;
+&nbsp;import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+&nbsp;import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+&nbsp;import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+&nbsp;import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+&nbsp;import org.springframework.security.web.SecurityFilterChain;
+&nbsp;import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+&nbsp;
+&nbsp;@Configuration
+&nbsp;@EnableWebSecurity
+<b class="fc">&nbsp;public class AppSecurityConfig {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private LoginServiceImpl loginServiceImpl;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private JwtTokenFilter jwtTokenFilter;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private CustomAuthenticationProvider customAuthenticationProvider;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private JwtTokenProvider jwtTokenProvider;
+&nbsp;
+&nbsp;    @Bean
+&nbsp;    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+<b class="nc">&nbsp;        JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager(new AuthenticationConfiguration()));</b>
+<b class="nc">&nbsp;        jwtAuthenticationFilter.setAuthenticationSuccessHandler((request, response, authentication) -&gt; {</b>
+<b class="nc">&nbsp;            String token = jwtTokenProvider.createToken(authentication);</b>
+<b class="nc">&nbsp;            response.getWriter().write(new ObjectMapper().writeValueAsString(new AuthResponse(token)));</b>
+&nbsp;        });
+&nbsp;
+<b class="nc">&nbsp;        jwtAuthenticationFilter.setAuthenticationFailureHandler((request, response, exception) -&gt; {</b>
+<b class="nc">&nbsp;            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);</b>
+<b class="nc">&nbsp;            response.getWriter().write(&quot;Invalid username/password&quot;);</b>
+&nbsp;        });
+&nbsp;
+<b class="nc">&nbsp;        http</b>
+<b class="nc">&nbsp;                .cors()</b>
+<b class="nc">&nbsp;                .and()</b>
+<b class="nc">&nbsp;                .csrf(AbstractHttpConfigurer::disable)</b>
+<b class="nc">&nbsp;                .authorizeHttpRequests(auth -&gt; auth</b>
+<b class="nc">&nbsp;                        .requestMatchers(HttpMethod.OPTIONS, &quot;/**&quot;).permitAll()</b>
+<b class="nc">&nbsp;                        .requestMatchers(&quot;/login/**&quot;).permitAll()</b>
+<b class="nc">&nbsp;                        .anyRequest().authenticated()</b>
+&nbsp;                )
+<b class="nc">&nbsp;                .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)</b>
+<b class="nc">&nbsp;                .addFilterAt(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)</b>
+<b class="nc">&nbsp;                .authenticationProvider(customAuthenticationProvider);</b>
+&nbsp;
+<b class="nc">&nbsp;        return http.build();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Bean
+&nbsp;    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+<b class="fc">&nbsp;        return authenticationConfiguration.getAuthenticationManager();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-09-01 14:08</div>
+</div>
+</body>
+</html>

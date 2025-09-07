@@ -1,0 +1,201 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > EmailService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sedinternet.services</a>
+</div>
+
+<h1>Coverage Summary for Class: EmailService (com.sedinternet.services)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EmailService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (16/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (29/29)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sedinternet.services;
+&nbsp;
+&nbsp;import java.io.File;
+&nbsp;import jakarta.mail.internet.InternetAddress;
+&nbsp;import jakarta.mail.internet.MimeMessage;
+&nbsp;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.core.io.FileSystemResource;
+&nbsp;import org.springframework.mail.javamail.JavaMailSender;
+&nbsp;import org.springframework.mail.javamail.MimeMessageHelper;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;@Service
+<b class="fc">&nbsp;public class EmailService {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private JavaMailSender mailSender;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Envia um e-mail com as informações fornecidas.
+&nbsp;     *
+&nbsp;     * @param descRemetente Nome do remetente a ser exibido
+&nbsp;     * @param emailDestino  Destinatário(s) separados por vírgula ou ponto e vírgula
+&nbsp;     * @param assuntoEmail  Assunto do e-mail
+&nbsp;     * @param corpoHtml     Corpo do e-mail no formato HTML
+&nbsp;     * @param anexo         Caminho do arquivo anexo (opcional, pode ser vazio ou null)
+&nbsp;     * @return true se o e-mail for enviado com sucesso; false caso contrário
+&nbsp;     */
+&nbsp;    public boolean enviarEmail(String descRemetente, String emailDestino, String assuntoEmail, String corpoHtml, String anexo) {
+<b class="fc">&nbsp;        if (emailDestino != null &amp;&amp; !emailDestino.trim().isEmpty()) {</b>
+&nbsp;            try {
+&nbsp;                // Cria a mensagem MIME
+<b class="fc">&nbsp;                MimeMessage message = mailSender.createMimeMessage();</b>
+&nbsp;                // Se houver anexo, o segundo parâmetro deve ser true (multipart)
+<b class="fc">&nbsp;                boolean multipart = (anexo != null &amp;&amp; !anexo.trim().isEmpty());</b>
+<b class="fc">&nbsp;                MimeMessageHelper helper = new MimeMessageHelper(message, multipart, &quot;UTF-8&quot;);</b>
+&nbsp;
+&nbsp;                // Define o remetente (from)
+<b class="fc">&nbsp;                helper.setFrom(new InternetAddress(&quot;comercial@sedsoft.com.br&quot;, descRemetente));</b>
+&nbsp;
+&nbsp;                // Processa os destinatários, tratando separadores &quot;;&quot; e &quot;,&quot;
+&nbsp;                String[] destinatarios;
+<b class="fc">&nbsp;                if (emailDestino.contains(&quot;;&quot;)) {</b>
+<b class="fc">&nbsp;                    destinatarios = emailDestino.split(&quot;;&quot;);</b>
+<b class="fc">&nbsp;                } else if (emailDestino.contains(&quot;,&quot;)) {</b>
+<b class="fc">&nbsp;                    destinatarios = emailDestino.split(&quot;,&quot;);</b>
+&nbsp;                } else {
+<b class="fc">&nbsp;                    destinatarios = new String[]{ emailDestino };</b>
+&nbsp;                }
+&nbsp;                // Remove espaços em branco de cada endereço
+<b class="fc">&nbsp;                for (int i = 0; i &lt; destinatarios.length; i++) {</b>
+<b class="fc">&nbsp;                    destinatarios[i] = destinatarios[i].trim();</b>
+&nbsp;                }
+<b class="fc">&nbsp;                helper.setTo(destinatarios);</b>
+&nbsp;
+&nbsp;                // Define o assunto e o corpo (HTML) do e-mail
+<b class="fc">&nbsp;                helper.setSubject(assuntoEmail);</b>
+<b class="fc">&nbsp;                helper.setText(corpoHtml, true);</b>
+&nbsp;
+&nbsp;                // Define cabeçalhos de prioridade alta
+<b class="fc">&nbsp;                message.setHeader(&quot;X-Priority&quot;, &quot;1&quot;);</b>
+<b class="fc">&nbsp;                message.setHeader(&quot;X-MSMail-Priority&quot;, &quot;High&quot;);</b>
+<b class="fc">&nbsp;                message.setHeader(&quot;Importance&quot;, &quot;High&quot;);</b>
+&nbsp;
+&nbsp;                // Se houver anexo, adiciona-o
+<b class="fc">&nbsp;                if (multipart) {</b>
+<b class="fc">&nbsp;                    File file = new File(anexo);</b>
+<b class="fc">&nbsp;                    if (file.exists()) {</b>
+<b class="fc">&nbsp;                        FileSystemResource fileResource = new FileSystemResource(file);</b>
+<b class="fc">&nbsp;                        helper.addAttachment(fileResource.getFilename(), fileResource);</b>
+&nbsp;                    } else {
+<b class="fc">&nbsp;                        System.err.println(&quot;Arquivo de anexo não encontrado: &quot; + anexo);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                // Envia o e-mail
+<b class="fc">&nbsp;                mailSender.send(message);</b>
+<b class="fc">&nbsp;                return true;</b>
+&nbsp;            } catch (Exception e) {
+<b class="fc">&nbsp;                e.printStackTrace();</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-09-01 14:08</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,167 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ResumoAtividade</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sedinternet.entities</a>
+</div>
+
+<h1>Coverage Summary for Class: ResumoAtividade (com.sedinternet.entities)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">ResumoAtividade</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sedinternet.entities;
+&nbsp;
+&nbsp;import jakarta.persistence.*;
+&nbsp;import lombok.*;
+&nbsp;
+&nbsp;import java.time.LocalDate;
+&nbsp;
+&nbsp;@Data
+&nbsp;@EqualsAndHashCode(callSuper = false)
+&nbsp;@Entity
+&nbsp;@Builder
+&nbsp;@NoArgsConstructor
+&nbsp;@AllArgsConstructor
+&nbsp;@Table(name = &quot;resumo_atividades&quot;)
+&nbsp;public class ResumoAtividade extends GenericEntity {
+&nbsp;
+&nbsp;    @Id
+&nbsp;    @Column(name= &quot;resumo_at_id&quot;)
+&nbsp;    @GeneratedValue(strategy=GenerationType.IDENTITY)
+&nbsp;    private Long id;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;CONTEUDO&quot;)
+&nbsp;    private byte[] conteudo;
+&nbsp;
+&nbsp;    @Column(name = &quot;TURMA_ID&quot;)
+&nbsp;    private Integer turmaId;
+&nbsp;
+&nbsp;    @Column(name = &quot;DISCIPLINA_ID&quot;,nullable = false)
+&nbsp;    private Integer disciplinaId;
+&nbsp;
+&nbsp;    @Column(name = &quot;DT_ATIVIDADE&quot;)
+&nbsp;    private LocalDate dtAtividade;
+&nbsp;
+&nbsp;    @Column(name = &quot;DT_ALT&quot;)
+&nbsp;    private LocalDate dtAlt;
+&nbsp;
+&nbsp;    @Column(name = &quot;DT_CAD&quot;)
+&nbsp;    private LocalDate dtCad;
+&nbsp;
+&nbsp;    @Column(name = &quot;ANO_LETIVO&quot;)
+&nbsp;    private Integer anoLetivo;
+&nbsp;
+&nbsp;    @Column(name = &quot;USR_CAD&quot;)
+&nbsp;    private Integer usrCad;
+&nbsp;
+&nbsp;    @Column(name = &quot;USARIO_ID&quot;)
+&nbsp;    private Integer usuarioId;
+&nbsp;
+&nbsp;    @Column(name = &quot;GRADE_ID&quot;)
+&nbsp;    private Integer gradeId;
+&nbsp;
+&nbsp;    @Column(name = &quot;GRADE_PROF_ID&quot;)
+&nbsp;    private Integer gradeProfId;
+&nbsp;
+&nbsp;    @Column(name = &quot;QTD_AULA&quot;)
+&nbsp;    private Short qtdAula;
+&nbsp;
+&nbsp;    @Column(name = &quot;ETAPA&quot;)
+&nbsp;    private Integer etapa;
+&nbsp;
+&nbsp;    @Column(name = &quot;SITE&quot;)
+&nbsp;    private Short site;
+&nbsp;
+&nbsp;    @Column(name = &quot;DT_SITE&quot;,nullable = true)
+&nbsp;    private LocalDate dtSite;
+&nbsp;
+&nbsp;    @Column(name = &quot;RESUMO_AT_ID2&quot;)
+&nbsp;    private Integer resumoAtId2;
+&nbsp;
+&nbsp;    @Column(name = &quot;RESUMO_AT_ID3&quot;)
+&nbsp;    private Integer resumoAtId3;
+&nbsp;
+&nbsp;    @Column(name = &quot;INST_ID&quot;, insertable = false, updatable = false)
+&nbsp;    private Integer instId;
+&nbsp;
+&nbsp;    @Column(name = &quot;PLANO_AULA_ID&quot;)
+&nbsp;    private Integer planoAulaId;
+&nbsp;
+&nbsp;    @Column(name = &quot;PLANO_AULA_CONT_ID&quot;)
+&nbsp;    private Integer planoAulaContId;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;procedimento_metodologico&quot;)
+&nbsp;    private byte[] procedimentoMetodologico;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;tarefa_casa&quot;)
+&nbsp;    private byte[] tarefaCasa;
+&nbsp;
+&nbsp;    @Column(name = &quot;res_at_imp_id&quot;)
+&nbsp;    private Integer resAtImpId;
+&nbsp;
+&nbsp;    @Column(name = &quot;env_net&quot;)
+&nbsp;    private Integer envNet;
+&nbsp;
+&nbsp;    @Column(name = &quot;dt_entrega_tarefa&quot;)
+&nbsp;    private LocalDate dtEntregaTarefa;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-09-01 14:08</div>
+</div>
+</body>
+</html>

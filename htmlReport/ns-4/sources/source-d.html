@@ -1,0 +1,349 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Nota</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sedinternet.entities</a>
+</div>
+
+<h1>Coverage Summary for Class: Nota (com.sedinternet.entities)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">Nota</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sedinternet.entities;
+&nbsp;
+&nbsp;import jakarta.persistence.*;
+&nbsp;import lombok.*;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.time.LocalDateTime;
+&nbsp;
+&nbsp;@Data
+&nbsp;@EqualsAndHashCode(callSuper = false)
+&nbsp;@Entity
+&nbsp;@Builder
+&nbsp;@NoArgsConstructor
+&nbsp;@AllArgsConstructor
+&nbsp;@Table(name = &quot;notas&quot;)
+&nbsp;public class Nota extends GenericEntity{
+&nbsp;
+&nbsp;    @Id
+&nbsp;    @Column(name = &quot;notas_id&quot;)
+&nbsp;    @GeneratedValue(strategy=GenerationType.IDENTITY)
+&nbsp;    private Long id;
+&nbsp;
+&nbsp;    @Column(name = &quot;MATRICULA_ID&quot;, nullable = false)
+&nbsp;    private Long matriculaId;
+&nbsp;
+&nbsp;    @Column(name = &quot;ANO_LETIVO&quot;)
+&nbsp;    private Integer anoLetivo;
+&nbsp;
+&nbsp;    @Column(name = &quot;ALUNO_ID&quot;)
+&nbsp;    private Long alunoId;
+&nbsp;
+&nbsp;    @Column(name = &quot;DISCIPLINA_ID&quot;)
+&nbsp;    private Long disciplinaId;
+&nbsp;
+&nbsp;    @Column(name = &quot;GRADE_ID&quot;)
+&nbsp;    private Long gradeId;
+&nbsp;
+&nbsp;    @Column(name = &quot;METODO_ID&quot;)
+&nbsp;    private Long metodoId;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT11&quot;)
+&nbsp;    private Double nt11;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT12&quot;)
+&nbsp;    private Double nt12;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT13&quot;)
+&nbsp;    private Double nt13;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT14&quot;)
+&nbsp;    private Double nt14;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT15&quot;)
+&nbsp;    private Double nt15;
+&nbsp;
+&nbsp;    @Column(name = &quot;NC11&quot;, length = 2)
+&nbsp;    private String nc11;
+&nbsp;
+&nbsp;    @Column(name = &quot;MF11&quot;)
+&nbsp;    private Double mf11;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT21&quot;)
+&nbsp;    private Double nt21;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT22&quot;)
+&nbsp;    private Double nt22;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT23&quot;)
+&nbsp;    private Double nt23;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT24&quot;)
+&nbsp;    private Double nt24;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT25&quot;)
+&nbsp;    private Double nt25;
+&nbsp;
+&nbsp;    @Column(name = &quot;NC21&quot;, length = 2)
+&nbsp;    private String nc21;
+&nbsp;
+&nbsp;    @Column(name = &quot;MF21&quot;)
+&nbsp;    private Double mf21;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT31&quot;)
+&nbsp;    private Double nt31;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT32&quot;)
+&nbsp;    private Double nt32;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT33&quot;)
+&nbsp;    private Double nt33;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT34&quot;)
+&nbsp;    private Double nt34;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT35&quot;)
+&nbsp;    private Double nt35;
+&nbsp;
+&nbsp;    @Column(name = &quot;NC31&quot;, length = 2)
+&nbsp;    private String nc31;
+&nbsp;
+&nbsp;    @Column(name = &quot;MF31&quot;)
+&nbsp;    private Double mf31;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT41&quot;)
+&nbsp;    private Double nt41;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT42&quot;)
+&nbsp;    private Double nt42;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT43&quot;)
+&nbsp;    private Double nt43;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT44&quot;)
+&nbsp;    private Double nt44;
+&nbsp;
+&nbsp;    @Column(name = &quot;NT45&quot;)
+&nbsp;    private Double nt45;
+&nbsp;
+&nbsp;    @Column(name = &quot;NC41&quot;, length = 2)
+&nbsp;    private String nc41;
+&nbsp;
+&nbsp;    @Column(name = &quot;MF41&quot;)
+&nbsp;    private Double mf41;
+&nbsp;
+&nbsp;    @Column(name = &quot;NF&quot;)
+&nbsp;    private Integer nf;
+&nbsp;
+&nbsp;    @Column(name = &quot;TP&quot;)
+&nbsp;    private Double tp;
+&nbsp;
+&nbsp;    @Column(name = &quot;MA&quot;)
+&nbsp;    private Double ma;
+&nbsp;
+&nbsp;    @Column(name = &quot;PF&quot;)
+&nbsp;    private Double pf;
+&nbsp;
+&nbsp;    @Column(name = &quot;MF&quot;)
+&nbsp;    private Double mf;
+&nbsp;
+&nbsp;    @Column(name = &quot;USR_CAD&quot;)
+&nbsp;    private Integer usrCad;
+&nbsp;
+&nbsp;    @Column(name = &quot;USUARIO_ID&quot;)
+&nbsp;    private Long usuarioId;
+&nbsp;
+&nbsp;    @Column(name = &quot;DT_ALTERADO&quot;, nullable = false, columnDefinition = &quot;TIMESTAMP NOT NULL DEFAULT &#39;0000-00-00 00:00:00&#39;&quot;)
+&nbsp;    private LocalDateTime dtAlterado;
+&nbsp;
+&nbsp;    @Column(name = &quot;SM1&quot;)
+&nbsp;    private Double sm1;
+&nbsp;
+&nbsp;    @Column(name = &quot;SM2&quot;)
+&nbsp;    private Double sm2;
+&nbsp;
+&nbsp;    @Column(name = &quot;SM3&quot;)
+&nbsp;    private Double sm3;
+&nbsp;
+&nbsp;    @Column(name = &quot;SM4&quot;)
+&nbsp;    private Double sm4;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC11&quot;)
+&nbsp;    private Double rec11;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC12&quot;)
+&nbsp;    private Double rec12;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC13&quot;)
+&nbsp;    private Double rec13;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC1&quot;)
+&nbsp;    private Double rec1;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC21&quot;)
+&nbsp;    private Double rec21;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC22&quot;)
+&nbsp;    private Double rec22;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC23&quot;)
+&nbsp;    private Double rec23;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC2&quot;)
+&nbsp;    private Double rec2;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC31&quot;)
+&nbsp;    private Double rec31;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC32&quot;)
+&nbsp;    private Double rec32;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC33&quot;)
+&nbsp;    private Double rec33;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC3&quot;)
+&nbsp;    private Double rec3;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC41&quot;)
+&nbsp;    private Double rec41;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC42&quot;)
+&nbsp;    private Double rec42;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC43&quot;)
+&nbsp;    private Double rec43;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC4&quot;)
+&nbsp;    private Double rec4;
+&nbsp;
+&nbsp;    @Column(name = &quot;SITE&quot;)
+&nbsp;    private Short site;
+&nbsp;
+&nbsp;    @Column(name = &quot;DT_SITE&quot;)
+&nbsp;    private LocalDateTime dtSite;
+&nbsp;
+&nbsp;    @Column(name = &quot;DISP&quot;)
+&nbsp;    private Short disp;
+&nbsp;
+&nbsp;    @Column(name = &quot;INTERNET&quot;)
+&nbsp;    private Short internet;
+&nbsp;
+&nbsp;    @Column(name = &quot;PT_EXTRA1&quot;)
+&nbsp;    private Double ptExtra1;
+&nbsp;
+&nbsp;    @Column(name = &quot;PT_EXTRA2&quot;)
+&nbsp;    private Double ptExtra2;
+&nbsp;
+&nbsp;    @Column(name = &quot;PT_EXTRA3&quot;)
+&nbsp;    private Double ptExtra3;
+&nbsp;
+&nbsp;    @Column(name = &quot;PT_EXTRA4&quot;)
+&nbsp;    private Double ptExtra4;
+&nbsp;
+&nbsp;    @Column(name = &quot;NF1&quot;)
+&nbsp;    private Integer nf1;
+&nbsp;
+&nbsp;    @Column(name = &quot;NF2&quot;)
+&nbsp;    private Integer nf2;
+&nbsp;
+&nbsp;    @Column(name = &quot;NF3&quot;)
+&nbsp;    private Integer nf3;
+&nbsp;
+&nbsp;    @Column(name = &quot;NF4&quot;)
+&nbsp;    private Integer nf4;
+&nbsp;
+&nbsp;    @Column(name = &quot;NC_MF&quot;, length = 2)
+&nbsp;    private String ncMf;
+&nbsp;
+&nbsp;    @Column(name = &quot;REC_PF&quot;)
+&nbsp;    private Double recPf;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;DISP_MOT&quot;)
+&nbsp;    private byte[] dispMot;
+&nbsp;
+&nbsp;    @Column(name = &quot;DISP_DT&quot;)
+&nbsp;    private LocalDate dispDt;
+&nbsp;
+&nbsp;    @Column(name = &quot;PT_EXTRA_MA&quot;)
+&nbsp;    private Double ptExtraMa;
+&nbsp;
+&nbsp;    @Column(name = &quot;PT_EXTRA_MF&quot;)
+&nbsp;    private Double ptExtraMf;
+&nbsp;
+&nbsp;    @Column(name = &quot;BOLETO_GERAD&quot;)
+&nbsp;    private Integer boletoGerad;
+&nbsp;
+&nbsp;    @Column(name = &quot;DT_ALT&quot;, nullable = false, columnDefinition = &quot;TIMESTAMP NOT NULL DEFAULT &#39;0000-00-00 00:00:00&#39;&quot;)
+&nbsp;    private LocalDateTime dtAlt;
+&nbsp;
+&nbsp;    @Column(name = &quot;BOLETO_ID&quot;)
+&nbsp;    private Long boletoId;
+&nbsp;
+&nbsp;    @Column(name = &quot;TURMA_ID&quot;)
+&nbsp;    private Long turmaId;
+&nbsp;
+&nbsp;    @Column(name = &quot;SERIE_ID&quot;)
+&nbsp;    private Long serieId;
+&nbsp;
+&nbsp;    @Column(name = &quot;estrut_c_id&quot;)
+&nbsp;    private Long estruturCid;
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-09-01 14:08</div>
+</div>
+</body>
+</html>

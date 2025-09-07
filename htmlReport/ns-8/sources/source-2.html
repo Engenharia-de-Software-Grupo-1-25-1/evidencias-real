@@ -1,0 +1,114 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ResumoAtividadeRepository</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sedinternet.repositories</a>
+</div>
+
+<h1>Coverage Summary for Class: ResumoAtividadeRepository (com.sedinternet.repositories)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">ResumoAtividadeRepository$MockitoMock$F2tOpoxe</td>
+  </tr>
+  <tr>
+    <td class="name">ResumoAtividadeRepository$MockitoMock$F2tOpoxe$auxiliary$00wjFF3a</td>
+  </tr>
+  <tr>
+    <td class="name">ResumoAtividadeRepository$MockitoMock$F2tOpoxe$auxiliary$BVeA4iB3</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sedinternet.repositories;
+&nbsp;
+&nbsp;import com.sedinternet.entities.ResumoAtividade;
+&nbsp;import org.springframework.data.jpa.repository.Query;
+&nbsp;import org.springframework.data.repository.query.Param;
+&nbsp;import org.springframework.stereotype.Repository;
+&nbsp;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@Repository
+&nbsp;public interface ResumoAtividadeRepository extends GenericRepository&lt;ResumoAtividade&gt; {
+&nbsp;
+&nbsp;    @Query(
+&nbsp;            &quot;SELECT ra FROM ResumoAtividade ra &quot; +
+&nbsp;                    &quot;WHERE ra.turmaId = :turmaId &quot; +
+&nbsp;                    &quot;AND ra.disciplinaId = :disciplinaId &quot; +
+&nbsp;                    &quot;AND ra.dtAtividade = :dtAtividade&quot;)
+&nbsp;    List&lt;ResumoAtividade&gt; findResumoByTurmaDiscDateAtvd(
+&nbsp;            @Param(&quot;turmaId&quot;) Integer turmaId,
+&nbsp;            @Param(&quot;disciplinaId&quot;) Integer disciplinaId,
+&nbsp;            @Param(&quot;dtAtividade&quot;) LocalDate dtAtividade
+&nbsp;    );
+&nbsp;
+&nbsp;    @Query(
+&nbsp;            &quot;SELECT ra FROM ResumoAtividade ra &quot; +
+&nbsp;            &quot;WHERE ra.turmaId = :turmaId &quot; +
+&nbsp;            &quot;AND ra.disciplinaId = :disciplinaId &quot; +
+&nbsp;            &quot;AND ra.anoLetivo = YEAR(CURRENT_DATE) &quot; +
+&nbsp;            &quot;AND ra.etapa = :etapa &quot; +
+&nbsp;            &quot;ORDER BY ra.dtAtividade ASC&quot;)
+&nbsp;    List&lt;ResumoAtividade&gt; findResumoAtivToPrint(
+&nbsp;            @Param(&quot;turmaId&quot;) Integer turmaId,
+&nbsp;            @Param(&quot;disciplinaId&quot;) Integer disciplinaId,
+&nbsp;            @Param(&quot;etapa&quot;) Integer etapa
+&nbsp;    );
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-09-01 14:08</div>
+</div>
+</body>
+</html>

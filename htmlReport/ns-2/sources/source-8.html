@@ -1,0 +1,134 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GradeCurricularController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sedinternet.controllers</a>
+</div>
+
+<h1>Coverage Summary for Class: GradeCurricularController (com.sedinternet.controllers)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GradeCurricularController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sedinternet.controllers;
+&nbsp;
+&nbsp;import com.sedinternet.dtos.GradeCurricularDTO;
+&nbsp;import com.sedinternet.entities.GradeCurricular;
+&nbsp;import com.sedinternet.services.GradeCurricularService;
+&nbsp;import org.springframework.web.bind.annotation.*;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@RestController
+&nbsp;@RequestMapping(&quot;/grade-curricular&quot;)
+&nbsp;public class GradeCurricularController extends GenericController&lt;GradeCurricular, Long&gt;{
+&nbsp;
+&nbsp;    private final GradeCurricularService gradeCurricularService;
+&nbsp;
+&nbsp;    public GradeCurricularController(GradeCurricularService gradeCurricularService) {
+<b class="fc">&nbsp;        super(gradeCurricularService);</b>
+<b class="fc">&nbsp;        this.gradeCurricularService = gradeCurricularService;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @GetMapping(&quot;/turma/{turmaId}/professor/{professorId}&quot;)
+&nbsp;    public List&lt;GradeCurricularDTO&gt; getDisciplinasByTurma(@PathVariable Integer turmaId, @PathVariable Integer professorId) {
+<b class="fc">&nbsp;        return gradeCurricularService.getDisciplinasByTurmaId(turmaId, professorId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @GetMapping(&quot;/turma/{turmaId}/disciplina/{disciplinaId}&quot;)
+&nbsp;    public List&lt;Object[]&gt; getSubDisc(@PathVariable Integer turmaId, @PathVariable Integer disciplinaId) {
+<b class="fc">&nbsp;        return gradeCurricularService.getSubDisc(turmaId, disciplinaId);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-09-01 14:08</div>
+</div>
+</body>
+</html>

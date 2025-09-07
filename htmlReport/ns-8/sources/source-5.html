@@ -1,0 +1,137 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FreqAlunoRepository</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sedinternet.repositories</a>
+</div>
+
+<h1>Coverage Summary for Class: FreqAlunoRepository (com.sedinternet.repositories)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">FreqAlunoRepository$MockitoMock$iOtqWuKU</td>
+  </tr>
+  <tr>
+    <td class="name">FreqAlunoRepository$MockitoMock$iOtqWuKU$auxiliary$SuHd4mxG</td>
+  </tr>
+  <tr>
+    <td class="name">FreqAlunoRepository$MockitoMock$iOtqWuKU$auxiliary$xCqN2xdz</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sedinternet.repositories;
+&nbsp;
+&nbsp;import com.sedinternet.dtos.FreqAlunoDTO;
+&nbsp;import com.sedinternet.entities.FreqAluno;
+&nbsp;import jakarta.transaction.Transactional;
+&nbsp;import org.springframework.data.jpa.repository.Modifying;
+&nbsp;import org.springframework.data.jpa.repository.Query;
+&nbsp;import org.springframework.data.repository.query.Param;
+&nbsp;import org.springframework.stereotype.Repository;
+&nbsp;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@Repository
+&nbsp;public interface FreqAlunoRepository extends GenericRepository&lt;FreqAluno&gt; {
+&nbsp;
+&nbsp;    @Query(&quot;SELECT fa FROM FreqAluno fa WHERE fa.disciplinaId = :disciplinaId AND fa.turmaId = :turmaId&quot;)
+&nbsp;    List&lt;FreqAluno&gt; findFaltasByDisciplinaAndTurma(@Param(&quot;disciplinaId&quot;) Integer disciplinaId, @Param(&quot;turmaId&quot;) Integer turmaId);
+&nbsp;
+&nbsp;    @Query(&quot;SELECT DISTINCT new com.sedinternet.dtos.FreqAlunoDTO(m.id, fa.id, a.nome, ra.etapa, sm.situacao, ra.id, &quot; +
+&nbsp;            &quot;CASE WHEN fa.numeroFaltas IS NULL THEN 0 ELSE fa.numeroFaltas END, ra.qtdAula, fa.dataCadastro) &quot; +
+&nbsp;            &quot;FROM Matricula m &quot; +
+&nbsp;            &quot;INNER JOIN Aluno a ON m.aluno.id = a.id &quot; +
+&nbsp;            &quot;LEFT JOIN FreqAluno fa ON fa.matriculaId = m.id AND fa.dtFreq = :dataAtividade AND fa.disciplinaId = :disciplinaId &quot; +
+&nbsp;            &quot;LEFT JOIN SitMat sm ON sm.id = m.sit &quot; +
+&nbsp;            &quot;LEFT JOIN ResumoAtividade ra ON ra.turmaId = m.turma.id &quot; +
+&nbsp;            &quot;WHERE m.turma.id = :turmaId AND m.sit != 8 AND ra.disciplinaId = :disciplinaId &quot; +
+&nbsp;            &quot;AND ra.dtAtividade = :dataAtividade &quot; +
+&nbsp;            &quot;ORDER BY a.nome&quot;)
+&nbsp;    List&lt;FreqAlunoDTO&gt; findAlunosPorTurmaDisciplinaEData(
+&nbsp;            @Param(&quot;turmaId&quot;) Long turmaId,
+&nbsp;            @Param(&quot;disciplinaId&quot;) Long disciplinaId,
+&nbsp;            @Param(&quot;dataAtividade&quot;) LocalDate dataAtividade);
+&nbsp;
+&nbsp;    @Transactional
+&nbsp;    @Modifying
+&nbsp;    @Query(value = &quot;&quot;&quot;
+&nbsp;        DELETE FROM freq_alunos fa WHERE fa.RESUMO_AT_ID = :resumoId
+&nbsp;        &quot;&quot;&quot;, nativeQuery = true)
+&nbsp;    void deleteFrequenciaPorResumo(@Param(&quot;resumoId&quot;) Long resumoId);
+&nbsp;
+&nbsp;    @Query(&quot;SELECT DISTINCT m.id, a.nome, &quot; +
+&nbsp;            &quot;sm.situacao, &quot; +
+&nbsp;            &quot;COALESCE(SUM(fa.numeroFaltas), 0) &quot; +
+&nbsp;            &quot;FROM Matricula m &quot; +
+&nbsp;            &quot;INNER JOIN Aluno a ON m.aluno.id = a.id &quot; +
+&nbsp;            &quot;LEFT JOIN FreqAluno fa ON fa.matriculaId = m.id AND fa.disciplinaId = :disciplinaId AND fa.dtFreq BETWEEN :etapaInicio AND :etapaFim &quot; +
+&nbsp;            &quot;LEFT JOIN SitMat sm ON sm.id = m.sit &quot; +
+&nbsp;            &quot;WHERE m.turma.id = :turmaId AND m.sit != 8 &quot; +
+&nbsp;            &quot;GROUP BY m.id, a.nome, sm.situacao &quot; +
+&nbsp;            &quot;ORDER BY a.nome&quot;)
+&nbsp;    List&lt;Object[]&gt; findAlunosMediaByTurmaDisciplinaAndIntervalo(
+&nbsp;            @Param(&quot;turmaId&quot;) Long turmaId,
+&nbsp;            @Param(&quot;disciplinaId&quot;) Long disciplinaId,
+&nbsp;            @Param(&quot;etapaInicio&quot;) LocalDate etapaInicio,
+&nbsp;            @Param(&quot;etapaFim&quot;) LocalDate etapaFim
+&nbsp;    );
+&nbsp;
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-09-01 14:08</div>
+</div>
+</body>
+</html>

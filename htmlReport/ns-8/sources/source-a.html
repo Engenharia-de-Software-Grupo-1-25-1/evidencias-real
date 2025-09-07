@@ -1,0 +1,157 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GradeCurricularRepository</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sedinternet.repositories</a>
+</div>
+
+<h1>Coverage Summary for Class: GradeCurricularRepository (com.sedinternet.repositories)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">GradeCurricularRepository$MockitoMock$LsLKRfC7</td>
+  </tr>
+  <tr>
+    <td class="name">GradeCurricularRepository$MockitoMock$LsLKRfC7$auxiliary$c0R0fLCD</td>
+  </tr>
+  <tr>
+    <td class="name">GradeCurricularRepository$MockitoMock$LsLKRfC7$auxiliary$M4Ara79B</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sedinternet.repositories;
+&nbsp;
+&nbsp;import com.sedinternet.entities.GradeCurricular;
+&nbsp;import org.springframework.data.jpa.repository.Query;
+&nbsp;import org.springframework.data.repository.query.Param;
+&nbsp;import org.springframework.stereotype.Repository;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@Repository
+&nbsp;public interface GradeCurricularRepository extends GenericRepository&lt;GradeCurricular&gt; {
+&nbsp;
+&nbsp;    @Query(&quot;SELECT DISTINCT s.cursoId, s.serieId, gc.disciplina.id, d.disciplina, gc.ordem, gc.cargaHoraria, d.abrev, s.serieNome, &quot; +
+&nbsp;            &quot;CASE WHEN (SELECT COUNT(gc2) FROM GradeCurricular gc2 WHERE gc2.anoLetivo = gp.anoLetivo AND gc2.serieId = gc.serieId AND gc2.discPrincId = gc.disciplina.id) &gt; 0 THEN 1 ELSE 0 END, &quot; +
+&nbsp;            &quot;gc.discPrincId, CASE WHEN gc.discPrincId &gt; 0 THEN 0 ELSE 1 END, &quot; +
+&nbsp;            &quot;CASE WHEN gc.discPrincId &gt; 0 THEN (SELECT d2.disciplina FROM Disciplina d2 WHERE d2.id = gc.discPrincId) ELSE NULL END, &quot; +
+&nbsp;            &quot;gc.aplicarSeparado, gp.turmaId, t.turmaNome, t.turmaAbrev, t.turno, t.opcaoAula, t.opcaoHorario, &quot; +
+&nbsp;            &quot;(SELECT COALESCE(al.nSemAnual, 0) FROM AnoLet al WHERE al.anoLet = gc.anoLetivo), &quot; +
+&nbsp;            &quot;COALESCE(t.instId, t.instId2), gp.id, gp.professorId, gp.dtInicial, gp.dtFinal, p.professorNome, p.professorAbrev, p.situacaoProf, p.prioridadeHorario, p.grauImportancia, p.opcaoGeminacao, &quot; +
+&nbsp;            &quot;p.manha, p.tarde, p.noite, gp.anoLetivo, gp.gradeId, gp.turnoGp, &quot; +
+&nbsp;            &quot;COALESCE(gc.metodoId, t.metodoId), COALESCE(d.discCatId, 1) AS discCatId, COALESCE(i.descricao, &#39;Categoria Padrão&#39;) AS descricao, &quot; +
+&nbsp;            &quot;d.codInep, gc.replicar, s.grupoId, t.aulaInicio, t.aulaFinal, t.turPerid, t.dtFech, &quot; +
+&nbsp;            &quot;(SELECT CASE WHEN COUNT(gc3) &gt; 0 THEN 1 ELSE 0 END FROM GradeCurricular gc3 WHERE gc3.turmaId = t.id), &quot; +
+&nbsp;            &quot;(SELECT MAX(ep.etapa) &quot; +
+&nbsp;            &quot;FROM Etapa ep &quot; +
+&nbsp;            &quot;WHERE ep.metodoId = t.metodoId &quot; +
+&nbsp;            &quot;AND CURRENT_DATE BETWEEN ep.dtDigIn AND ep.dtDigFin &quot; +
+&nbsp;            &quot;AND ep.anoLetivo = YEAR(CURRENT_DATE)) &quot; +
+&nbsp;            &quot;FROM GradeCurricular gc &quot; +
+&nbsp;            &quot;LEFT JOIN GradeProfessor gp ON gc.id = gp.gradeId AND gc.disciplina.id = gp.disciplinaId AND gc.serieId = gp.serieId &quot; +
+&nbsp;            &quot;LEFT JOIN Turma t ON gp.turmaId = t.id &quot; +
+&nbsp;            &quot;LEFT JOIN Disciplina d ON gc.disciplina.id = d.id &quot; +
+&nbsp;            &quot;LEFT JOIN Serie s ON s.id = gc.serieId &quot; +
+&nbsp;            &quot;LEFT JOIN Professor p ON p.id = gp.professorId &quot; +
+&nbsp;            &quot;LEFT JOIN DisciplinaCategoria i ON d.discCatId = i.discCatId &quot; +
+&nbsp;            &quot;LEFT JOIN Etapa ep ON ep.metodoId = t.metodoId &quot; +
+&nbsp;            &quot;WHERE gp.turmaId = :turmaId AND gp.professorId = :professorId &quot; +
+&nbsp;            &quot;ORDER BY gc.ordem, COALESCE((CASE WHEN gc.discPrincId &gt; 0 THEN (SELECT d2.disciplina FROM Disciplina d2 WHERE d2.id = gc.discPrincId) ELSE NULL END), d.disciplina), &quot; +
+&nbsp;            &quot;CASE WHEN gc.discPrincId &gt; 0 THEN 0 ELSE 1 END, gc.disciplina.id&quot;)
+&nbsp;    List&lt;Object[]&gt; findDisciplinasByTurmaId(
+&nbsp;            @Param(&quot;turmaId&quot;) Integer turmaId,
+&nbsp;            @Param(&quot;professorId&quot;) Integer professorId
+&nbsp;    );
+&nbsp;
+&nbsp;    @Query(&quot;SELECT d FROM GradeCurricular gc &quot; +
+&nbsp;            &quot;LEFT JOIN Disciplina d on gc.disciplina.id = d.id &quot; +
+&nbsp;            &quot;LEFT JOIN GradeProfessor gp on gp.gradeId = gc.id &quot; +
+&nbsp;            &quot;WHERE gc.discPrincId = :disciplinaId and gc.anoLetivo = YEAR(CURRENT_DATE) and gp.turmaId = :turmaId &quot;)
+&nbsp;    List&lt;Object[]&gt; getSubDisc(
+&nbsp;            @Param(&quot;turmaId&quot;) Integer turmaId,
+&nbsp;            @Param(&quot;disciplinaId&quot;) Integer disciplinaId
+&nbsp;    );
+&nbsp;
+&nbsp;    @Query(value = &quot;SELECT d.disc_id, d.disciplina, gp.turma_id, gc.ano_letivo, gc.DISCIPLINA_PRINC &quot; +
+&nbsp;            &quot;FROM grade_curricular gc &quot; +
+&nbsp;            &quot;LEFT JOIN disciplinas d ON gc.DISCIPLINA_ID = d.disc_id &quot; +
+&nbsp;            &quot;LEFT JOIN grade_professor gp ON gp.GRADE_ID = gc.grade_id &quot; +
+&nbsp;            &quot;WHERE &quot; +
+&nbsp;            &quot;   (gc.DISCIPLINA_ID = :disciplinaId AND gp.TURMA_ID = :turmaId) &quot; +
+&nbsp;            &quot;   OR (gc.DISC_PRINC_ID = :disciplinaId AND gp.TURMA_ID = :turmaId) &quot; +
+&nbsp;            &quot;   OR (gc.DISCIPLINA_ID = ( &quot; +
+&nbsp;            &quot;       SELECT DISC_PRINC_ID &quot; +
+&nbsp;            &quot;       FROM grade_curricular &quot; +
+&nbsp;            &quot;       WHERE DISCIPLINA_ID = :disciplinaId &quot; +
+&nbsp;            &quot;       LIMIT 1) &quot; +
+&nbsp;            &quot;       AND gp.TURMA_ID = :turmaId) &quot; +
+&nbsp;            &quot;   OR (gc.DISC_PRINC_ID = ( &quot; +
+&nbsp;            &quot;       SELECT DISC_PRINC_ID &quot; +
+&nbsp;            &quot;       FROM grade_curricular &quot; +
+&nbsp;            &quot;       WHERE DISCIPLINA_ID = :disciplinaId &quot; +
+&nbsp;            &quot;       LIMIT 1) &quot; +
+&nbsp;            &quot;       AND gp.TURMA_ID = :turmaId)&quot;,
+&nbsp;            nativeQuery = true)
+&nbsp;    List&lt;Object[]&gt; getRelatedDisc(
+&nbsp;            @Param(&quot;turmaId&quot;) Integer turmaId,
+&nbsp;            @Param(&quot;disciplinaId&quot;) Integer disciplinaId
+&nbsp;    );
+&nbsp;
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-09-01 14:08</div>
+</div>
+</body>
+</html>

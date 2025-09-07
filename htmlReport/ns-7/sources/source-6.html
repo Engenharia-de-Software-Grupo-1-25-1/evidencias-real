@@ -1,0 +1,231 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GradeCurricularServiceImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sedinternet.services.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: GradeCurricularServiceImpl (com.sedinternet.services.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GradeCurricularServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (72/72)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sedinternet.services.impl;
+&nbsp;
+&nbsp;import com.sedinternet.dtos.GradeCurricularDTO;
+&nbsp;import com.sedinternet.dtos.RelatedDiscDTO;
+&nbsp;import com.sedinternet.entities.GradeCurricular;
+&nbsp;import com.sedinternet.repositories.GradeCurricularRepository;
+&nbsp;import com.sedinternet.services.GradeCurricularService;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;
+&nbsp;@Service
+&nbsp;public class GradeCurricularServiceImpl extends GenericServiceImpl&lt;GradeCurricular, Long&gt; implements GradeCurricularService {
+&nbsp;
+&nbsp;    private final GradeCurricularRepository gradeCurricularRepository;
+&nbsp;
+&nbsp;    @Autowired
+<b class="fc">&nbsp;    public GradeCurricularServiceImpl(GradeCurricularRepository gradeCurricularRepository) {</b>
+<b class="fc">&nbsp;        this.genericRepository = gradeCurricularRepository;</b>
+<b class="fc">&nbsp;        this.gradeCurricularRepository = gradeCurricularRepository;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;GradeCurricularDTO&gt; getDisciplinasByTurmaId(Integer turmaId, Integer professorId) {
+<b class="fc">&nbsp;        List&lt;Object[]&gt; resultList = gradeCurricularRepository.findDisciplinasByTurmaId(turmaId, professorId);</b>
+<b class="fc">&nbsp;        return convertToGradeCurricularDTOList(resultList);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;Object[]&gt; getSubDisc(Integer turmaId, Integer disciplinaId) {
+<b class="fc">&nbsp;        return gradeCurricularRepository.getSubDisc(turmaId, disciplinaId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;RelatedDiscDTO&gt; getRelatedDisc(Integer turmaId, Integer disciplinaId) {
+<b class="fc">&nbsp;        List&lt;Object[]&gt; results = gradeCurricularRepository.getRelatedDisc(turmaId, disciplinaId);</b>
+<b class="fc">&nbsp;        return convertToRelatedDiscDTOList(results);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private List&lt;RelatedDiscDTO&gt; convertToRelatedDiscDTOList(List&lt;Object[]&gt; resultList) {
+<b class="fc">&nbsp;        List&lt;RelatedDiscDTO&gt; dtos = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        for (Object[] obj : resultList) {</b>
+<b class="fc">&nbsp;            RelatedDiscDTO dto = new RelatedDiscDTO();</b>
+<b class="fc">&nbsp;            dto.setDisciplinaId((Integer) obj[0]);</b>
+<b class="fc">&nbsp;            dto.setNome((String) obj[1]);</b>
+<b class="fc">&nbsp;            dto.setTurmaId((Integer) obj[2]);</b>
+<b class="fc">&nbsp;            dto.setAnoLetivo((Integer) obj[3]);</b>
+<b class="fc">&nbsp;            dto.setIsPrincipal((Integer) obj[4]);</b>
+<b class="fc">&nbsp;            dtos.add(dto);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return dtos;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    private List&lt;GradeCurricularDTO&gt; convertToGradeCurricularDTOList(List&lt;Object[]&gt; resultList) {
+<b class="fc">&nbsp;        List&lt;GradeCurricularDTO&gt; dtos = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        for (Object[] obj : resultList) {</b>
+<b class="fc">&nbsp;            GradeCurricularDTO dto = new GradeCurricularDTO();</b>
+<b class="fc">&nbsp;            dto.setCursoId((Integer) obj[0]);</b>
+<b class="fc">&nbsp;            dto.setSerieId((Integer) obj[1]);</b>
+<b class="fc">&nbsp;            dto.setDisciplinaId((Long) obj[2]);</b>
+<b class="fc">&nbsp;            dto.setDisciplinaNome((String) obj[3]);</b>
+<b class="fc">&nbsp;            dto.setOrdem((Integer) obj[4]);</b>
+<b class="fc">&nbsp;            dto.setCargaHoraria((Integer) obj[5]);</b>
+<b class="fc">&nbsp;            dto.setDisciplinaAbrev((String) obj[6]);</b>
+<b class="fc">&nbsp;            dto.setSerieNome((String) obj[7]);</b>
+<b class="fc">&nbsp;            dto.setPossuiDepend((Integer) obj[8]);</b>
+<b class="fc">&nbsp;            dto.setDiscPrincId((Integer) obj[9]);</b>
+<b class="fc">&nbsp;            dto.setDisciplinaPrinc((Integer) obj[10]);</b>
+<b class="fc">&nbsp;            dto.setNomeDiscPrinc((String) obj[11]);</b>
+<b class="fc">&nbsp;            dto.setAplicarSeparado((Integer) obj[12]);</b>
+<b class="fc">&nbsp;            dto.setTurmaId((Integer) obj[13]);</b>
+<b class="fc">&nbsp;            dto.setTurmaNome((String) obj[14]);</b>
+<b class="fc">&nbsp;            dto.setTurmaAbrev((String) obj[15]);</b>
+<b class="fc">&nbsp;            dto.setTurno((String) obj[16]);</b>
+<b class="fc">&nbsp;            dto.setOpcaoAula((Integer) obj[17]);</b>
+<b class="fc">&nbsp;            dto.setOpcaoHorario((Integer) obj[18]);</b>
+<b class="fc">&nbsp;            dto.setCargaHorariaSem((Integer) obj[19]);</b>
+<b class="fc">&nbsp;            dto.setInstId((Integer) obj[20]);</b>
+<b class="fc">&nbsp;            dto.setGradeProfId((Long) obj[21]);</b>
+<b class="fc">&nbsp;            dto.setProfessorId((Integer) obj[22]);</b>
+<b class="fc">&nbsp;            dto.setDtInicial((java.time.LocalDate) obj[23]);</b>
+<b class="fc">&nbsp;            dto.setDtFinal((java.time.LocalDate) obj[24]);</b>
+<b class="fc">&nbsp;            dto.setProfessorNome((String) obj[25]);</b>
+<b class="fc">&nbsp;            dto.setProfessorAbrev((String) obj[26]);</b>
+<b class="fc">&nbsp;            dto.setSituacaoProf((String) obj[27]);</b>
+<b class="fc">&nbsp;            dto.setPrioridadeHorario((String) obj[28]);</b>
+<b class="fc">&nbsp;            dto.setGrauImportancia((String) obj[29]);</b>
+<b class="fc">&nbsp;            dto.setOpcaoGeminacao((String) obj[30]);</b>
+<b class="fc">&nbsp;            dto.setManha((Integer) obj[31]);</b>
+<b class="fc">&nbsp;            dto.setTarde((Integer) obj[32]);</b>
+<b class="fc">&nbsp;            dto.setNoite((Integer) obj[33]);</b>
+<b class="fc">&nbsp;            dto.setAnoLetivo((Integer) obj[34]);</b>
+<b class="fc">&nbsp;            dto.setGradeId((Integer) obj[35]);</b>
+<b class="fc">&nbsp;            dto.setTurnoGp((String) obj[36]);</b>
+<b class="fc">&nbsp;            dto.setMetodoId((Integer) obj[37]);</b>
+<b class="fc">&nbsp;            dto.setDiscCatId((Integer) obj[38]);</b>
+<b class="fc">&nbsp;            dto.setCategoriaNome((String) obj[39]);</b>
+<b class="fc">&nbsp;            dto.setCodInep((Short) obj[40]);</b>
+<b class="fc">&nbsp;            dto.setReplicar((Short) obj[41]);</b>
+<b class="fc">&nbsp;            dto.setGrupoId((Integer) obj[42]);</b>
+<b class="fc">&nbsp;            dto.setAulaInicio((java.time.LocalDate) obj[43]);</b>
+<b class="fc">&nbsp;            dto.setAulaFinal((java.time.LocalDate) obj[44]);</b>
+<b class="fc">&nbsp;            dto.setTurPerid((Short) obj[45]);</b>
+<b class="fc">&nbsp;            dto.setDtFech((java.time.LocalDateTime) obj[46]);</b>
+<b class="fc">&nbsp;            dto.setGradePadrao((Integer) obj[47]);</b>
+<b class="fc">&nbsp;            dto.setEtapa((Short) obj[48]);</b>
+<b class="fc">&nbsp;            dtos.add(dto);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return dtos;</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-09-01 14:08</div>
+</div>
+</body>
+</html>

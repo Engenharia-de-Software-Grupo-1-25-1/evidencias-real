@@ -1,0 +1,215 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GradeProfessorImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sedinternet.services.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: GradeProfessorImpl (com.sedinternet.services.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GradeProfessorImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/67)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sedinternet.services.impl;
+&nbsp;
+&nbsp;
+&nbsp;import com.sedinternet.dtos.GradeProfessorDTO;
+&nbsp;import com.sedinternet.entities.GradeProfessor;
+&nbsp;import com.sedinternet.entities.TurmaAulas;
+&nbsp;import com.sedinternet.repositories.GradeProfessorRepository;
+&nbsp;import com.sedinternet.services.GradeProfessorService;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import java.sql.Time;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@Service
+&nbsp;public class GradeProfessorImpl extends GenericServiceImpl&lt;GradeProfessor, Long&gt; implements GradeProfessorService {
+&nbsp;
+&nbsp;    private final GradeProfessorRepository gradeProfessorRepository;
+&nbsp;
+&nbsp;    @Autowired
+<b class="nc">&nbsp;    public GradeProfessorImpl(GradeProfessorRepository gradeProfessorRepository) {</b>
+<b class="nc">&nbsp;        this.genericRepository = gradeProfessorRepository;</b>
+<b class="nc">&nbsp;        this.gradeProfessorRepository = gradeProfessorRepository;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;GradeProfessorDTO&gt; getGradeProfessorByProfessorId(Integer professorId) {
+<b class="nc">&nbsp;        List&lt;Object[]&gt; resultList = gradeProfessorRepository.findGradeProfessorByProfessorId(professorId);</b>
+<b class="nc">&nbsp;        return convertToGradeProfessorDTOList(resultList);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private List&lt;GradeProfessorDTO&gt; convertToGradeProfessorDTOList(List&lt;Object[]&gt; resultList) {
+<b class="nc">&nbsp;        List&lt;GradeProfessorDTO&gt; dtos = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (Object[] obj : resultList) {</b>
+<b class="nc">&nbsp;            GradeProfessorDTO dto = new GradeProfessorDTO();</b>
+<b class="nc">&nbsp;            dto.setTurmaAulaId((Integer) obj[0]);</b>
+<b class="nc">&nbsp;            dto.setAnoLetivo((Integer) obj[1]);</b>
+<b class="nc">&nbsp;            dto.setTurmaId((Integer) obj[2]);</b>
+<b class="nc">&nbsp;            dto.setHoraAulaId((Integer) obj[3]);</b>
+<b class="nc">&nbsp;            dto.setCDom((Short) obj[4]);</b>
+<b class="nc">&nbsp;            dto.setDomGradeProfId((Integer) obj[5]);</b>
+<b class="nc">&nbsp;            dto.setCSeg((Short) obj[6]);</b>
+<b class="nc">&nbsp;            dto.setSegGradeProfId((Integer) obj[7]);</b>
+<b class="nc">&nbsp;            dto.setCTer((Short) obj[8]);</b>
+<b class="nc">&nbsp;            dto.setTerGradeProfId((Integer) obj[9]);</b>
+<b class="nc">&nbsp;            dto.setCQua((Short) obj[10]);</b>
+<b class="nc">&nbsp;            dto.setQuaGradeProfId((Integer) obj[11]);</b>
+<b class="nc">&nbsp;            dto.setCQui((Short) obj[12]);</b>
+<b class="nc">&nbsp;            dto.setQuiGradeProfId((Integer) obj[13]);</b>
+<b class="nc">&nbsp;            dto.setCSex((Short) obj[14]);</b>
+<b class="nc">&nbsp;            dto.setSexGradeProfId((Integer) obj[15]);</b>
+<b class="nc">&nbsp;            dto.setCSab((Short) obj[16]);</b>
+<b class="nc">&nbsp;            dto.setSabGradeProfId((Integer) obj[17]);</b>
+<b class="nc">&nbsp;            dto.setObservacao((byte[]) obj[18]);</b>
+<b class="nc">&nbsp;            dto.setUsuarioId((Integer) obj[19]);</b>
+<b class="nc">&nbsp;            dto.setSegSalaId((Short) obj[20]);</b>
+<b class="nc">&nbsp;            dto.setTerSalaId((Short) obj[21]);</b>
+<b class="nc">&nbsp;            dto.setQuaSalaId((Short) obj[22]);</b>
+<b class="nc">&nbsp;            dto.setQuiSalaId((Short) obj[23]);</b>
+<b class="nc">&nbsp;            dto.setSexSalaId((Short) obj[24]);</b>
+<b class="nc">&nbsp;            dto.setSabSalaId((Short) obj[25]);</b>
+<b class="nc">&nbsp;            dto.setTurmaNome((String) obj[26]);</b>
+<b class="nc">&nbsp;            dto.setTurmaAbrev((String) obj[27]);</b>
+<b class="nc">&nbsp;            dto.setTurno((String) obj[28]);</b>
+<b class="nc">&nbsp;            dto.setHInicial((Time) obj[29]);</b>
+<b class="nc">&nbsp;            dto.setHFinal((Time) obj[30]);</b>
+<b class="nc">&nbsp;            dto.setDataFechamento((LocalDate) obj[31]);</b>
+<b class="nc">&nbsp;            dto.setAulaN((Integer) obj[32]);</b>
+<b class="nc">&nbsp;            dto.setSegProfId((Integer) obj[33]);</b>
+<b class="nc">&nbsp;            dto.setSegProfAbrev((String) obj[34]);</b>
+<b class="nc">&nbsp;            dto.setSegDiscId((Integer) obj[35]);</b>
+<b class="nc">&nbsp;            dto.setSegDisc((String) obj[36]);</b>
+<b class="nc">&nbsp;            dto.setTerProfId((Integer) obj[37]);</b>
+<b class="nc">&nbsp;            dto.setTerProfAbrev((String) obj[38]);</b>
+<b class="nc">&nbsp;            dto.setTerDiscId((Integer) obj[39]);</b>
+<b class="nc">&nbsp;            dto.setTerDisc((String) obj[40]);</b>
+<b class="nc">&nbsp;            dto.setQuaProfId((Integer) obj[41]);</b>
+<b class="nc">&nbsp;            dto.setQuaProfAbrev((String) obj[42]);</b>
+<b class="nc">&nbsp;            dto.setQuaDiscId((Integer) obj[43]);</b>
+<b class="nc">&nbsp;            dto.setQuaDisc((String) obj[44]);</b>
+<b class="nc">&nbsp;            dto.setQuiProfId((Integer) obj[45]);</b>
+<b class="nc">&nbsp;            dto.setQuiProfAbrev((String) obj[46]);</b>
+<b class="nc">&nbsp;            dto.setQuiDiscId((Integer) obj[47]);</b>
+<b class="nc">&nbsp;            dto.setQuiDisc((String) obj[48]);</b>
+<b class="nc">&nbsp;            dto.setSexProfId((Integer) obj[49]);</b>
+<b class="nc">&nbsp;            dto.setSexProfAbrev((String) obj[50]);</b>
+<b class="nc">&nbsp;            dto.setSexDiscId((Integer) obj[51]);</b>
+<b class="nc">&nbsp;            dto.setSexDisc((String) obj[52]);</b>
+<b class="nc">&nbsp;            dto.setSabProfId((Integer) obj[53]);</b>
+<b class="nc">&nbsp;            dto.setSabProfAbrev((String) obj[54]);</b>
+<b class="nc">&nbsp;            dto.setSabDiscId((Integer) obj[55]);</b>
+<b class="nc">&nbsp;            dto.setSabDisc((String) obj[56]);</b>
+<b class="nc">&nbsp;            dtos.add(dto);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return dtos;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-09-01 14:08</div>
+</div>
+</body>
+</html>

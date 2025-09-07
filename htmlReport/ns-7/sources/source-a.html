@@ -1,0 +1,197 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > LoginServiceImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sedinternet.services.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: LoginServiceImpl (com.sedinternet.services.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LoginServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    20%
+  </span>
+  <span class="absValue">
+    (1/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    11.1%
+  </span>
+  <span class="absValue">
+    (3/27)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sedinternet.services.impl;
+&nbsp;
+&nbsp;import com.sedinternet.dtos.LoginDTO;
+&nbsp;import com.sedinternet.infrastructure.CustomUserDetails;
+&nbsp;import com.sedinternet.entities.Login;
+&nbsp;import com.sedinternet.repositories.LoginRepository;
+&nbsp;import com.sedinternet.services.LoginService;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.security.core.GrantedAuthority;
+&nbsp;import org.springframework.security.core.authority.SimpleGrantedAuthority;
+&nbsp;import org.springframework.security.core.userdetails.UserDetails;
+&nbsp;import org.springframework.security.core.userdetails.UserDetailsService;
+&nbsp;import org.springframework.security.core.userdetails.UsernameNotFoundException;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;@Service
+&nbsp;public class LoginServiceImpl extends GenericServiceImpl&lt;Login, Long&gt; implements LoginService, UserDetailsService {
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private final LoginRepository loginRepository;
+&nbsp;
+&nbsp;    @Autowired
+<b class="fc">&nbsp;    public LoginServiceImpl(LoginRepository loginRepository) {</b>
+<b class="fc">&nbsp;        this.genericRepository = loginRepository;</b>
+<b class="fc">&nbsp;        this.loginRepository = loginRepository;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public LoginDTO loadUserByUsernameDto(String username){
+<b class="nc">&nbsp;        return loginRepository.findByUsernameDTO(username);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;LoginDTO&gt; findUsersById(List&lt;Integer&gt; grupoIds) {
+<b class="nc">&nbsp;        List&lt;Object[]&gt; resultList = loginRepository.findUsersById(grupoIds);</b>
+<b class="nc">&nbsp;        return convertToLoginDTOList(resultList);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private List&lt;LoginDTO&gt; convertToLoginDTOList(List&lt;Object[]&gt; resultList) {
+<b class="nc">&nbsp;        List&lt;LoginDTO&gt; dtos = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        for (Object[] row : resultList) {</b>
+<b class="nc">&nbsp;            LoginDTO dto = new LoginDTO();</b>
+<b class="nc">&nbsp;            dto.setNome(Objects.toString(row[0], null)); </b>
+<b class="nc">&nbsp;            dto.setLoginId(row[1] != null ? ((Number) row[1]).longValue() : null);</b>
+<b class="nc">&nbsp;            dto.setProfessorId(row[2] != null ? ((Number) row[2]).intValue() : null); </b>
+<b class="nc">&nbsp;            dto.setGrupoId(Objects.toString(row[3], null)); </b>
+<b class="nc">&nbsp;            dto.setPsicId(row[4] != null ? ((Number) row[4]).intValue() : null);</b>
+<b class="nc">&nbsp;            dto.setGUsrId(row[5] != null ? ((Number) row[5]).intValue() : null); </b>
+<b class="nc">&nbsp;            dto.setInstId(row[6] != null ? ((Number) row[6]).longValue() : null); </b>
+<b class="nc">&nbsp;            dto.setInstNome(Objects.toString(row[7], null)); </b>
+<b class="nc">&nbsp;            dtos.add(dto);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return dtos;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+<b class="nc">&nbsp;        Optional&lt;Login&gt; optionalUser = loginRepository.findByUsername(username);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (optionalUser.isPresent()) {</b>
+<b class="nc">&nbsp;            Login user = optionalUser.get();</b>
+&nbsp;
+<b class="nc">&nbsp;            List&lt;GrantedAuthority&gt; authorities = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;            authorities.add(new SimpleGrantedAuthority(&quot;ROLE_ADMIN&quot;));</b>
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;            return new CustomUserDetails(user.getId(),</b>
+<b class="nc">&nbsp;                    user.getUsername(), user.getPassword(), authorities</b>
+&nbsp;            );
+&nbsp;        } else {
+<b class="nc">&nbsp;            throw new UsernameNotFoundException(&quot;Usuário não encontrado&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+&nbsp;
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-09-01 14:08</div>
+</div>
+</body>
+</html>

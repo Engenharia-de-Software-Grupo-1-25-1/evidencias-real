@@ -1,0 +1,130 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GradeCurricularDTO</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sedinternet.dtos</a>
+</div>
+
+<h1>Coverage Summary for Class: GradeCurricularDTO (com.sedinternet.dtos)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">GradeCurricularDTO</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sedinternet.dtos;
+&nbsp;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.time.LocalDateTime;
+&nbsp;import lombok.AllArgsConstructor;
+&nbsp;import lombok.Data;
+&nbsp;import lombok.NoArgsConstructor;
+&nbsp;
+&nbsp;@Data
+&nbsp;@NoArgsConstructor
+&nbsp;@AllArgsConstructor
+&nbsp;public class GradeCurricularDTO extends AbstractDTO {
+&nbsp;    private Integer cursoId;
+&nbsp;    private Integer serieId;
+&nbsp;    private Long disciplinaId;
+&nbsp;    private String disciplinaNome;
+&nbsp;    private Integer ordem;
+&nbsp;    private Integer cargaHoraria;
+&nbsp;    private String disciplinaAbrev;
+&nbsp;    private String serieNome;
+&nbsp;    private Integer possuiDepend;
+&nbsp;    private Integer discPrincId;
+&nbsp;    private Integer disciplinaPrinc;
+&nbsp;    private String nomeDiscPrinc;
+&nbsp;    private Integer aplicarSeparado;
+&nbsp;    private Integer turmaId;
+&nbsp;    private String turmaNome;
+&nbsp;    private String turmaAbrev;
+&nbsp;    private String turno;
+&nbsp;    private Integer opcaoAula;
+&nbsp;    private Integer opcaoHorario;
+&nbsp;    private Integer cargaHorariaSem;
+&nbsp;    private Integer instId;
+&nbsp;    private Long gradeProfId;
+&nbsp;    private Integer professorId;
+&nbsp;    private LocalDate dtInicial;
+&nbsp;    private LocalDate dtFinal;
+&nbsp;    private String professorNome;
+&nbsp;    private String professorAbrev;
+&nbsp;    private String situacaoProf;
+&nbsp;    private String prioridadeHorario;
+&nbsp;    private String grauImportancia;
+&nbsp;    private String opcaoGeminacao;
+&nbsp;    private Integer manha;
+&nbsp;    private Integer tarde;
+&nbsp;    private Integer noite;
+&nbsp;    private Integer anoLetivo;
+&nbsp;    private Integer gradeId;
+&nbsp;    private String turnoGp;
+&nbsp;    private Integer metodoId;
+&nbsp;    private Integer discCatId;
+&nbsp;    private String categoriaNome;
+&nbsp;    private Short codInep;
+&nbsp;    private Short replicar;
+&nbsp;    private Integer grupoId;
+&nbsp;    private LocalDate aulaInicio;
+&nbsp;    private LocalDate aulaFinal;
+&nbsp;    private Short turPerid;
+&nbsp;    private LocalDateTime dtFech;
+&nbsp;    private Integer gradePadrao;
+&nbsp;    private Short etapa;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-09-01 14:08</div>
+</div>
+</body>
+</html>

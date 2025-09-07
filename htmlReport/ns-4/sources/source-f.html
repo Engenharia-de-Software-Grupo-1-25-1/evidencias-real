@@ -1,0 +1,121 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Aluno</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sedinternet.entities</a>
+</div>
+
+<h1>Coverage Summary for Class: Aluno (com.sedinternet.entities)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">Aluno</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sedinternet.entities;
+&nbsp;
+&nbsp;import jakarta.persistence.*;
+&nbsp;import lombok.*;
+&nbsp;
+&nbsp;import java.time.LocalDate;
+&nbsp;
+&nbsp;@Data
+&nbsp;@Entity
+&nbsp;@Table(name = &quot;alunos&quot;)
+&nbsp;public class Aluno {
+&nbsp;
+&nbsp;    @Id
+&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
+&nbsp;    @Column(name = &quot;aluno_id&quot;)
+&nbsp;    private Long id;
+&nbsp;
+&nbsp;    @Column(name = &quot;MATRICULA&quot;, nullable = false)
+&nbsp;    private Integer matricula;
+&nbsp;
+&nbsp;    @Column(name = &quot;ALUNO&quot;, nullable = false)
+&nbsp;    private String nome;
+&nbsp;
+&nbsp;    @Column(name = &quot;NASCIMENTO&quot;)
+&nbsp;    private LocalDate dataNascimento;
+&nbsp;
+&nbsp;    @Column(name = &quot;SEXO&quot;)
+&nbsp;    private String sexo;
+&nbsp;
+&nbsp;    @Column(name = &quot;NATURALIDADE&quot;)
+&nbsp;    private String naturalidade;
+&nbsp;
+&nbsp;    @Column(name = &quot;UF_NATURAL&quot;)
+&nbsp;    private String ufNatural;
+&nbsp;
+&nbsp;    @Column(name = &quot;NACIONALIDADE&quot;)
+&nbsp;    private String nacionalidade;
+&nbsp;
+&nbsp;    @Column(name = &quot;RG&quot;)
+&nbsp;    private String rg;
+&nbsp;
+&nbsp;    @Column(name = &quot;CPF&quot;)
+&nbsp;    private String cpf;
+&nbsp;
+&nbsp;    @Column(name = &quot;FONE1&quot;)
+&nbsp;    private String fone1;
+&nbsp;
+&nbsp;    @Column(name = &quot;FONE2&quot;)
+&nbsp;    private String fone2;
+&nbsp;
+&nbsp;    @Column(name = &quot;EMAIL&quot;)
+&nbsp;    private String email;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-09-01 14:08</div>
+</div>
+</body>
+</html>

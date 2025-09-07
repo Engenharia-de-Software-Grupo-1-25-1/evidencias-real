@@ -1,0 +1,222 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > NotaRepository</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sedinternet.repositories</a>
+</div>
+
+<h1>Coverage Summary for Class: NotaRepository (com.sedinternet.repositories)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">NotaRepository$MockitoMock$tSA9DQRK</td>
+  </tr>
+  <tr>
+    <td class="name">NotaRepository$MockitoMock$tSA9DQRK$auxiliary$nt3abpIX</td>
+  </tr>
+  <tr>
+    <td class="name">NotaRepository$MockitoMock$tSA9DQRK$auxiliary$wkHgiVCq</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sedinternet.repositories;
+&nbsp;
+&nbsp;import com.sedinternet.dtos.AlunoMediaDTO;
+&nbsp;import com.sedinternet.entities.Nota;
+&nbsp;import org.springframework.data.jpa.repository.Query;
+&nbsp;import org.springframework.data.repository.query.Param;
+&nbsp;import org.springframework.stereotype.Repository;
+&nbsp;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Optional;
+&nbsp;
+&nbsp;@Repository
+&nbsp;public interface NotaRepository extends GenericRepository&lt;Nota&gt; {
+&nbsp;
+&nbsp;    Optional&lt;Nota&gt; findByDisciplinaIdAndMatriculaIdAndGradeId(
+&nbsp;            Long disciplinaId,
+&nbsp;            Long matriculaId,
+&nbsp;            Long gradeId);
+&nbsp;
+&nbsp;    @Query(&quot;SELECT m.id, a.id, a.nome, &quot; +
+&nbsp;            &quot;n.id, n.anoLetivo, n.disciplinaId, n.gradeId, n.metodoId, &quot; +
+&nbsp;            &quot;n.nt11, n.nt12, n.nt13, n.nt14, n.nt15, &quot; +
+&nbsp;            &quot;n.nc11, n.mf11, &quot; +
+&nbsp;            &quot;n.nt21, n.nt22, n.nt23, n.nt24, n.nt25, &quot; +
+&nbsp;            &quot;n.nc21, n.mf21, &quot; +
+&nbsp;            &quot;n.nt31, n.nt32, n.nt33, n.nt34, n.nt35, &quot; +
+&nbsp;            &quot;n.nc31, n.mf31, &quot; +
+&nbsp;            &quot;n.nt41, n.nt42, n.nt43, n.nt44, n.nt45, &quot; +
+&nbsp;            &quot;n.nc41, n.mf41, &quot; +
+&nbsp;            &quot;n.nf, n.tp, n.ma, n.pf, n.mf, &quot; +
+&nbsp;            &quot;n.usrCad, n.usuarioId, n.dtAlterado, &quot; +
+&nbsp;            &quot;n.sm1, n.sm2, n.sm3, n.sm4, &quot; +
+&nbsp;            &quot;n.rec11, n.rec12, n.rec13, n.rec1, &quot; +
+&nbsp;            &quot;n.rec21, n.rec22, n.rec23, n.rec2, &quot; +
+&nbsp;            &quot;n.rec31, n.rec32, n.rec33, n.rec3, &quot; +
+&nbsp;            &quot;n.rec41, n.rec42, n.rec43, n.rec4, &quot; +
+&nbsp;            &quot;n.site, n.dtSite, n.disp, n.internet, &quot; +
+&nbsp;            &quot;n.ptExtra1, n.ptExtra2, n.ptExtra3, n.ptExtra4, &quot; +
+&nbsp;            &quot;n.nf1, n.nf2, n.nf3, n.nf4, &quot; +
+&nbsp;            &quot;n.ncMf, n.recPf, n.dispMot, n.dispDt, &quot; +
+&nbsp;            &quot;n.ptExtraMa, n.ptExtraMf, n.boletoGerad, n.dtAlt, n.boletoId, n.turmaId, n.serieId, n.estruturCid, &quot; +
+&nbsp;            &quot;m.sit &quot; +
+&nbsp;            &quot;FROM Nota n &quot; +
+&nbsp;            &quot;LEFT JOIN Aluno a ON a.id = n.alunoId &quot; +
+&nbsp;            &quot;LEFT JOIN Matricula m ON m.id = n.matriculaId &quot; +
+&nbsp;            &quot;WHERE n.turmaId = :turmaId AND n.disciplinaId = :disciplinaId &quot; +
+&nbsp;            &quot;ORDER BY a.nome&quot;)
+&nbsp;    List&lt;Object[]&gt; findAlunosNotasByTurmaAndDisciplina(
+&nbsp;            @Param(&quot;turmaId&quot;) Integer turmaId,
+&nbsp;            @Param(&quot;disciplinaId&quot;) Long disciplinaId
+&nbsp;    );
+&nbsp;
+&nbsp;    @Query(&quot;SELECT m.id, a.id, a.nome, &quot; +
+&nbsp;            &quot;n.id, n.anoLetivo, n.disciplinaId, n.gradeId, n.metodoId, &quot; +
+&nbsp;            &quot;n.nt11, n.nt12, n.nt13, n.nt14, n.nt15, &quot; +
+&nbsp;            &quot;n.nc11, n.mf11, &quot; +
+&nbsp;            &quot;n.nt21, n.nt22, n.nt23, n.nt24, n.nt25, &quot; +
+&nbsp;            &quot;n.nc21, n.mf21, &quot; +
+&nbsp;            &quot;n.nt31, n.nt32, n.nt33, n.nt34, n.nt35, &quot; +
+&nbsp;            &quot;n.nc31, n.mf31, &quot; +
+&nbsp;            &quot;n.nt41, n.nt42, n.nt43, n.nt44, n.nt45, &quot; +
+&nbsp;            &quot;n.nc41, n.mf41, &quot; +
+&nbsp;            &quot;n.nf, n.tp, n.ma, n.pf, n.mf, &quot; +
+&nbsp;            &quot;n.usrCad, n.usuarioId, n.dtAlterado, &quot; +
+&nbsp;            &quot;n.sm1, n.sm2, n.sm3, n.sm4, &quot; +
+&nbsp;            &quot;n.rec11, n.rec12, n.rec13, n.rec1, &quot; +
+&nbsp;            &quot;n.rec21, n.rec22, n.rec23, n.rec2, &quot; +
+&nbsp;            &quot;n.rec31, n.rec32, n.rec33, n.rec3, &quot; +
+&nbsp;            &quot;n.rec41, n.rec42, n.rec43, n.rec4, &quot; +
+&nbsp;            &quot;n.site, n.dtSite, n.disp, n.internet, &quot; +
+&nbsp;            &quot;n.ptExtra1, n.ptExtra2, n.ptExtra3, n.ptExtra4, &quot; +
+&nbsp;            &quot;n.nf1, n.nf2, n.nf3, n.nf4, &quot; +
+&nbsp;            &quot;n.ncMf, n.recPf, n.dispMot, n.dispDt, &quot; +
+&nbsp;            &quot;n.ptExtraMa, n.ptExtraMf, n.boletoGerad, n.dtAlt, n.boletoId, n.turmaId, n.serieId, n.estruturCid, &quot; +
+&nbsp;            &quot;m.situacao &quot; +
+&nbsp;            &quot;FROM Nota n &quot; +
+&nbsp;            &quot;LEFT JOIN Aluno a ON a.id = n.alunoId &quot; +
+&nbsp;            &quot;LEFT JOIN Matricula m ON m.id = n.matriculaId &quot; +
+&nbsp;            &quot;WHERE n.turmaId = :turmaId AND n.disciplinaId = :disciplinaId AND n.alunoId = :alunoId &quot; +
+&nbsp;            &quot;ORDER BY a.nome&quot;)
+&nbsp;    List&lt;Object[]&gt; findAlunosNotasByAlunoTurmaAndDisciplina(
+&nbsp;            @Param(&quot;turmaId&quot;) Integer turmaId,
+&nbsp;            @Param(&quot;disciplinaId&quot;) Long disciplinaId,
+&nbsp;            @Param(&quot;alunoId&quot;) Integer alunoId
+&nbsp;    );
+&nbsp;
+&nbsp;
+&nbsp;    @Query(&quot;SELECT DISTINCT new com.sedinternet.dtos.AlunoMediaDTO(m.id, a.nome, &quot; +
+&nbsp;            &quot;n.nt11, n.nt12, n.nt13, n.nt14, n.nt15, &quot; +
+&nbsp;            &quot;n.nc11, n.mf11, &quot; +
+&nbsp;            &quot;n.nt21, n.nt22, n.nt23, n.nt24, n.nt25, &quot; +
+&nbsp;            &quot;n.nc21, n.mf21, &quot; +
+&nbsp;            &quot;n.nt31, n.nt32, n.nt33, n.nt34, n.nt35, &quot; +
+&nbsp;            &quot;n.nc31, n.mf31, &quot; +
+&nbsp;            &quot;n.nt41, n.nt42, n.nt43, n.nt44, n.nt45, &quot; +
+&nbsp;            &quot;n.nc41, n.mf41, &quot; +
+&nbsp;            &quot;n.nf, n.tp, n.ma, n.pf, n.mf, &quot; +
+&nbsp;            &quot;n.rec11, n.rec12, n.rec13, n.rec1, &quot; +
+&nbsp;            &quot;n.rec21, n.rec22, n.rec23, n.rec2, &quot; +
+&nbsp;            &quot;n.rec31, n.rec32, n.rec33, n.rec3, &quot; +
+&nbsp;            &quot;n.rec41, n.rec42, n.rec43, n.rec4, &quot; +
+&nbsp;            &quot;n.sm1, n.sm2, n.sm3, n.sm4, sm.situacao, &quot; +
+&nbsp;            &quot;COALESCE(SUM(fa.numeroFaltas), 0), n.ptExtra1, n.ptExtra2, n.ptExtra3, n.ptExtra4) &quot; +
+&nbsp;            &quot;FROM Matricula m &quot; +
+&nbsp;            &quot;INNER JOIN Aluno a ON m.aluno.id = a.id &quot; +
+&nbsp;            &quot;LEFT JOIN FreqAluno fa ON fa.matriculaId = m.id AND fa.disciplinaId = :disciplinaId AND fa.dtFreq BETWEEN :etapaInicio AND :etapaFim &quot; +
+&nbsp;            &quot;LEFT JOIN Nota n ON n.matriculaId = m.id AND n.alunoId = a.id &quot; +
+&nbsp;            &quot;LEFT JOIN SitMat sm ON sm.id = m.sit &quot; +
+&nbsp;            &quot;WHERE m.turma.id = :turmaId AND m.sit != 8 AND n.disciplinaId = :disciplinaId &quot; +
+&nbsp;            &quot;GROUP BY m.id, a.nome, n.nt11, n.nt12, n.nt13, n.nt14, n.nt15, &quot; +
+&nbsp;            &quot;n.nc11, n.mf11, n.nt21, n.nt22, n.nt23, n.nt24, n.nt25, n.nc21, &quot; +
+&nbsp;            &quot;n.mf21, n.nt31, n.nt32, n.nt33, n.nt34, n.nt35, n.nc31, n.mf31, &quot; +
+&nbsp;            &quot;n.nt41, n.nt42, n.nt43, n.nt44, n.nt45, n.nc41, n.mf41, &quot; +
+&nbsp;            &quot;n.nf, n.tp, n.ma, n.pf, n.mf, &quot; +
+&nbsp;            &quot;n.rec11, n.rec12, n.rec13, n.rec1, &quot; +
+&nbsp;            &quot;n.rec21, n.rec22, n.rec23, n.rec2, &quot; +
+&nbsp;            &quot;n.rec31, n.rec32, n.rec33, n.rec3, &quot; +
+&nbsp;            &quot;n.rec41, n.rec42, n.rec43, n.rec4, &quot; +
+&nbsp;            &quot;n.sm1, n.sm2, n.sm3, n.sm4, sm.situacao, n.ptExtra1, n.ptExtra2, n.ptExtra3, n.ptExtra4 &quot; +
+&nbsp;            &quot;ORDER BY a.nome&quot;)
+&nbsp;    List&lt;AlunoMediaDTO&gt; findAlunosMediaByTurmaDisciplinaAndIntervalo(
+&nbsp;            @Param(&quot;turmaId&quot;) Long turmaId,
+&nbsp;            @Param(&quot;disciplinaId&quot;) Long disciplinaId,
+&nbsp;            @Param(&quot;etapaInicio&quot;) LocalDate etapaInicio,
+&nbsp;            @Param(&quot;etapaFim&quot;) LocalDate etapaFim
+&nbsp;    );
+&nbsp;
+&nbsp;    @Query(value = &quot;SELECT m.matric_id, m.aluno_id, a.aluno, MAX(gc.estrut_c_id) AS estrutur_c_id &quot; +
+&nbsp;            &quot;FROM matricula m &quot; +
+&nbsp;            &quot;INNER JOIN alunos a ON m.ALUNO_ID = a.aluno_id &quot; +
+&nbsp;            &quot;JOIN sit_mat sm ON sm.sit_id = m.sit &quot; +
+&nbsp;            &quot;JOIN disciplinas d ON d.disc_id = :disciplinaId &quot; +
+&nbsp;            &quot;LEFT JOIN grade_curricular gc ON gc.DISCIPLINA_ID = d.disc_id &quot; +
+&nbsp;            &quot;LEFT JOIN grade_professor gp ON gc.grade_id = gp.GRADE_ID &quot; +
+&nbsp;            &quot;AND gc.DISCIPLINA_ID = gp.DISCIPLINA_ID &quot; +
+&nbsp;            &quot;AND gc.SERIE_ID = gp.SERIE_ID &quot; +
+&nbsp;            &quot;LEFT JOIN turmas t ON gp.TURMA_ID = t.turma_id &quot; +
+&nbsp;            &quot;WHERE m.TURMA_ID = :turmaId AND sm.sit_id != 8 AND d.disc_id = :disciplinaId &quot; +
+&nbsp;            &quot;GROUP BY m.matric_id, m.aluno_id, a.aluno&quot;, nativeQuery = true)
+&nbsp;    List&lt;Object[]&gt; findAlunosByTurma(
+&nbsp;            @Param(&quot;turmaId&quot;) Long turmaId,
+&nbsp;            @Param(&quot;disciplinaId&quot;) Long disciplinaId
+&nbsp;    );
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-09-01 14:08</div>
+</div>
+</body>
+</html>

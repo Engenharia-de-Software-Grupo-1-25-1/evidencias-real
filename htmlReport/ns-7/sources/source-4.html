@@ -1,0 +1,174 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FreqAlunoServiceImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sedinternet.services.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: FreqAlunoServiceImpl (com.sedinternet.services.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FreqAlunoServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    20%
+  </span>
+  <span class="absValue">
+    (1/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    18.8%
+  </span>
+  <span class="absValue">
+    (3/16)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sedinternet.services.impl;
+&nbsp;
+&nbsp;import com.sedinternet.dtos.AlunoMediaDTO;
+&nbsp;import com.sedinternet.dtos.FreqAlunoDTO;
+&nbsp;import com.sedinternet.entities.FreqAluno;
+&nbsp;import com.sedinternet.repositories.FreqAlunoRepository;
+&nbsp;import com.sedinternet.services.FreqAlunoService;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@Service
+&nbsp;public class FreqAlunoServiceImpl extends GenericServiceImpl&lt;FreqAluno, Long&gt; implements FreqAlunoService {
+&nbsp;
+&nbsp;    private final FreqAlunoRepository freqAlunoRepository;
+&nbsp;
+&nbsp;    @Autowired
+<b class="fc">&nbsp;    public FreqAlunoServiceImpl(FreqAlunoRepository freqAlunoRepository) {</b>
+<b class="fc">&nbsp;        this.genericRepository = freqAlunoRepository;</b>
+<b class="fc">&nbsp;        this.freqAlunoRepository = freqAlunoRepository;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;FreqAluno&gt; getFaltasByDisciplinaAndTurma(Integer disciplinaId, Integer turmaId) {
+<b class="nc">&nbsp;        return freqAlunoRepository.findFaltasByDisciplinaAndTurma(disciplinaId, turmaId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;FreqAlunoDTO&gt; findAlunosPorTurmaDisciplinaEData(Long turmaId, Long disciplinaId, LocalDate dataAtividade) {
+<b class="nc">&nbsp;        return freqAlunoRepository.findAlunosPorTurmaDisciplinaEData(turmaId, disciplinaId, dataAtividade);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;AlunoMediaDTO&gt; findAlunosMediaByTurmaDisciplinaAndIntervalo(Long turmaId, Long disciplinaId, LocalDate etapaInicio, LocalDate etapaFim) {
+<b class="nc">&nbsp;        List&lt;Object[]&gt; results = this.freqAlunoRepository.findAlunosMediaByTurmaDisciplinaAndIntervalo(turmaId, disciplinaId, etapaInicio, etapaFim);</b>
+<b class="nc">&nbsp;        List&lt;AlunoMediaDTO&gt; alunoMediaDTOList = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (Object[] result : results) {</b>
+<b class="nc">&nbsp;            AlunoMediaDTO dto = new AlunoMediaDTO();</b>
+&nbsp;
+<b class="nc">&nbsp;            dto.setMatriculaId(result[0] != null ? ((Number) result[0]).longValue() : null);</b>
+<b class="nc">&nbsp;            dto.setNomeAluno((String) result[1]);</b>
+<b class="nc">&nbsp;            dto.setSituacao((String) result[2]);</b>
+<b class="nc">&nbsp;            dto.setFaltas((Long) result[3]);</b>
+&nbsp;
+<b class="nc">&nbsp;            alunoMediaDTOList.add(dto);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return alunoMediaDTOList;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void deleteFrequenciaPorResumo(Long resumoId){
+<b class="nc">&nbsp;        this.freqAlunoRepository.deleteFrequenciaPorResumo(resumoId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-09-01 14:08</div>
+</div>
+</body>
+</html>

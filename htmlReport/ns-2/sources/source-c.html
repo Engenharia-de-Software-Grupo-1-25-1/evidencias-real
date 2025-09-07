@@ -1,0 +1,700 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > NotaController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sedinternet.controllers</a>
+</div>
+
+<h1>Coverage Summary for Class: NotaController (com.sedinternet.controllers)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NotaController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    46.7%
+  </span>
+  <span class="absValue">
+    (7/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    12.5%
+  </span>
+  <span class="absValue">
+    (12/96)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    9.4%
+  </span>
+  <span class="absValue">
+    (34/363)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sedinternet.controllers;
+&nbsp;
+&nbsp;import com.sedinternet.dtos.AlunoMediaDTO;
+&nbsp;import com.sedinternet.dtos.AlunoNotaDTO;
+&nbsp;import com.sedinternet.dtos.RelatedDiscDTO;
+&nbsp;import com.sedinternet.entities.Metodo;
+&nbsp;import com.sedinternet.entities.Nota;
+&nbsp;import com.sedinternet.services.GradeCurricularService;
+&nbsp;import com.sedinternet.services.MetodoService;
+&nbsp;import com.sedinternet.services.NotaService;
+&nbsp;import org.springframework.dao.DataIntegrityViolationException;
+&nbsp;import org.springframework.http.HttpStatus;
+&nbsp;import org.springframework.http.ResponseEntity;
+&nbsp;import org.springframework.web.bind.annotation.*;
+&nbsp;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.time.LocalDateTime;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;@RestController
+&nbsp;@RequestMapping(&quot;/notas&quot;)
+&nbsp;public class
+&nbsp;NotaController extends GenericController&lt;Nota, Long&gt; {
+&nbsp;
+&nbsp;    private final NotaService notaService;
+&nbsp;
+&nbsp;    private final GradeCurricularService gradeCurricularService;
+&nbsp;
+&nbsp;    private final MetodoService metodoService;
+&nbsp;
+&nbsp;    public NotaController(NotaService notaService, GradeCurricularService gradeCurricularService, MetodoService metodoService) {
+<b class="fc">&nbsp;        super(notaService);</b>
+<b class="fc">&nbsp;        this.notaService = notaService;</b>
+<b class="fc">&nbsp;        this.gradeCurricularService = gradeCurricularService;</b>
+<b class="fc">&nbsp;        this.metodoService = metodoService;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void calcularSubdDisc(Integer discId, Integer turmaId, Integer alunoId) {
+<b class="fc">&nbsp;        List&lt;RelatedDiscDTO&gt; relatedDiscDTOList = this.gradeCurricularService.getRelatedDisc(turmaId, discId);</b>
+&nbsp;
+<b class="fc">&nbsp;        if (relatedDiscDTOList.size() &gt; 1) {</b>
+<b class="fc">&nbsp;            List&lt;AlunoNotaDTO&gt; notasDisciplina = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;            for (RelatedDiscDTO relatedDisc : relatedDiscDTOList) {</b>
+<b class="fc">&nbsp;                List&lt;AlunoNotaDTO&gt; notas = notaService.findAlunosNotasByAlunoTurmaAndisciplina(turmaId, Long.valueOf(relatedDisc.getDisciplinaId()), alunoId);</b>
+<b class="fc">&nbsp;                notasDisciplina.addAll(notas);</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            Metodo metodo = this.metodoService.findMetodoByDisciplinaOrTurma(discId, turmaId);</b>
+&nbsp;
+<b class="pc">&nbsp;            if (metodo == null || notasDisciplina.isEmpty()) {</b>
+&nbsp;                return; 
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if(metodo.getCalcDiscPrin() == 1 || metodo.getCalcDiscPrin() == 3) {</b>
+<b class="nc">&nbsp;                calcularSoma(notasDisciplina, relatedDiscDTOList);</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                calcularMedia(notasDisciplina, relatedDiscDTOList);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void calcularMedia(List&lt;AlunoNotaDTO&gt; notasDisciplina, List&lt;RelatedDiscDTO&gt; relatedDiscDTOList) {
+<b class="nc">&nbsp;        if(notasDisciplina.size() != 1) {</b>
+<b class="nc">&nbsp;            RelatedDiscDTO disciplinaPrincipal = null;</b>
+<b class="nc">&nbsp;            for(RelatedDiscDTO disc : relatedDiscDTOList) {</b>
+<b class="nc">&nbsp;                if(disc.getIsPrincipal() == 1){</b>
+<b class="nc">&nbsp;                    disciplinaPrincipal = disc;</b>
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            List&lt;AlunoNotaDTO&gt; notasDiscPrinc = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;            for(AlunoNotaDTO alunoNota : notasDisciplina) {</b>
+<b class="nc">&nbsp;                if(disciplinaPrincipal != null) {</b>
+<b class="nc">&nbsp;                    if (Objects.equals(alunoNota.getDisciplinaId(), disciplinaPrincipal.getDisciplinaId())) {</b>
+<b class="nc">&nbsp;                        notasDiscPrinc.add(alunoNota);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            notasDisciplina.removeAll(notasDiscPrinc);</b>
+<b class="nc">&nbsp;            Map&lt;AlunoKey, List&lt;AlunoNotaDTO&gt;&gt; alunosAgrupados = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;            for (AlunoNotaDTO alunoNota : notasDisciplina) {</b>
+<b class="nc">&nbsp;                AlunoKey chaveAluno = new AlunoKey(alunoNota.getMatriculaId(), alunoNota.getAlunoId());</b>
+<b class="nc">&nbsp;                alunosAgrupados.putIfAbsent(chaveAluno, new ArrayList&lt;&gt;());</b>
+<b class="nc">&nbsp;                alunosAgrupados.get(chaveAluno).add(alunoNota);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            for (Map.Entry&lt;AlunoKey, List&lt;AlunoNotaDTO&gt;&gt; entry : alunosAgrupados.entrySet()) {</b>
+<b class="nc">&nbsp;                List&lt;AlunoNotaDTO&gt; notasAluno = entry.getValue();</b>
+&nbsp;
+<b class="nc">&nbsp;                Double mediaNt11 = calcularMediaNota(notasAluno, &quot;nt11&quot;);</b>
+<b class="nc">&nbsp;                Double mediaNt12 = calcularMediaNota(notasAluno, &quot;nt12&quot;);</b>
+<b class="nc">&nbsp;                Double mediaNt13 = calcularMediaNota(notasAluno, &quot;nt13&quot;);</b>
+<b class="nc">&nbsp;                Double mediaNt14 = calcularMediaNota(notasAluno, &quot;nt14&quot;);</b>
+<b class="nc">&nbsp;                Double mediaNt15 = calcularMediaNota(notasAluno, &quot;nt15&quot;);</b>
+<b class="nc">&nbsp;                Double mediaSm1 = calcularMediaNota(notasAluno, &quot;sm1&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                Double mediaNt21 = calcularMediaNota(notasAluno, &quot;nt21&quot;);</b>
+<b class="nc">&nbsp;                Double mediaNt22 = calcularMediaNota(notasAluno, &quot;nt22&quot;);</b>
+<b class="nc">&nbsp;                Double mediaNt23 = calcularMediaNota(notasAluno, &quot;nt23&quot;);</b>
+<b class="nc">&nbsp;                Double mediaNt24 = calcularMediaNota(notasAluno, &quot;nt24&quot;);</b>
+<b class="nc">&nbsp;                Double mediaNt25 = calcularMediaNota(notasAluno, &quot;nt25&quot;);</b>
+<b class="nc">&nbsp;                Double mediaSm2 = calcularMediaNota(notasAluno, &quot;sm2&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                Double mediaNt31 = calcularMediaNota(notasAluno, &quot;nt31&quot;);</b>
+<b class="nc">&nbsp;                Double mediaNt32 = calcularMediaNota(notasAluno, &quot;nt32&quot;);</b>
+<b class="nc">&nbsp;                Double mediaNt33 = calcularMediaNota(notasAluno, &quot;nt33&quot;);</b>
+<b class="nc">&nbsp;                Double mediaNt34 = calcularMediaNota(notasAluno, &quot;nt34&quot;);</b>
+<b class="nc">&nbsp;                Double mediaNt35 = calcularMediaNota(notasAluno, &quot;nt35&quot;);</b>
+<b class="nc">&nbsp;                Double mediaSm3 = calcularMediaNota(notasAluno, &quot;sm3&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                Double mediaNt41 = calcularMediaNota(notasAluno, &quot;nt41&quot;);</b>
+<b class="nc">&nbsp;                Double mediaNt42 = calcularMediaNota(notasAluno, &quot;nt42&quot;);</b>
+<b class="nc">&nbsp;                Double mediaNt43 = calcularMediaNota(notasAluno, &quot;nt43&quot;);</b>
+<b class="nc">&nbsp;                Double mediaNt44 = calcularMediaNota(notasAluno, &quot;nt44&quot;);</b>
+<b class="nc">&nbsp;                Double mediaNt45 = calcularMediaNota(notasAluno, &quot;nt45&quot;);</b>
+<b class="nc">&nbsp;                Double mediaSm4 = calcularMediaNota(notasAluno, &quot;sm4&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                Double mediaMf = calcularMediaNota(notasAluno, &quot;mf&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                Double mediaMf11 = calcularMediaNota(notasAluno, &quot;mf11&quot;);</b>
+<b class="nc">&nbsp;                Double mediaMf21 = calcularMediaNota(notasAluno, &quot;mf21&quot;);</b>
+<b class="nc">&nbsp;                Double mediaMf31 = calcularMediaNota(notasAluno, &quot;mf31&quot;);</b>
+<b class="nc">&nbsp;                Double mediaMf41 = calcularMediaNota(notasAluno, &quot;mf41&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                Integer somaNf = safeSomaNota(notasAluno, &quot;nf&quot;);</b>
+<b class="nc">&nbsp;                Integer somaNf1 = safeSomaNota(notasAluno, &quot;nf1&quot;);</b>
+<b class="nc">&nbsp;                Integer somaNf2 = safeSomaNota(notasAluno, &quot;nf2&quot;);</b>
+<b class="nc">&nbsp;                Integer somaNf3 = safeSomaNota(notasAluno, &quot;nf3&quot;);</b>
+<b class="nc">&nbsp;                Integer somaNf4 = safeSomaNota(notasAluno, &quot;nf4&quot;);</b>
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;                Double mediaRec1 = calcularMediaNota(notasAluno, &quot;rec1&quot;);</b>
+<b class="nc">&nbsp;                Double mediaRec2 = calcularMediaNota(notasAluno, &quot;rec2&quot;);</b>
+<b class="nc">&nbsp;                Double mediaRec3 = calcularMediaNota(notasAluno, &quot;rec3&quot;);</b>
+<b class="nc">&nbsp;                Double mediaRec4 = calcularMediaNota(notasAluno, &quot;rec4&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                Double mediaTp = calcularMediaNota(notasAluno, &quot;tp&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                Double mediaPf = calcularMediaNota(notasAluno, &quot;pf&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                Double mediaMa =  calcularMediaNota(notasAluno, &quot;pf&quot;);</b>
+<b class="nc">&nbsp;                if(mediaMa == null || mediaMa == 0) {</b>
+<b class="nc">&nbsp;                    mediaMa = calcularMediaNota(notasAluno, &quot;ma&quot;);</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                Double mediaRecPf = calcularMediaNota(notasAluno, &quot;recPf&quot;);</b>
+<b class="nc">&nbsp;                if(mediaRecPf == null || mediaRecPf == 0) {</b>
+<b class="nc">&nbsp;                    mediaRecPf = calcularMediaNota(notasAluno, &quot;pf&quot;);</b>
+<b class="nc">&nbsp;                    if(mediaRecPf == null || mediaRecPf == 0) {</b>
+<b class="nc">&nbsp;                            mediaRecPf = calcularMediaNota(notasAluno, &quot;ma&quot;);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                for (AlunoNotaDTO notasPrinc : notasDiscPrinc) {</b>
+<b class="nc">&nbsp;                    if(notasPrinc.getMatriculaId().equals(entry.getKey().getMatriculaId()) &amp;&amp; notasPrinc.getAlunoId().equals(entry.getKey().getAlunoId())) {</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt11(mediaNt11);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt12(mediaNt12);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt13(mediaNt13);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt14(mediaNt14);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt15(mediaNt15);</b>
+<b class="nc">&nbsp;                        notasPrinc.setMf11(mediaMf11);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt21(mediaNt21);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt22(mediaNt22);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt23(mediaNt23);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt24(mediaNt24);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt25(mediaNt25);</b>
+<b class="nc">&nbsp;                        notasPrinc.setMf21(mediaMf21);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt31(mediaNt31);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt32(mediaNt32);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt33(mediaNt33);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt34(mediaNt34);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt35(mediaNt35);</b>
+<b class="nc">&nbsp;                        notasPrinc.setMf31(mediaMf31);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt41(mediaNt41);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt42(mediaNt42);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt43(mediaNt43);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt44(mediaNt44);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt45(mediaNt45);</b>
+<b class="nc">&nbsp;                        notasPrinc.setMf41(mediaMf41);</b>
+<b class="nc">&nbsp;                        notasPrinc.setTp(mediaTp);</b>
+<b class="nc">&nbsp;                        notasPrinc.setMa(mediaMa);</b>
+<b class="nc">&nbsp;                        notasPrinc.setPf(mediaPf);</b>
+<b class="nc">&nbsp;                        notasPrinc.setMf(mediaMf);</b>
+<b class="nc">&nbsp;                        notasPrinc.setSm1(mediaSm1);</b>
+<b class="nc">&nbsp;                        notasPrinc.setSm2(mediaSm2);</b>
+<b class="nc">&nbsp;                        notasPrinc.setSm3(mediaSm3);</b>
+<b class="nc">&nbsp;                        notasPrinc.setSm4(mediaSm4);</b>
+<b class="nc">&nbsp;                        notasPrinc.setRec1(mediaRec1);</b>
+<b class="nc">&nbsp;                        notasPrinc.setRec2(mediaRec2);</b>
+<b class="nc">&nbsp;                        notasPrinc.setRec3(mediaRec3);</b>
+<b class="nc">&nbsp;                        notasPrinc.setRec4(mediaRec4);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNf1(somaNf1);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNf2(somaNf2);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNf3(somaNf3);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNf4(somaNf4);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNf(somaNf);</b>
+<b class="nc">&nbsp;                        notasPrinc.setRecPf(mediaRecPf);</b>
+<b class="nc">&nbsp;                        Nota nota = converterAlunoNotaDTOParaNota(notasPrinc);</b>
+<b class="nc">&nbsp;                        notaService.createOrUpdate(nota);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private Integer safeSomaNota(List&lt;AlunoNotaDTO&gt; notasAluno, String campo) {
+<b class="nc">&nbsp;        Double soma = calcularSomaNota(notasAluno, campo);</b>
+<b class="nc">&nbsp;        return (soma != null) ? (int) soma.doubleValue() : null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    private Double calcularMediaNota(List&lt;AlunoNotaDTO&gt; notasAluno, String campo) {
+<b class="nc">&nbsp;        List&lt;Double&gt; valores = notasAluno.stream()</b>
+<b class="nc">&nbsp;                .map(nota -&gt; obterValorCampo(nota, campo))</b>
+<b class="nc">&nbsp;                .filter(Objects::nonNull) </b>
+<b class="nc">&nbsp;                .toList();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (valores.isEmpty()) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return valores.stream()</b>
+<b class="nc">&nbsp;                .mapToDouble(Double::doubleValue)</b>
+<b class="nc">&nbsp;                .average()</b>
+<b class="nc">&nbsp;                .orElseThrow(); </b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Double obterValorCampo(AlunoNotaDTO alunoNota, String campo) {
+&nbsp;        try {
+<b class="nc">&nbsp;            String metodoNome = &quot;get&quot; + capitalizeFirstLetter(campo);</b>
+&nbsp;
+<b class="nc">&nbsp;            Method metodo = AlunoNotaDTO.class.getMethod(metodoNome);</b>
+&nbsp;
+<b class="nc">&nbsp;            Object valor = metodo.invoke(alunoNota);</b>
+&nbsp;
+<b class="nc">&nbsp;            return (valor != null) ? (Double) valor : null;</b>
+&nbsp;        } catch (Exception e) {
+<b class="nc">&nbsp;            return null; </b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    private Double calcularSomaNota(List&lt;AlunoNotaDTO&gt; notasAluno, String campo) {
+<b class="nc">&nbsp;        List&lt;Double&gt; valores = notasAluno.stream()</b>
+<b class="nc">&nbsp;                .map(nota -&gt; obterValorCampo(nota, campo))</b>
+<b class="nc">&nbsp;                .filter(Objects::nonNull)</b>
+<b class="nc">&nbsp;                .toList();</b>
+&nbsp;
+<b class="nc">&nbsp;        if (valores.isEmpty()) {</b>
+<b class="nc">&nbsp;            return null; </b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return valores.stream()</b>
+<b class="nc">&nbsp;                .mapToDouble(Double::doubleValue)</b>
+<b class="nc">&nbsp;                .sum();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private String capitalizeFirstLetter(String str) {
+<b class="nc">&nbsp;        if (str == null || str.isEmpty()) return str;</b>
+<b class="nc">&nbsp;        return str.substring(0, 1).toUpperCase() + str.substring(1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void calcularSoma(List&lt;AlunoNotaDTO&gt; notasDisciplina, List&lt;RelatedDiscDTO&gt; relatedDiscDTOList) {
+<b class="nc">&nbsp;        if(notasDisciplina.size() != 1) {</b>
+<b class="nc">&nbsp;            RelatedDiscDTO disciplinaPrincipal = null;</b>
+<b class="nc">&nbsp;            for(RelatedDiscDTO disc : relatedDiscDTOList) {</b>
+<b class="nc">&nbsp;                if(disc.getIsPrincipal() == 1){</b>
+<b class="nc">&nbsp;                    disciplinaPrincipal = disc;</b>
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            List&lt;AlunoNotaDTO&gt; notasDiscPrinc = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;            for(AlunoNotaDTO alunoNota : notasDisciplina) {</b>
+<b class="nc">&nbsp;                if(disciplinaPrincipal != null) {</b>
+<b class="nc">&nbsp;                    if (Objects.equals(alunoNota.getDisciplinaId(), disciplinaPrincipal.getDisciplinaId())) {</b>
+<b class="nc">&nbsp;                        notasDiscPrinc.add(alunoNota);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            notasDisciplina.removeAll(notasDiscPrinc);</b>
+<b class="nc">&nbsp;            Map&lt;AlunoKey, List&lt;AlunoNotaDTO&gt;&gt; alunosAgrupados = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;            for (AlunoNotaDTO alunoNota : notasDisciplina) {</b>
+<b class="nc">&nbsp;                AlunoKey chaveAluno = new AlunoKey(alunoNota.getMatriculaId(), alunoNota.getAlunoId());</b>
+<b class="nc">&nbsp;                alunosAgrupados.putIfAbsent(chaveAluno, new ArrayList&lt;&gt;());</b>
+<b class="nc">&nbsp;                alunosAgrupados.get(chaveAluno).add(alunoNota);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            for (Map.Entry&lt;AlunoKey, List&lt;AlunoNotaDTO&gt;&gt; entry : alunosAgrupados.entrySet()) {</b>
+<b class="nc">&nbsp;                List&lt;AlunoNotaDTO&gt; notasAluno = entry.getValue();</b>
+&nbsp;
+<b class="nc">&nbsp;                Double somaNt11 = calcularSomaNota(notasAluno, &quot;nt11&quot;);</b>
+<b class="nc">&nbsp;                Double somaNt12= calcularSomaNota(notasAluno, &quot;nt12&quot;);</b>
+<b class="nc">&nbsp;                Double somaNt13 = calcularSomaNota(notasAluno, &quot;nt13&quot;);</b>
+<b class="nc">&nbsp;                Double somaNt14 = calcularSomaNota(notasAluno, &quot;nt14&quot;);</b>
+<b class="nc">&nbsp;                Double somaNt15 = calcularSomaNota(notasAluno, &quot;nt15&quot;);</b>
+<b class="nc">&nbsp;                Double somaSm1 = calcularSomaNota(notasAluno, &quot;sm1&quot;);</b>
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;                Double somaNt21 = calcularSomaNota(notasAluno, &quot;nt21&quot;);</b>
+<b class="nc">&nbsp;                Double somaNt22 = calcularSomaNota(notasAluno, &quot;nt22&quot;);</b>
+<b class="nc">&nbsp;                Double somaNt23 = calcularSomaNota(notasAluno, &quot;nt23&quot;);</b>
+<b class="nc">&nbsp;                Double somaNt24 = calcularSomaNota(notasAluno, &quot;nt24&quot;);</b>
+<b class="nc">&nbsp;                Double somaNt25 = calcularSomaNota(notasAluno, &quot;nt25&quot;);</b>
+<b class="nc">&nbsp;                Double somaSm2 = calcularSomaNota(notasAluno, &quot;sm2&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                Double somaNt31 = calcularSomaNota(notasAluno, &quot;nt31&quot;);</b>
+<b class="nc">&nbsp;                Double somaNt32 = calcularSomaNota(notasAluno, &quot;nt32&quot;);</b>
+<b class="nc">&nbsp;                Double somaNt33 = calcularSomaNota(notasAluno, &quot;nt33&quot;);</b>
+<b class="nc">&nbsp;                Double somaNt34 = calcularSomaNota(notasAluno, &quot;nt34&quot;);</b>
+<b class="nc">&nbsp;                Double somaNt35 = calcularSomaNota(notasAluno, &quot;nt35&quot;);</b>
+<b class="nc">&nbsp;                Double somaSm3 = calcularSomaNota(notasAluno, &quot;sm3&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                Double somaNt41 = calcularSomaNota(notasAluno, &quot;nt41&quot;);</b>
+<b class="nc">&nbsp;                Double somaNt42 = calcularSomaNota(notasAluno, &quot;nt42&quot;);</b>
+<b class="nc">&nbsp;                Double somaNt43 = calcularSomaNota(notasAluno, &quot;nt43&quot;);</b>
+<b class="nc">&nbsp;                Double somaNt44 = calcularSomaNota(notasAluno, &quot;nt44&quot;);</b>
+<b class="nc">&nbsp;                Double somaNt45 = calcularSomaNota(notasAluno, &quot;nt45&quot;);</b>
+<b class="nc">&nbsp;                Double somaSm4 = calcularSomaNota(notasAluno, &quot;sm4&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                Double somaRec11 = calcularSomaNota(notasAluno, &quot;rec11&quot;);</b>
+<b class="nc">&nbsp;                Double somaRec12 = calcularSomaNota(notasAluno, &quot;rec12&quot;);</b>
+<b class="nc">&nbsp;                Double somaRec13 = calcularSomaNota(notasAluno, &quot;rec13&quot;);</b>
+<b class="nc">&nbsp;                Double somaRec1 = calcularSomaNota(notasAluno, &quot;rec1&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                Double somaRec21 = calcularSomaNota(notasAluno, &quot;rec21&quot;);</b>
+<b class="nc">&nbsp;                Double somaRec22 = calcularSomaNota(notasAluno, &quot;rec22&quot;);</b>
+<b class="nc">&nbsp;                Double somaRec23 = calcularSomaNota(notasAluno, &quot;rec23&quot;);</b>
+<b class="nc">&nbsp;                Double somaRec2 = calcularSomaNota(notasAluno, &quot;rec2&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                Double somaRec31 = calcularSomaNota(notasAluno, &quot;rec31&quot;);</b>
+<b class="nc">&nbsp;                Double somaRec32 = calcularSomaNota(notasAluno, &quot;rec32&quot;);</b>
+<b class="nc">&nbsp;                Double somaRec33 = calcularSomaNota(notasAluno, &quot;rec33&quot;);</b>
+<b class="nc">&nbsp;                Double somaRec3 = calcularSomaNota(notasAluno, &quot;rec3&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                Double somaRec41 = calcularSomaNota(notasAluno, &quot;rec41&quot;);</b>
+<b class="nc">&nbsp;                Double somaRec42 = calcularSomaNota(notasAluno, &quot;rec42&quot;);</b>
+<b class="nc">&nbsp;                Double somaRec43 = calcularSomaNota(notasAluno, &quot;rec43&quot;);</b>
+<b class="nc">&nbsp;                Double somaRec4 = calcularSomaNota(notasAluno, &quot;rec4&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                Double somaMf1 = calcularSomaNota(notasAluno, &quot;mf11&quot;);</b>
+<b class="nc">&nbsp;                Double somaMf2 = calcularSomaNota(notasAluno, &quot;mf21&quot;);</b>
+<b class="nc">&nbsp;                Double somaMf3 = calcularSomaNota(notasAluno, &quot;mf31&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                Double somaPtExtra1 = calcularSomaNota(notasAluno, &quot;ptExtra1&quot;);</b>
+<b class="nc">&nbsp;                Double somaPtExtra2 = calcularSomaNota(notasAluno, &quot;ptExtra2&quot;);</b>
+<b class="nc">&nbsp;                Double somaPtExtra3 = calcularSomaNota(notasAluno, &quot;ptExtra3&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                Integer somaNf = safeSomaNota(notasAluno, &quot;nf&quot;);</b>
+<b class="nc">&nbsp;                Integer somaNf1 = safeSomaNota(notasAluno, &quot;nf1&quot;);</b>
+<b class="nc">&nbsp;                Integer somaNf2 = safeSomaNota(notasAluno, &quot;nf2&quot;);</b>
+<b class="nc">&nbsp;                Integer somaNf3 = safeSomaNota(notasAluno, &quot;nf3&quot;);</b>
+<b class="nc">&nbsp;                Integer somaNf4 = safeSomaNota(notasAluno, &quot;nf4&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                Double mediaPf = calcularSomaNota(notasAluno, &quot;pf&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                Double somaMa =  calcularSomaNota(notasAluno, &quot;pf&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                Double somaRecPf = calcularSomaNota(notasAluno, &quot;recPf&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;                for (AlunoNotaDTO notasPrinc : notasDiscPrinc) {</b>
+<b class="nc">&nbsp;                    if (notasPrinc.getMatriculaId().equals(entry.getKey().getMatriculaId()) &amp;&amp; notasPrinc.getAlunoId().equals(entry.getKey().getAlunoId())) {</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt11(somaNt11);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt12(somaNt12);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt13(somaNt13);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt14(somaNt14);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt15(somaNt15);</b>
+<b class="nc">&nbsp;                        notasPrinc.setMf11(somaSm1);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt21(somaNt21);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt22(somaNt22);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt23(somaNt23);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt24(somaNt24);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt25(somaNt25);</b>
+<b class="nc">&nbsp;                        notasPrinc.setMf21(somaSm2);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt31(somaNt31);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt32(somaNt32);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt33(somaNt33);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt34(somaNt34);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt35(somaNt35);</b>
+<b class="nc">&nbsp;                        notasPrinc.setMf31(somaSm3);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt41(somaNt41);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt42(somaNt42);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt43(somaNt43);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt44(somaNt44);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNt45(somaNt45);</b>
+<b class="nc">&nbsp;                        notasPrinc.setMf41(somaSm4);</b>
+<b class="nc">&nbsp;                        notasPrinc.setRec11(somaRec11);</b>
+<b class="nc">&nbsp;                        notasPrinc.setRec12(somaRec12);</b>
+<b class="nc">&nbsp;                        notasPrinc.setRec13(somaRec13);</b>
+<b class="nc">&nbsp;                        notasPrinc.setRec1(somaRec1);</b>
+<b class="nc">&nbsp;                        notasPrinc.setRec21(somaRec21);</b>
+<b class="nc">&nbsp;                        notasPrinc.setRec22(somaRec22);</b>
+<b class="nc">&nbsp;                        notasPrinc.setRec23(somaRec23);</b>
+<b class="nc">&nbsp;                        notasPrinc.setRec2(somaRec2);</b>
+<b class="nc">&nbsp;                        notasPrinc.setRec31(somaRec31);</b>
+<b class="nc">&nbsp;                        notasPrinc.setRec32(somaRec32);</b>
+<b class="nc">&nbsp;                        notasPrinc.setRec33(somaRec33);</b>
+<b class="nc">&nbsp;                        notasPrinc.setRec3(somaRec3);</b>
+<b class="nc">&nbsp;                        notasPrinc.setRec41(somaRec41);</b>
+<b class="nc">&nbsp;                        notasPrinc.setRec42(somaRec42);</b>
+<b class="nc">&nbsp;                        notasPrinc.setRec43(somaRec43);</b>
+<b class="nc">&nbsp;                        notasPrinc.setRec4(somaRec4);</b>
+<b class="nc">&nbsp;                        notasPrinc.setPf(mediaPf);</b>
+<b class="nc">&nbsp;                        notasPrinc.setMf11(somaMf1);</b>
+<b class="nc">&nbsp;                        notasPrinc.setMf21(somaMf2);</b>
+<b class="nc">&nbsp;                        notasPrinc.setMf31(somaMf3);</b>
+<b class="nc">&nbsp;                        notasPrinc.setPtExtra1(somaPtExtra1);</b>
+<b class="nc">&nbsp;                        notasPrinc.setPtExtra2(somaPtExtra2);</b>
+<b class="nc">&nbsp;                        notasPrinc.setPtExtra3(somaPtExtra3);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNf1(somaNf1);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNf2(somaNf2);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNf3(somaNf3);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNf4(somaNf4);</b>
+<b class="nc">&nbsp;                        notasPrinc.setNf(somaNf);</b>
+<b class="nc">&nbsp;                        notasPrinc.setMa(somaMa);</b>
+<b class="nc">&nbsp;                        notasPrinc.setRecPf(somaRecPf);</b>
+<b class="nc">&nbsp;                        Nota nota = converterAlunoNotaDTOParaNota(notasPrinc);</b>
+<b class="nc">&nbsp;                        notaService.createOrUpdate(nota);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private Nota converterAlunoNotaDTOParaNota(AlunoNotaDTO dto) {
+<b class="nc">&nbsp;        return Nota.builder()</b>
+<b class="nc">&nbsp;                .id(dto.getId() != null ? Long.valueOf(dto.getId()) : null)</b>
+<b class="nc">&nbsp;                .matriculaId(dto.getMatriculaId() != null ? Long.valueOf(dto.getMatriculaId()) : null)</b>
+<b class="nc">&nbsp;                .anoLetivo(dto.getAnoLetivo())</b>
+<b class="nc">&nbsp;                .alunoId(dto.getAlunoId())</b>
+<b class="nc">&nbsp;                .disciplinaId(dto.getDisciplinaId() != null ? Long.valueOf(dto.getDisciplinaId()) : null)</b>
+<b class="nc">&nbsp;                .gradeId(dto.getGradeId() != null ? Long.valueOf(dto.getGradeId()) : null)</b>
+<b class="nc">&nbsp;                .metodoId(dto.getMetodoId() != null ? Long.valueOf(dto.getMetodoId()) : null)</b>
+<b class="nc">&nbsp;                .mf(dto.getMf())</b>
+<b class="nc">&nbsp;                .nt11(dto.getNt11())</b>
+<b class="nc">&nbsp;                .nt12(dto.getNt12())</b>
+<b class="nc">&nbsp;                .nt13(dto.getNt13())</b>
+<b class="nc">&nbsp;                .nt14(dto.getNt14())</b>
+<b class="nc">&nbsp;                .nt15(dto.getNt15())</b>
+<b class="nc">&nbsp;                .mf11(dto.getMf11())</b>
+<b class="nc">&nbsp;                .nt21(dto.getNt21())</b>
+<b class="nc">&nbsp;                .nt22(dto.getNt22())</b>
+<b class="nc">&nbsp;                .nt23(dto.getNt23())</b>
+<b class="nc">&nbsp;                .nt24(dto.getNt24())</b>
+<b class="nc">&nbsp;                .nt25(dto.getNt25())</b>
+<b class="nc">&nbsp;                .mf21(dto.getMf21())</b>
+<b class="nc">&nbsp;                .nt31(dto.getNt31())</b>
+<b class="nc">&nbsp;                .nt32(dto.getNt32())</b>
+<b class="nc">&nbsp;                .nt33(dto.getNt33())</b>
+<b class="nc">&nbsp;                .nt34(dto.getNt34())</b>
+<b class="nc">&nbsp;                .nt35(dto.getNt35())</b>
+<b class="nc">&nbsp;                .mf31(dto.getMf31())</b>
+<b class="nc">&nbsp;                .nt41(dto.getNt41())</b>
+<b class="nc">&nbsp;                .nt42(dto.getNt42())</b>
+<b class="nc">&nbsp;                .nt43(dto.getNt43())</b>
+<b class="nc">&nbsp;                .nt44(dto.getNt44())</b>
+<b class="nc">&nbsp;                .nt45(dto.getNt45())</b>
+<b class="nc">&nbsp;                .mf41(dto.getMf41())</b>
+<b class="nc">&nbsp;                .tp(dto.getTp())</b>
+<b class="nc">&nbsp;                .ma(dto.getMa())</b>
+<b class="nc">&nbsp;                .pf(dto.getPf())</b>
+<b class="nc">&nbsp;                .sm1(dto.getSm1())</b>
+<b class="nc">&nbsp;                .sm2(dto.getSm2())</b>
+<b class="nc">&nbsp;                .sm3(dto.getSm3())</b>
+<b class="nc">&nbsp;                .sm4(dto.getSm4())</b>
+<b class="nc">&nbsp;                .rec1(dto.getRec1())</b>
+<b class="nc">&nbsp;                .rec2(dto.getRec2())</b>
+<b class="nc">&nbsp;                .rec3(dto.getRec3())</b>
+<b class="nc">&nbsp;                .rec4(dto.getRec4())</b>
+<b class="nc">&nbsp;                .nf1(dto.getNf1())</b>
+<b class="nc">&nbsp;                .nf2(dto.getNf2())</b>
+<b class="nc">&nbsp;                .nf3(dto.getNf3())</b>
+<b class="nc">&nbsp;                .nf4(dto.getNf4())</b>
+<b class="nc">&nbsp;                .nf(dto.getNf())</b>
+<b class="nc">&nbsp;                .recPf(dto.getRecPf())</b>
+<b class="nc">&nbsp;                .dtAlterado(LocalDateTime.now())</b>
+<b class="nc">&nbsp;                .dtAlt(LocalDateTime.now())</b>
+<b class="nc">&nbsp;                .dtSite(LocalDateTime.now())</b>
+<b class="nc">&nbsp;                .serieId(Long.valueOf(dto.getSerieId()))</b>
+<b class="nc">&nbsp;                .turmaId(Long.valueOf(dto.getTurmaId()))</b>
+<b class="nc">&nbsp;                .build();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @PostMapping
+&nbsp;    public ResponseEntity&lt;Nota&gt; create(@RequestBody Nota nota) {
+&nbsp;        try {
+<b class="fc">&nbsp;            Nota saved = notaService.createOrUpdate(nota);        // insert ou update</b>
+<b class="fc">&nbsp;            return ResponseEntity.status(HttpStatus.CREATED).body(saved);</b>
+&nbsp;        } catch (DataIntegrityViolationException ex) {            // UNIQUE violada
+<b class="fc">&nbsp;            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);</b>
+&nbsp;        } catch (Exception ex) {
+<b class="fc">&nbsp;            return ResponseEntity.badRequest().body(null);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @PutMapping(&quot;/{id}&quot;)
+&nbsp;    public ResponseEntity&lt;Nota&gt; update(@PathVariable Long id,
+&nbsp;                                       @RequestBody Nota nota) {
+&nbsp;        try {
+<b class="fc">&nbsp;            nota.setId(id);                                       // força update</b>
+<b class="fc">&nbsp;            Nota saved = notaService.createOrUpdate(nota);</b>
+<b class="fc">&nbsp;            return ResponseEntity.ok(saved);</b>
+&nbsp;        } catch (DataIntegrityViolationException ex) {
+<b class="fc">&nbsp;            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);</b>
+&nbsp;        } catch (Exception ex) {
+<b class="fc">&nbsp;            return ResponseEntity.badRequest().body(null);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @GetMapping(&quot;/turma/{turmaId}/disciplina/{disciplinaId}&quot;)
+&nbsp;    public ResponseEntity&lt;List&lt;AlunoNotaDTO&gt;&gt; getByIdAndCurrentYear(
+&nbsp;            @PathVariable(&quot;turmaId&quot;) Integer turmaId,
+&nbsp;            @PathVariable(&quot;disciplinaId&quot;) Long disciplinaId) {
+<b class="fc">&nbsp;        List&lt;AlunoNotaDTO&gt; entity = notaService.findAlunosNotasByTurmaAndDisciplina(turmaId, disciplinaId);</b>
+<b class="fc">&nbsp;        if (entity.isEmpty()) {</b>
+<b class="fc">&nbsp;            return ResponseEntity.noContent().build();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return ResponseEntity.ok(entity);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @GetMapping(&quot;/turma/{turmaId}/disciplina/{disciplinaId}/etapaInicio/{etapaInicio}/etapaFim/{etapaFim}&quot;)
+&nbsp;    public ResponseEntity&lt;List&lt;AlunoMediaDTO&gt;&gt; findAlunosMediaByTurmaDisciplinaAndIntervalo(
+&nbsp;            @PathVariable(&quot;turmaId&quot;) Long turmaId,
+&nbsp;            @PathVariable(&quot;disciplinaId&quot;) Long disciplinaId,
+&nbsp;            @PathVariable(&quot;etapaInicio&quot;) LocalDate etapaInicio,
+&nbsp;            @PathVariable(&quot;etapaFim&quot;) LocalDate etapaFim) {
+&nbsp;        try {
+<b class="fc">&nbsp;            List&lt;AlunoMediaDTO&gt; medias = notaService.findAlunosMediaByTurmaDisciplinaAndIntervalo(turmaId, disciplinaId, etapaInicio, etapaFim);</b>
+<b class="fc">&nbsp;            if (medias.isEmpty()) {</b>
+<b class="fc">&nbsp;                return ResponseEntity.noContent().build();</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return ResponseEntity.ok(medias);</b>
+&nbsp;        } catch (Exception e) {
+<b class="fc">&nbsp;            return ResponseEntity.badRequest().build();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @GetMapping(&quot;/alunos/turma/{turmaId}/disciplina/{disciplinaId}&quot;)
+&nbsp;    public ResponseEntity&lt;List&lt;AlunoNotaDTO&gt;&gt; findAlunosByTurma(
+&nbsp;            @PathVariable(&quot;turmaId&quot;) Long turmaId,
+&nbsp;            @PathVariable(&quot;disciplinaId&quot;) Long disciplinaId
+&nbsp;    ) {
+<b class="fc">&nbsp;        List&lt;AlunoNotaDTO&gt; entity = notaService.findAlunosByTurma(turmaId, disciplinaId);</b>
+<b class="fc">&nbsp;        if (entity.isEmpty()) {</b>
+<b class="fc">&nbsp;            return ResponseEntity.noContent().build();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return ResponseEntity.ok(entity);</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+&nbsp;class AlunoKey {
+&nbsp;    private Integer matriculaId;
+&nbsp;    private Long alunoId;
+&nbsp;
+&nbsp;    public AlunoKey(Integer matriculaId, Long alunoId) {
+&nbsp;        this.matriculaId = matriculaId;
+&nbsp;        this.alunoId = alunoId;
+&nbsp;    }
+&nbsp;
+&nbsp;    public Integer getMatriculaId() {
+&nbsp;        return matriculaId;
+&nbsp;    }
+&nbsp;
+&nbsp;    public Long getAlunoId() {
+&nbsp;        return alunoId;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object obj) {
+&nbsp;        if (this == obj) return true;
+&nbsp;        if (obj == null || getClass() != obj.getClass()) return false;
+&nbsp;        AlunoKey alunoKey = (AlunoKey) obj;
+&nbsp;        return matriculaId.equals(alunoKey.matriculaId) &amp;&amp; alunoId.equals(alunoKey.alunoId);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+&nbsp;        return Objects.hash(matriculaId, alunoId);
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-09-01 14:08</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,131 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Disciplina</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sedinternet.entities</a>
+</div>
+
+<h1>Coverage Summary for Class: Disciplina (com.sedinternet.entities)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">Disciplina</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sedinternet.entities;
+&nbsp;
+&nbsp;import jakarta.persistence.*;
+&nbsp;import lombok.*;
+&nbsp;
+&nbsp;import java.time.LocalDate;
+&nbsp;
+&nbsp;@Data
+&nbsp;@EqualsAndHashCode(callSuper = false)
+&nbsp;@Entity
+&nbsp;@Builder
+&nbsp;@NoArgsConstructor
+&nbsp;@AllArgsConstructor
+&nbsp;@Table(name = &quot;disciplinas&quot;)
+&nbsp;public class Disciplina extends GenericEntity {
+&nbsp;
+&nbsp;    @Id
+&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
+&nbsp;    @Column(name = &quot;disc_id&quot;)
+&nbsp;    private Long id;
+&nbsp;
+&nbsp;    @Column(name = &quot;DISCIPLINA&quot;, length = 120)
+&nbsp;    private String disciplina;
+&nbsp;
+&nbsp;    @Column(name = &quot;ABREV&quot;, length = 9)
+&nbsp;    private String abrev;
+&nbsp;
+&nbsp;    @Column(name = &quot;MAT_DISC_ID&quot;)
+&nbsp;    private Integer matDiscId;
+&nbsp;
+&nbsp;    @Column(name = &quot;OBS&quot;, length = 240)
+&nbsp;    private String obs;
+&nbsp;
+&nbsp;    @Column(name = &quot;CAMPO&quot;, length = 9)
+&nbsp;    private String campo;
+&nbsp;
+&nbsp;    @Column(name = &quot;USR_CAD&quot;)
+&nbsp;    private Integer usrCad;
+&nbsp;
+&nbsp;    @Column(name = &quot;USUARIO_ID&quot;)
+&nbsp;    private Integer usuarioId;
+&nbsp;
+&nbsp;    @Column(name = &quot;DT_ALTERADO&quot;)
+&nbsp;    private LocalDate dtAlterado;
+&nbsp;
+&nbsp;    @Column(name = &quot;DISC_CAT_ID&quot;)
+&nbsp;    private Integer discCatId;
+&nbsp;
+&nbsp;    @Column(name = &quot;COD_INEP&quot;)
+&nbsp;    private Short codInep;
+&nbsp;
+&nbsp;    @Column(name = &quot;TIPO_DISC&quot;)
+&nbsp;    private Short tipoDisc;
+&nbsp;
+&nbsp;    @Column(name = &quot;TIPO&quot;)
+&nbsp;    private Integer tipo;
+&nbsp;
+&nbsp;    @Column(name = &quot;ANT_DISC_ID&quot;)
+&nbsp;    private Integer antDiscId;
+&nbsp;
+&nbsp;    @Column(name = &quot;area_conh_id&quot;)
+&nbsp;    private Integer areaConhId;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-09-01 14:08</div>
+</div>
+</body>
+</html>

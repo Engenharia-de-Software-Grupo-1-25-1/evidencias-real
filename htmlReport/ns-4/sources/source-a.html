@@ -1,0 +1,145 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GradeProfessor</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sedinternet.entities</a>
+</div>
+
+<h1>Coverage Summary for Class: GradeProfessor (com.sedinternet.entities)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">GradeProfessor</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sedinternet.entities;
+&nbsp;
+&nbsp;import jakarta.persistence.*;
+&nbsp;import lombok.*;
+&nbsp;import java.time.LocalDate;
+&nbsp;
+&nbsp;@Data
+&nbsp;@EqualsAndHashCode(callSuper = false)
+&nbsp;@Entity
+&nbsp;@Builder
+&nbsp;@NoArgsConstructor
+&nbsp;@AllArgsConstructor
+&nbsp;@Table(name = &quot;grade_professor&quot;)
+&nbsp;public class GradeProfessor extends GenericEntity {
+&nbsp;
+&nbsp;    @Id
+&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
+&nbsp;    @Column(name = &quot;grade_prof_id&quot;)
+&nbsp;    private Long id;
+&nbsp;
+&nbsp;    @Column(name = &quot;GRADE_ID&quot;, nullable = false)
+&nbsp;    private Integer gradeId;
+&nbsp;
+&nbsp;    @Column(name = &quot;SERIE_ID&quot;)
+&nbsp;    private Integer serieId;
+&nbsp;
+&nbsp;    @Column(name = &quot;TURMA_ID&quot;)
+&nbsp;    private Integer turmaId;
+&nbsp;
+&nbsp;    @Column(name = &quot;DISCIPLINA_ID&quot;)
+&nbsp;    private Integer disciplinaId;
+&nbsp;
+&nbsp;    @Column(name = &quot;PROFESSOR_ID&quot;)
+&nbsp;    private Integer professorId;
+&nbsp;
+&nbsp;    @Column(name = &quot;ANO_LETIVO&quot;)
+&nbsp;    private Integer anoLetivo;
+&nbsp;
+&nbsp;    @Column(name = &quot;CURSO_ID&quot;)
+&nbsp;    private Integer cursoId;
+&nbsp;
+&nbsp;    @Column(name = &quot;INST_ID&quot;)
+&nbsp;    private Integer instId;
+&nbsp;
+&nbsp;    @Column(name = &quot;USR_CAD&quot;)
+&nbsp;    private Integer usrCad;
+&nbsp;
+&nbsp;    @Column(name = &quot;USUARIO_ID&quot;)
+&nbsp;    private Integer usuarioId;
+&nbsp;
+&nbsp;    @Column(name = &quot;DT_ALTERADO&quot;)
+&nbsp;    private LocalDate dtAlterado;
+&nbsp;
+&nbsp;    @Column(name = &quot;DT_INICIAL&quot;)
+&nbsp;    private LocalDate dtInicial;
+&nbsp;
+&nbsp;    @Column(name = &quot;DT_FINAL&quot;)
+&nbsp;    private LocalDate dtFinal;
+&nbsp;
+&nbsp;    @Column(name = &quot;ORDEM&quot;)
+&nbsp;    private Integer ordem;
+&nbsp;
+&nbsp;    @Column(name = &quot;DISC_PRINC_ID&quot;)
+&nbsp;    private Integer discPrincId;
+&nbsp;
+&nbsp;    @Column(name = &quot;TURNO_GP&quot;, length = 9)
+&nbsp;    private String turnoGp;
+&nbsp;
+&nbsp;    @Column(name = &quot;SIT&quot;)
+&nbsp;    private Short sit;
+&nbsp;
+&nbsp;    @Column(name = &quot;GRUPO_ID&quot;)
+&nbsp;    private Integer grupoId;
+&nbsp;
+&nbsp;    @Column(name = &quot;ESTRUT_C_ID&quot;)
+&nbsp;    private Integer estruturCid;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-09-01 14:08</div>
+</div>
+</body>
+</html>

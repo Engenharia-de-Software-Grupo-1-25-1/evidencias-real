@@ -1,0 +1,147 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FreqAluno</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sedinternet.entities</a>
+</div>
+
+<h1>Coverage Summary for Class: FreqAluno (com.sedinternet.entities)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">FreqAluno</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sedinternet.entities;
+&nbsp;
+&nbsp;import jakarta.persistence.*;
+&nbsp;import lombok.*;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.time.LocalDateTime;
+&nbsp;
+&nbsp;@Data
+&nbsp;@EqualsAndHashCode(callSuper = false)
+&nbsp;@Entity
+&nbsp;@Builder
+&nbsp;@NoArgsConstructor
+&nbsp;@AllArgsConstructor
+&nbsp;@Table(name = &quot;freq_alunos&quot;)
+&nbsp;public class FreqAluno extends GenericEntity {
+&nbsp;
+&nbsp;    @Id
+&nbsp;    @Column(name = &quot;freq_al_id&quot;)
+&nbsp;    @GeneratedValue(strategy=GenerationType.IDENTITY)
+&nbsp;    private Long id;
+&nbsp;
+&nbsp;    @Column(name = &quot;MATRICULA_ID&quot;)
+&nbsp;    private Long matriculaId;
+&nbsp;
+&nbsp;    @ManyToOne
+&nbsp;    @JoinColumn(name = &quot;aluno_id&quot;, referencedColumnName = &quot;aluno_id&quot;)
+&nbsp;    private Aluno aluno;
+&nbsp;
+&nbsp;    @Column(name = &quot;DISCIPLINA_ID&quot;)
+&nbsp;    private Long disciplinaId;
+&nbsp;
+&nbsp;    @Column(name = &quot;TURMA_ID&quot;, insertable = false, updatable = false)
+&nbsp;    private Long turmaId;
+&nbsp;
+&nbsp;    @Column(name = &quot;DT_FREQ&quot;)
+&nbsp;    private LocalDate dtFreq;
+&nbsp;
+&nbsp;    @Column(name = &quot;RESUMO_AT_ID&quot;)
+&nbsp;    private Long resumoId;
+&nbsp;
+&nbsp;    @Column(name = &quot;ACS_ALU_ID&quot;)
+&nbsp;    private Long acsAlunoId;
+&nbsp;
+&nbsp;    @Column(name = &quot;USR_CAD&quot;)
+&nbsp;    private Integer usuarioCadastroId;
+&nbsp;
+&nbsp;    @Column(name = &quot;DT_CAD&quot;, nullable = false, columnDefinition = &quot;TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP&quot;)
+&nbsp;    private LocalDateTime dataCadastro;
+&nbsp;
+&nbsp;    @Column(name = &quot;USR_ALT&quot;)
+&nbsp;    private Integer usuarioAlteracaoId;
+&nbsp;
+&nbsp;    @Column(name = &quot;DT_ALT&quot;, nullable = false, columnDefinition = &quot;TIMESTAMP NOT NULL DEFAULT &#39;0000-00-00 00:00:00&#39;&quot;)
+&nbsp;    private LocalDateTime dataAlteracao;
+&nbsp;
+&nbsp;    @Column(name = &quot;ANO_LETIVO&quot;)
+&nbsp;    private Integer anoLetivo;
+&nbsp;
+&nbsp;    @Column(name = &quot;ETAPA&quot;)
+&nbsp;    private Short etapa;
+&nbsp;
+&nbsp;    @Column(name = &quot;QTD_FALTAS&quot;)
+&nbsp;    private Integer quantidadeFaltas;
+&nbsp;
+&nbsp;    @Column(name = &quot;SITE&quot;)
+&nbsp;    private Short site;
+&nbsp;
+&nbsp;    @Column(name = &quot;DT_SITE&quot;, columnDefinition = &quot;TIMESTAMP NOT NULL DEFAULT &#39;0000-00-00 00:00:00&#39;&quot;)
+&nbsp;    private LocalDateTime dataSite;
+&nbsp;
+&nbsp;    @Column(name = &quot;HORA_AULA_ID&quot;)
+&nbsp;    private Integer horaAulaId;
+&nbsp;
+&nbsp;    @Column(name = &quot;N_FALTA&quot;)
+&nbsp;    private Short numeroFaltas;
+&nbsp;
+&nbsp;    @Column(name = &quot;GRADE_ID&quot;)
+&nbsp;    private Long gradeId;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-09-01 14:08</div>
+</div>
+</body>
+</html>

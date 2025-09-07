@@ -1,0 +1,427 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Professor</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sedinternet.entities</a>
+</div>
+
+<h1>Coverage Summary for Class: Professor (com.sedinternet.entities)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">Professor</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sedinternet.entities;
+&nbsp;
+&nbsp;import jakarta.persistence.*;
+&nbsp;import lombok.*;
+&nbsp;
+&nbsp;import java.time.LocalDate;
+&nbsp;
+&nbsp;@Data
+&nbsp;@EqualsAndHashCode(callSuper = false)
+&nbsp;@Entity
+&nbsp;@Builder
+&nbsp;@NoArgsConstructor
+&nbsp;@AllArgsConstructor
+&nbsp;@Table(name = &quot;professores&quot;)
+&nbsp;public class Professor extends GenericEntity {
+&nbsp;
+&nbsp;    @Id
+&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
+&nbsp;    @Column(name = &quot;professor_id&quot;)
+&nbsp;    private Integer professorId;
+&nbsp;
+&nbsp;    @Column(name = &quot;PROFESSOR_NOME&quot;, length = 60)
+&nbsp;    private String professorNome;
+&nbsp;
+&nbsp;    @Column(name = &quot;PROFESSOR_ABREV&quot;, length = 20)
+&nbsp;    private String professorAbrev;
+&nbsp;
+&nbsp;    @Column(name = &quot;NASCIMENTO&quot;)
+&nbsp;    private LocalDate nascimento;
+&nbsp;
+&nbsp;    @Column(name = &quot;SEXO&quot;, length = 1)
+&nbsp;    private String sexo;
+&nbsp;
+&nbsp;    @Column(name = &quot;NATURALIDADE&quot;, length = 60)
+&nbsp;    private String naturalidade;
+&nbsp;
+&nbsp;    @Column(name = &quot;UF_NATURAL&quot;, length = 20)
+&nbsp;    private String ufNatural;
+&nbsp;
+&nbsp;    @Column(name = &quot;RG&quot;, length = 16)
+&nbsp;    private String rg;
+&nbsp;
+&nbsp;    @Column(name = &quot;CPF&quot;, length = 19)
+&nbsp;    private String cpf;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;FOTO&quot;)
+&nbsp;    private byte[] foto;
+&nbsp;
+&nbsp;    @Column(name = &quot;DATA_ENTRADA&quot;)
+&nbsp;    private LocalDate dataEntrada;
+&nbsp;
+&nbsp;    @Column(name = &quot;NACIONALIDADE&quot;, length = 20)
+&nbsp;    private String nacionalidade;
+&nbsp;
+&nbsp;    @Column(name = &quot;FONE1&quot;, length = 16)
+&nbsp;    private String fone1;
+&nbsp;
+&nbsp;    @Column(name = &quot;FONE2&quot;, length = 16)
+&nbsp;    private String fone2;
+&nbsp;
+&nbsp;    @Column(name = &quot;FONE3&quot;, length = 16)
+&nbsp;    private String fone3;
+&nbsp;
+&nbsp;    @Column(name = &quot;CELULAR&quot;, length = 16)
+&nbsp;    private String celular;
+&nbsp;
+&nbsp;    @Column(name = &quot;FAX&quot;, length = 16)
+&nbsp;    private String fax;
+&nbsp;
+&nbsp;    @Column(name = &quot;EMAIL&quot;, length = 60)
+&nbsp;    private String email;
+&nbsp;
+&nbsp;    @Column(name = &quot;COMPLEMENTO&quot;, length = 240)
+&nbsp;    private String complemento;
+&nbsp;
+&nbsp;    @Column(name = &quot;OBS_END&quot;, length = 240)
+&nbsp;    private String obsEnd;
+&nbsp;
+&nbsp;    @Column(name = &quot;OBS_PROF&quot;, length = 240)
+&nbsp;    private String obsProf;
+&nbsp;
+&nbsp;    @Column(name = &quot;NUMERO&quot;, length = 16)
+&nbsp;    private String numero;
+&nbsp;
+&nbsp;    @Column(name = &quot;END_ID&quot;)
+&nbsp;    private Integer endId;
+&nbsp;
+&nbsp;    @Column(name = &quot;SITUACAO_PROF&quot;, length = 13)
+&nbsp;    private String situacaoProf;
+&nbsp;
+&nbsp;    @Column(name = &quot;TITULO_ELEITOTAL&quot;, length = 20)
+&nbsp;    private String tituloEleitotal;
+&nbsp;
+&nbsp;    @Column(name = &quot;TITULO_ZONA&quot;, length = 9)
+&nbsp;    private String tituloZona;
+&nbsp;
+&nbsp;    @Column(name = &quot;TITULO_SECAO&quot;, length = 9)
+&nbsp;    private String tituloSecao;
+&nbsp;
+&nbsp;    @Column(name = &quot;HABILITACAO&quot;, length = 20)
+&nbsp;    private String habilitacao;
+&nbsp;
+&nbsp;    @Column(name = &quot;HABILIT_EMISAO&quot;)
+&nbsp;    private LocalDate habilitEmissao;
+&nbsp;
+&nbsp;    @Column(name = &quot;HABILIT_VENCIMENTO&quot;)
+&nbsp;    private LocalDate habilitVencimento;
+&nbsp;
+&nbsp;    @Column(name = &quot;HABILIT_CATEGORIA&quot;, length = 9)
+&nbsp;    private String habilitCategoria;
+&nbsp;
+&nbsp;    @Column(name = &quot;PIS&quot;, length = 20)
+&nbsp;    private String pis;
+&nbsp;
+&nbsp;    @Column(name = &quot;CTPS&quot;, length = 20)
+&nbsp;    private String ctps;
+&nbsp;
+&nbsp;    @Column(name = &quot;CTPS_SERIE&quot;)
+&nbsp;    private Integer ctpsSerie;
+&nbsp;
+&nbsp;    @Column(name = &quot;CTPS_UF&quot;, length = 20)
+&nbsp;    private String ctpsUf;
+&nbsp;
+&nbsp;    @Column(name = &quot;CTPS_EMISSAO&quot;)
+&nbsp;    private LocalDate ctpsEmissao;
+&nbsp;
+&nbsp;    @Column(name = &quot;ESTRANGEIRO&quot;)
+&nbsp;    private Integer estrangeiro;
+&nbsp;
+&nbsp;    @Column(name = &quot;ESTRAG_CHEGADA&quot;)
+&nbsp;    private LocalDate estragChegada;
+&nbsp;
+&nbsp;    @Column(name = &quot;RG_DATA&quot;)
+&nbsp;    private LocalDate rgData;
+&nbsp;
+&nbsp;    @Column(name = &quot;RG_ORGAO&quot;, length = 9)
+&nbsp;    private String rgOrgao;
+&nbsp;
+&nbsp;    @Column(name = &quot;TIPO&quot;)
+&nbsp;    private Integer tipo;
+&nbsp;
+&nbsp;    @Column(name = &quot;PROFISSAO&quot;, length = 60)
+&nbsp;    private String profissao;
+&nbsp;
+&nbsp;    @Column(name = &quot;SALARIO_BASE&quot;)
+&nbsp;    private Double salarioBase;
+&nbsp;
+&nbsp;    @Column(name = &quot;DIA_PAG&quot;)
+&nbsp;    private Integer diaPag;
+&nbsp;
+&nbsp;    @Column(name = &quot;TIPO_MES&quot;)
+&nbsp;    private Integer tipoMes;
+&nbsp;
+&nbsp;    @Column(name = &quot;DESCONTA_INSS&quot;)
+&nbsp;    private Integer descontaInss;
+&nbsp;
+&nbsp;    @Column(name = &quot;ATIVAR_FIN&quot;)
+&nbsp;    private Integer ativarFin;
+&nbsp;
+&nbsp;    @Column(name = &quot;BANCO_ID&quot;)
+&nbsp;    private Integer bancoId;
+&nbsp;
+&nbsp;    @Column(name = &quot;AGENCIA&quot;, length = 9)
+&nbsp;    private String agencia;
+&nbsp;
+&nbsp;    @Column(name = &quot;CONTA_CORRENTE&quot;, length = 60)
+&nbsp;    private String contaCorrente;
+&nbsp;
+&nbsp;    @Column(name = &quot;CONTA_POUPANCA&quot;, length = 60)
+&nbsp;    private String contaPoupanca;
+&nbsp;
+&nbsp;    @Column(name = &quot;TIPO_CONTAS_ID&quot;)
+&nbsp;    private Integer tipoContasId;
+&nbsp;
+&nbsp;    @Column(name = &quot;PRIORIDADE_HORARIO&quot;, length = 1)
+&nbsp;    private String prioridadeHorario;
+&nbsp;
+&nbsp;    @Column(name = &quot;GRAU_IMPORTANCIA&quot;, length = 40)
+&nbsp;    private String grauImportancia;
+&nbsp;
+&nbsp;    @Column(name = &quot;MX_AULA_DIA&quot;)
+&nbsp;    private Integer mxAulaDia;
+&nbsp;
+&nbsp;    @Column(name = &quot;OPCAO_GEMINACAO&quot;, length = 240)
+&nbsp;    private String opcaoGeminacao;
+&nbsp;
+&nbsp;    @Column(name = &quot;MANHA&quot;)
+&nbsp;    private Integer manha;
+&nbsp;
+&nbsp;    @Column(name = &quot;TARDE&quot;)
+&nbsp;    private Integer tarde;
+&nbsp;
+&nbsp;    @Column(name = &quot;NOITE&quot;)
+&nbsp;    private Integer noite;
+&nbsp;
+&nbsp;    @Column(name = &quot;USR_CAD&quot;)
+&nbsp;    private Integer usrCad;
+&nbsp;
+&nbsp;    @Column(name = &quot;USUARIO_ID&quot;)
+&nbsp;    private Integer usuarioId;
+&nbsp;
+&nbsp;    @Column(name = &quot;DT_ALTERADO&quot;)
+&nbsp;    private LocalDate dtAlterado;
+&nbsp;
+&nbsp;    @Column(name = &quot;QTD_DEPTS&quot;)
+&nbsp;    private Integer qtdDepts;
+&nbsp;
+&nbsp;    @Column(name = &quot;CERT_CIVIL&quot;)
+&nbsp;    private Short certCivil;
+&nbsp;
+&nbsp;    @Column(name = &quot;N_TERMO&quot;, length = 9)
+&nbsp;    private String nTermo;
+&nbsp;
+&nbsp;    @Column(name = &quot;FOLHA&quot;, length = 9)
+&nbsp;    private String folha;
+&nbsp;
+&nbsp;    @Column(name = &quot;LIVRO&quot;, length = 9)
+&nbsp;    private String livro;
+&nbsp;
+&nbsp;    @Column(name = &quot;DATA_CERTIDAO&quot;)
+&nbsp;    private LocalDate dataCertidao;
+&nbsp;
+&nbsp;    @Column(name = &quot;RG_UF&quot;, length = 2)
+&nbsp;    private String rgUf;
+&nbsp;
+&nbsp;    @Column(name = &quot;PAI&quot;, length = 60)
+&nbsp;    private String pai;
+&nbsp;
+&nbsp;    @Column(name = &quot;MAE&quot;, length = 60)
+&nbsp;    private String mae;
+&nbsp;
+&nbsp;    @Column(name = &quot;TIPO_NACIONAL&quot;)
+&nbsp;    private Short tipoNacional;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;FIR&quot;)
+&nbsp;    private byte[] fir;
+&nbsp;
+&nbsp;    @Column(name = &quot;ETNIA&quot;)
+&nbsp;    private Short etnia;
+&nbsp;
+&nbsp;    @Column(name = &quot;NIVEL_ESCOLAR&quot;)
+&nbsp;    private Short nivelEscolar;
+&nbsp;
+&nbsp;    @Column(name = &quot;POS_GRAD_ESP&quot;)
+&nbsp;    private Short posGradEsp;
+&nbsp;
+&nbsp;    @Column(name = &quot;POS_GRAD_MEST&quot;)
+&nbsp;    private Short posGradMest;
+&nbsp;
+&nbsp;    @Column(name = &quot;POS_GRAD_DOUT&quot;)
+&nbsp;    private Short posGradDout;
+&nbsp;
+&nbsp;    @Column(name = &quot;POS_GRAD_NENHUM&quot;)
+&nbsp;    private Short posGradNenhum;
+&nbsp;
+&nbsp;    @Column(name = &quot;OUT_CRECHE&quot;)
+&nbsp;    private Short outCreche;
+&nbsp;
+&nbsp;    @Column(name = &quot;OUT_PRE&quot;)
+&nbsp;    private Short outPre;
+&nbsp;
+&nbsp;    @Column(name = &quot;OUT_ESP&quot;)
+&nbsp;    private Short outEsp;
+&nbsp;
+&nbsp;    @Column(name = &quot;OUT_INDIGENA&quot;)
+&nbsp;    private Short outIndigena;
+&nbsp;
+&nbsp;    @Column(name = &quot;OUT_INTERCULT&quot;)
+&nbsp;    private Short outIntercult;
+&nbsp;
+&nbsp;    @Column(name = &quot;OUT_NENHUM&quot;)
+&nbsp;    private Short outNenhum;
+&nbsp;
+&nbsp;    @Column(name = &quot;id_inep&quot;)
+&nbsp;    private Long idInep;
+&nbsp;
+&nbsp;    @Column(name = &quot;PASS_SITE&quot;, length = 500)
+&nbsp;    private String passSite;
+&nbsp;
+&nbsp;    @Column(name = &quot;CUR_SUP1_LICENCIATURA&quot;)
+&nbsp;    private Short curSup1Licenciatura;
+&nbsp;
+&nbsp;    @Column(name = &quot;CUR_SUP1_CURSO_COD&quot;)
+&nbsp;    private Integer curSup1CursoCod;
+&nbsp;
+&nbsp;    @Column(name = &quot;CUR_SUP1_ANO_CONCLUSAO&quot;)
+&nbsp;    private Integer curSup1AnoConclusao;
+&nbsp;
+&nbsp;    @Column(name = &quot;CUR_SUP1_INST_COD&quot;)
+&nbsp;    private Integer curSup1InstCod;
+&nbsp;
+&nbsp;    @Column(name = &quot;CUR_SUP2_LICENCIATURA&quot;)
+&nbsp;    private Short curSup2Licenciatura;
+&nbsp;
+&nbsp;    @Column(name = &quot;CUR_SUP2_CURSO_COD&quot;)
+&nbsp;    private Integer curSup2CursoCod;
+&nbsp;
+&nbsp;    @Column(name = &quot;CUR_SUP2_ANO_CONCLUSAO&quot;)
+&nbsp;    private Integer curSup2AnoConclusao;
+&nbsp;
+&nbsp;    @Column(name = &quot;CUR_SUP2_INST_COD&quot;)
+&nbsp;    private Integer curSup2InstCod;
+&nbsp;
+&nbsp;    @Column(name = &quot;PASSAPORTE&quot;, length = 20)
+&nbsp;    private String passaporte;
+&nbsp;
+&nbsp;    @Column(name = &quot;FORM_SUPERIOR&quot;)
+&nbsp;    private Short formSuperior;
+&nbsp;
+&nbsp;    @Column(name = &quot;DEPTO_ID&quot;)
+&nbsp;    private Integer deptoId;
+&nbsp;
+&nbsp;    @Column(name = &quot;SENHA_SITE&quot;, length = 20)
+&nbsp;    private String senhaSite;
+&nbsp;
+&nbsp;    @Column(name = &quot;CART_ID&quot;)
+&nbsp;    private Integer cartId;
+&nbsp;
+&nbsp;    @Column(name = &quot;CARTORIO_ID&quot;)
+&nbsp;    private Integer cartorioId;
+&nbsp;
+&nbsp;    @Column(name = &quot;CERTIDAO_MATRICULA&quot;, length = 40)
+&nbsp;    private String certidaoMatricula;
+&nbsp;
+&nbsp;    @Column(name = &quot;CUR_SUP1_SIT&quot;)
+&nbsp;    private Short curSup1Sit;
+&nbsp;
+&nbsp;    @Column(name = &quot;CUR_SUP2_SIT&quot;)
+&nbsp;    private Short curSup2Sit;
+&nbsp;
+&nbsp;    @Column(name = &quot;CUR_SUP1_ANO_INICIO&quot;)
+&nbsp;    private Integer curSup1AnoInicio;
+&nbsp;
+&nbsp;    @Column(name = &quot;CUR_SUP2_ANO_INICIO&quot;)
+&nbsp;    private Integer curSup2AnoInicio;
+&nbsp;
+&nbsp;    @Column(name = &quot;OUT_ANO_INI_FUND&quot;)
+&nbsp;    private Short outAnoIniFund;
+&nbsp;
+&nbsp;    @Column(name = &quot;OUT_ANO_FIM_FUND&quot;)
+&nbsp;    private Short outAnoFimFund;
+&nbsp;
+&nbsp;    @Column(name = &quot;OUT_MEDIO&quot;)
+&nbsp;    private Short outMedio;
+&nbsp;
+&nbsp;    @Column(name = &quot;OUT_EJA&quot;)
+&nbsp;    private Short outEja;
+&nbsp;
+&nbsp;    @Column(name = &quot;OUT_OUTROS&quot;)
+&nbsp;    private Short outOutros;
+&nbsp;
+&nbsp;    @Column(name = &quot;FUNCAO&quot;)
+&nbsp;    private Short funcao;
+&nbsp;
+&nbsp;    @Column(name = &quot;INST_ID&quot;)
+&nbsp;    private Long instId;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-09-01 14:08</div>
+</div>
+</body>
+</html>

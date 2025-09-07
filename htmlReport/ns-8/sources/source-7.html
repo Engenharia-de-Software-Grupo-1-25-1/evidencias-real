@@ -1,0 +1,160 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GradeProfessorRepository</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sedinternet.repositories</a>
+</div>
+
+<h1>Coverage Summary for Class: GradeProfessorRepository (com.sedinternet.repositories)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">GradeProfessorRepository$MockitoMock$iggESZig</td>
+  </tr>
+  <tr>
+    <td class="name">GradeProfessorRepository$MockitoMock$iggESZig$auxiliary$06yrbaqu</td>
+  </tr>
+  <tr>
+    <td class="name">GradeProfessorRepository$MockitoMock$iggESZig$auxiliary$M4ZhAXtd</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sedinternet.repositories;
+&nbsp;
+&nbsp;import com.sedinternet.entities.GradeProfessor;
+&nbsp;import org.springframework.data.jpa.repository.Query;
+&nbsp;import org.springframework.data.repository.query.Param;
+&nbsp;import org.springframework.stereotype.Repository;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@Repository
+&nbsp;public interface GradeProfessorRepository extends GenericRepository&lt;GradeProfessor&gt; {
+&nbsp;
+&nbsp;    @Query(value = &quot;SELECT &quot; +
+&nbsp;            &quot;    ta.*, &quot; +
+&nbsp;            &quot;    t.turma_nome, &quot; +
+&nbsp;            &quot;    t.turma_abrev, &quot; +
+&nbsp;            &quot;    t.turno, &quot; +
+&nbsp;            &quot;    ha.h_inicial, &quot; +
+&nbsp;            &quot;    ha.h_final, &quot; +
+&nbsp;            &quot;    t.dt_fech, &quot; +
+&nbsp;            &quot;    ha.aula_n, &quot; +
+&nbsp;            &quot;    seg_grad.professor_id AS seg_prof_id, &quot; +
+&nbsp;            &quot;    seg_prof.professor_abrev AS seg_prof_abrev, &quot; +
+&nbsp;            &quot;    seg_disc.disc_id AS seg_disc_id, &quot; +
+&nbsp;            &quot;    seg_disc.disciplina AS seg_disciplina, &quot; +
+&nbsp;            &quot;    ter_grad.professor_id AS ter_prof_id, &quot; +
+&nbsp;            &quot;    ter_prof.professor_abrev AS ter_prof_abrev, &quot; +
+&nbsp;            &quot;    ter_disc.disc_id AS ter_disc_id, &quot; +
+&nbsp;            &quot;    ter_disc.disciplina AS ter_disciplina, &quot; +
+&nbsp;            &quot;    qua_grad.professor_id AS qua_prof_id, &quot; +
+&nbsp;            &quot;    qua_prof.professor_abrev AS qua_prof_abrev, &quot; +
+&nbsp;            &quot;    qua_disc.disc_id AS qua_disc_id, &quot; +
+&nbsp;            &quot;    qua_disc.disciplina AS qua_disciplina, &quot; +
+&nbsp;            &quot;    qui_grad.professor_id AS qui_prof_id, &quot; +
+&nbsp;            &quot;    qui_prof.professor_abrev AS qui_prof_abrev, &quot; +
+&nbsp;            &quot;    qui_disc.disc_id AS qui_disc_id, &quot; +
+&nbsp;            &quot;    qui_disc.disciplina AS qui_disciplina, &quot; +
+&nbsp;            &quot;    sex_grad.professor_id AS sex_prof_id, &quot; +
+&nbsp;            &quot;    sex_prof.professor_abrev AS sex_prof_abrev, &quot; +
+&nbsp;            &quot;    sex_disc.disc_id AS sex_disc_id, &quot; +
+&nbsp;            &quot;    sex_disc.disciplina AS sex_disciplina, &quot; +
+&nbsp;            &quot;    sab_grad.professor_id AS sab_prof_id, &quot; +
+&nbsp;            &quot;    sab_prof.professor_abrev AS sab_prof_abrev, &quot; +
+&nbsp;            &quot;    sab_disc.disc_id AS sab_disc_id, &quot; +
+&nbsp;            &quot;    sab_disc.disciplina AS sab_disciplina &quot; +
+&nbsp;            &quot;FROM &quot; +
+&nbsp;            &quot;    turma_aulas ta &quot; +
+&nbsp;            &quot;    LEFT JOIN turmas t ON t.turma_id = ta.turma_id &quot; +
+&nbsp;            &quot;    LEFT JOIN horario_aulas ha ON ha.hora_aula_id = ta.hora_aula_id &quot; +
+&nbsp;            &quot;    LEFT JOIN grade_professor seg_grad ON seg_grad.grade_prof_id = ta.seg_grade_prof_id &quot; +
+&nbsp;            &quot;    LEFT JOIN professores seg_prof ON seg_prof.professor_id = seg_grad.professor_id &quot; +
+&nbsp;            &quot;    LEFT JOIN disciplinas seg_disc ON seg_disc.disc_id = seg_grad.disciplina_id &quot; +
+&nbsp;            &quot;    LEFT JOIN grade_professor ter_grad ON ter_grad.grade_prof_id = ta.ter_grade_prof_id &quot; +
+&nbsp;            &quot;    LEFT JOIN professores ter_prof ON ter_prof.professor_id = ter_grad.professor_id &quot; +
+&nbsp;            &quot;    LEFT JOIN disciplinas ter_disc ON ter_disc.disc_id = ter_grad.disciplina_id &quot; +
+&nbsp;            &quot;    LEFT JOIN grade_professor qua_grad ON qua_grad.grade_prof_id = ta.qua_grade_prof_id &quot; +
+&nbsp;            &quot;    LEFT JOIN professores qua_prof ON qua_prof.professor_id = qua_grad.professor_id &quot; +
+&nbsp;            &quot;    LEFT JOIN disciplinas qua_disc ON qua_disc.disc_id = qua_grad.disciplina_id &quot; +
+&nbsp;            &quot;    LEFT JOIN grade_professor qui_grad ON qui_grad.grade_prof_id = ta.qui_grade_prof_id &quot; +
+&nbsp;            &quot;    LEFT JOIN professores qui_prof ON qui_prof.professor_id = qui_grad.professor_id &quot; +
+&nbsp;            &quot;    LEFT JOIN disciplinas qui_disc ON qui_disc.disc_id = qui_grad.disciplina_id &quot; +
+&nbsp;            &quot;    LEFT JOIN grade_professor sex_grad ON sex_grad.grade_prof_id = ta.sex_grade_prof_id &quot; +
+&nbsp;            &quot;    LEFT JOIN professores sex_prof ON sex_prof.professor_id = sex_grad.professor_id &quot; +
+&nbsp;            &quot;    LEFT JOIN disciplinas sex_disc ON sex_disc.disc_id = sex_grad.disciplina_id &quot; +
+&nbsp;            &quot;    LEFT JOIN grade_professor sab_grad ON sab_grad.grade_prof_id = ta.sab_grade_prof_id &quot; +
+&nbsp;            &quot;    LEFT JOIN professores sab_prof ON sab_prof.professor_id = sab_grad.professor_id &quot; +
+&nbsp;            &quot;    LEFT JOIN disciplinas sab_disc ON sab_disc.disc_id = sab_grad.disciplina_id &quot; +
+&nbsp;            &quot;WHERE &quot; +
+&nbsp;            &quot;    ha.aula_n &gt; 0 &quot; +
+&nbsp;            &quot;    AND ha.ano_letivo = YEAR(CURRENT_DATE) &quot; +
+&nbsp;            &quot;    AND (seg_grad.professor_id = :professorId &quot; +
+&nbsp;            &quot;         OR ter_grad.professor_id = :professorId &quot; +
+&nbsp;            &quot;         OR qua_grad.professor_id = :professorId &quot; +
+&nbsp;            &quot;         OR qui_grad.professor_id = :professorId &quot; +
+&nbsp;            &quot;         OR sex_grad.professor_id = :professorId &quot; +
+&nbsp;            &quot;         OR sab_grad.professor_id = :professorId) &quot; +
+&nbsp;            &quot;ORDER BY ha.aula_n&quot;,
+&nbsp;            nativeQuery = true)
+&nbsp;    List&lt;Object[]&gt; findGradeProfessorByProfessorId(
+&nbsp;            @Param(&quot;professorId&quot;) Integer professorId
+&nbsp;    );
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-09-01 14:08</div>
+</div>
+</body>
+</html>

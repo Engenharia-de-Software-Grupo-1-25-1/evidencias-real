@@ -1,0 +1,152 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ResumoAtividadeServicecImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sedinternet.services.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: ResumoAtividadeServicecImpl (com.sedinternet.services.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ResumoAtividadeServicecImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (1/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    40%
+  </span>
+  <span class="absValue">
+    (4/10)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sedinternet.services.impl;
+&nbsp;
+&nbsp;import com.sedinternet.entities.ResumoAtividade;
+&nbsp;import com.sedinternet.repositories.ResumoAtividadeRepository;
+&nbsp;import com.sedinternet.services.FreqAlunoService;
+&nbsp;import com.sedinternet.services.ResumoAtividadeService;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.http.HttpStatus;
+&nbsp;import org.springframework.http.ResponseEntity;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@Service
+&nbsp;public class ResumoAtividadeServicecImpl extends GenericServiceImpl&lt;ResumoAtividade, Long&gt; implements ResumoAtividadeService {
+&nbsp;
+&nbsp;    private final ResumoAtividadeRepository resumoAtividadeRepository;
+&nbsp;    private final FreqAlunoService freqAlunoService;
+&nbsp;
+&nbsp;    @Autowired
+<b class="fc">&nbsp;    public ResumoAtividadeServicecImpl(ResumoAtividadeRepository resumoAtividadeRepository,  FreqAlunoService freqAlunoService) {</b>
+<b class="fc">&nbsp;        this.genericRepository = resumoAtividadeRepository;</b>
+<b class="fc">&nbsp;        this.resumoAtividadeRepository = resumoAtividadeRepository;</b>
+<b class="fc">&nbsp;        this.freqAlunoService = freqAlunoService;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;ResumoAtividade&gt; findResumoByTurmaDiscDateAtvd(Integer turmaId, Integer disciplinaId, LocalDate dtAtividade){
+<b class="nc">&nbsp;        return this.resumoAtividadeRepository.findResumoByTurmaDiscDateAtvd(turmaId, disciplinaId, dtAtividade);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;ResumoAtividade&gt; findResumoAtivToPrint(Integer turmaId, Integer disciplinaId, Integer etapa) {
+<b class="nc">&nbsp;        return this.resumoAtividadeRepository.findResumoAtivToPrint(turmaId, disciplinaId, etapa);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public ResponseEntity&lt;Void&gt; deleteResumoById(Long resumoId) {
+&nbsp;        try {
+<b class="nc">&nbsp;            resumoAtividadeRepository.deleteById(resumoId);</b>
+<b class="nc">&nbsp;            freqAlunoService.deleteFrequenciaPorResumo(resumoId);</b>
+<b class="nc">&nbsp;            return ResponseEntity.noContent().build();</b>
+&nbsp;        } catch (Exception e) {
+<b class="nc">&nbsp;            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-09-01 14:08</div>
+</div>
+</body>
+</html>

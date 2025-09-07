@@ -1,0 +1,284 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Turma</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.sedinternet.entities</a>
+</div>
+
+<h1>Coverage Summary for Class: Turma (com.sedinternet.entities)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">Turma</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.sedinternet.entities;
+&nbsp;
+&nbsp;import jakarta.persistence.*;
+&nbsp;import lombok.*;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.time.LocalDateTime;
+&nbsp;
+&nbsp;@Data
+&nbsp;@EqualsAndHashCode(callSuper = false)
+&nbsp;@Entity
+&nbsp;@Builder
+&nbsp;@NoArgsConstructor
+&nbsp;@AllArgsConstructor
+&nbsp;@Table(name = &quot;turmas&quot;)
+&nbsp;public class Turma extends GenericEntity {
+&nbsp;
+&nbsp;    @Id
+&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
+&nbsp;    @Column(name = &quot;turma_id&quot;)
+&nbsp;    private Long id;
+&nbsp;
+&nbsp;    @Column(name = &quot;TURMA_NOME&quot;, length = 60)
+&nbsp;    private String turmaNome;
+&nbsp;
+&nbsp;    @Column(name = &quot;TURMA_ABREV&quot;, length = 9)
+&nbsp;    private String turmaAbrev;
+&nbsp;
+&nbsp;    @Column(name = &quot;SERIE_ID&quot;)
+&nbsp;    private Integer serieId;
+&nbsp;
+&nbsp;    @Column(name = &quot;NUM_VAGAS&quot;)
+&nbsp;    private Integer numVagas;
+&nbsp;
+&nbsp;    @Column(name = &quot;AULA_INICIO&quot;)
+&nbsp;    private LocalDate aulaInicio;
+&nbsp;
+&nbsp;    @Column(name = &quot;AULA_FINAL&quot;)
+&nbsp;    private LocalDate aulaFinal;
+&nbsp;
+&nbsp;    @Column(name = &quot;ANO_LETIVO&quot;)
+&nbsp;    private Integer anoLetivo;
+&nbsp;
+&nbsp;    @Column(name = &quot;TURNO&quot;, length = 9)
+&nbsp;    private String turno;
+&nbsp;
+&nbsp;    @Column(name = &quot;OBS&quot;, length = 240)
+&nbsp;    private String obs;
+&nbsp;
+&nbsp;    @Column(name = &quot;MAT_INICIO&quot;)
+&nbsp;    private LocalDate matInicio;
+&nbsp;
+&nbsp;    @Column(name = &quot;MAT_FIM&quot;)
+&nbsp;    private LocalDate matFim;
+&nbsp;
+&nbsp;    @Column(name = &quot;OPCAO_HORARIO&quot;)
+&nbsp;    private Integer opcaoHorario;
+&nbsp;
+&nbsp;    @Column(name = &quot;USR_CAD&quot;)
+&nbsp;    private Integer usrCad;
+&nbsp;
+&nbsp;    @Column(name = &quot;USUARIO_ID&quot;)
+&nbsp;    private Integer usuarioId;
+&nbsp;
+&nbsp;    @Column(name = &quot;DT_ALTERADO&quot;)
+&nbsp;    private LocalDate dtAlterado;
+&nbsp;
+&nbsp;    @Column(name = &quot;CONTRATO_DOC_ID&quot;)
+&nbsp;    private Integer contratoDocId;
+&nbsp;
+&nbsp;    @Column(name = &quot;METODO_ID&quot;)
+&nbsp;    private Integer metodoId;
+&nbsp;
+&nbsp;    @Column(name = &quot;OPCAO_AULA&quot;)
+&nbsp;    private Integer opcaoAula;
+&nbsp;
+&nbsp;    @Column(name = &quot;TIPO_INFANT&quot;)
+&nbsp;    private Integer tipoInfant;
+&nbsp;
+&nbsp;    @Column(name = &quot;HORA_INI&quot;, length = 2)
+&nbsp;    private String horaIni;
+&nbsp;
+&nbsp;    @Column(name = &quot;MIN_INI&quot;, length = 2)
+&nbsp;    private String minIni;
+&nbsp;
+&nbsp;    @Column(name = &quot;HORA_FIM&quot;, length = 2)
+&nbsp;    private String horaFim;
+&nbsp;
+&nbsp;    @Column(name = &quot;MIN_FIM&quot;, length = 2)
+&nbsp;    private String minFim;
+&nbsp;
+&nbsp;    @Column(name = &quot;COD_BOLETIM&quot;)
+&nbsp;    private Short codBoletim;
+&nbsp;
+&nbsp;    @Column(name = &quot;COD_REQUERIM&quot;)
+&nbsp;    private Short codRequerim;
+&nbsp;
+&nbsp;    @Column(name = &quot;SITE&quot;)
+&nbsp;    private Short site;
+&nbsp;
+&nbsp;    @Column(name = &quot;DT_SITE&quot;)
+&nbsp;    private LocalDateTime dtSite;
+&nbsp;
+&nbsp;    @Column(name = &quot;INST_ID2&quot;)
+&nbsp;    private Integer instId2;
+&nbsp;
+&nbsp;    @Column(name = &quot;BANCO_ID2&quot;)
+&nbsp;    private Integer bancoId2;
+&nbsp;
+&nbsp;    @Column(name = &quot;TIPO_CONTAS_ID&quot;)
+&nbsp;    private Integer tipoContasId;
+&nbsp;
+&nbsp;    @Column(name = &quot;TOLERAR&quot;)
+&nbsp;    private Short tolerar;
+&nbsp;
+&nbsp;    @Column(name = &quot;VERIFICAR&quot;)
+&nbsp;    private Short verificar;
+&nbsp;
+&nbsp;    @Column(name = &quot;VALOR_ANUAL&quot;)
+&nbsp;    private Double valorAnual;
+&nbsp;
+&nbsp;    @Column(name = &quot;SEQ_MAT&quot;)
+&nbsp;    private Integer seqMat;
+&nbsp;
+&nbsp;    @Column(name = &quot;SALA_ID&quot;)
+&nbsp;    private Short salaId;
+&nbsp;
+&nbsp;    @Column(name = &quot;ANT_TURMA_ID&quot;)
+&nbsp;    private Integer antTurmaId;
+&nbsp;
+&nbsp;    @Column(name = &quot;FORMA_PAG_ID&quot;)
+&nbsp;    private Integer formaPagId;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;LOG_REQ&quot;)
+&nbsp;    private byte[] logReq;
+&nbsp;
+&nbsp;    @Column(name = &quot;CURSO_ID&quot;)
+&nbsp;    private Integer cursoId;
+&nbsp;
+&nbsp;    @Column(name = &quot;INST_ID&quot;)
+&nbsp;    private Integer instId;
+&nbsp;
+&nbsp;    @Column(name = &quot;DT_FECH&quot;)
+&nbsp;    private LocalDate dtFech;
+&nbsp;
+&nbsp;    @Column(name = &quot;TIPO_PAG_ID&quot;)
+&nbsp;    private Integer tipoPagId;
+&nbsp;
+&nbsp;    @Column(name = &quot;IDADE_MINIM&quot;)
+&nbsp;    private Integer idadeMinim;
+&nbsp;
+&nbsp;    @Column(name = &quot;DT_PROVA&quot;)
+&nbsp;    private LocalDate dtProva;
+&nbsp;
+&nbsp;    @Column(name = &quot;VL_DISC&quot;)
+&nbsp;    private Double vlDisc;
+&nbsp;
+&nbsp;    @Column(name = &quot;TX_MATRICULA&quot;)
+&nbsp;    private Double txMatricula;
+&nbsp;
+&nbsp;    @Column(name = &quot;DURAC_AULA&quot;)
+&nbsp;    private Short duracAula;
+&nbsp;
+&nbsp;    @Column(name = &quot;PROG_PARC_DISC&quot;)
+&nbsp;    private Short progParcDisc;
+&nbsp;
+&nbsp;    @Lob
+&nbsp;    @Column(name = &quot;RESPONS_PAIS&quot;)
+&nbsp;    private byte[] responsPais;
+&nbsp;
+&nbsp;    @Column(name = &quot;TOL_ADVERT&quot;)
+&nbsp;    private Short tolAdvert;
+&nbsp;
+&nbsp;    @Column(name = &quot;INEP_AULA_PRESENC&quot;)
+&nbsp;    private Short inepAulaPresenc;
+&nbsp;
+&nbsp;    @Column(name = &quot;CONTRATO_ONLINE_DOC_ID&quot;)
+&nbsp;    private Short contratoOnlineDocId;
+&nbsp;
+&nbsp;    @Column(name = &quot;TUR_PERID&quot;)
+&nbsp;    private Short turPerid;
+&nbsp;
+&nbsp;    @Column(name = &quot;NF&quot;)
+&nbsp;    private Short nf;
+&nbsp;
+&nbsp;    @Column(name = &quot;IDADE_MAX&quot;)
+&nbsp;    private Integer idadeMax;
+&nbsp;
+&nbsp;    @Column(name = &quot;MODELO_REL_HORARIO&quot;)
+&nbsp;    private Integer modeloRelHorario;
+&nbsp;
+&nbsp;    @Column(name = &quot;GRADE_PADRAO&quot;)
+&nbsp;    private Integer gradePadrao;
+&nbsp;
+&nbsp;    @Column(name = &quot;CAMINHO_CONTRATO&quot;, length = 240)
+&nbsp;    private String caminhoContrato;
+&nbsp;
+&nbsp;    @Column(name = &quot;MODELO_BOLETIM&quot;, length = 60)
+&nbsp;    private String modeloBoletim;
+&nbsp;
+&nbsp;    @Column(name = &quot;N_AULA_SEM&quot;)
+&nbsp;    private Integer nAulaSem;
+&nbsp;
+&nbsp;    @Column(name = &quot;N_AULA_SEM_SEP&quot;)
+&nbsp;    private Integer nAulaSemSep;
+&nbsp;
+&nbsp;    @Column(name = &quot;BANCO_ID&quot;)
+&nbsp;    private Integer bancoId;
+&nbsp;
+&nbsp;    @Column(name = &quot;estrut_c_id&quot;)
+&nbsp;    private Integer estruturCid;
+&nbsp;
+&nbsp;    @Column(name = &quot;cod_imp&quot;)
+&nbsp;    private Integer codImp;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-09-01 14:08</div>
+</div>
+</body>
+</html>
